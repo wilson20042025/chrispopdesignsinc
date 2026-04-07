@@ -26,7 +26,7 @@ export default function ContactPage() {
             <div className="space-y-4">
               <span className="text-[10px] tracking-[0.3em] font-medium text-black uppercase block">Global Inquiry</span>
               <p className="text-2xl font-light hover:opacity-60 transition-opacity cursor-pointer">
-              chrispopdesigns@gmail.com
+              chrispopdesignsinc@gmail.com
               </p>
             </div>
           </div>
