@@ -139,7 +139,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
              <span className="text-lg leading-none">←</span> Back to Archive
             </Link>
             <span className="hidden xs:block text-[10px] tracking-[0.3em] font-light text-black/20 uppercase">
-              ChrisPop Designs Incorporated and Innovation
+              Chris Pop Design Inc.
             </span>
           </section>
         </main>

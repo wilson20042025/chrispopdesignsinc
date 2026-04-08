@@ -8,7 +8,7 @@ export default function Narrative() {
 
   const stories = [
     {
-      title: "Why ChrisPop Designs Incorporated and Innovation?",
+      title: "Why Chris Pop Design Inc.?",
       text: "We are a team of passionate architects and designers who are dedicated to creating beautiful and functional spaces. We believe that everyone deserves to live and work in a space that inspires them and makes them feel happy."
     },
     {
@@ -37,7 +37,7 @@ export default function Narrative() {
             <h2 key={`title-${currentSlide}`} className="text-2xl xs:text-3xl sm:text-5xl md:text-7xl font-thin tracking-tighter leading-tight text-on-surface animate-narrative uppercase">
               {currentSlide === 0 ? (
                 <>
-                  Why ChrisPop Designs <span className="md:hidden">Incorporated?</span><span className="hidden md:inline">Incorporated and Innovation?</span>
+                  Why Chris Pop Design <span className="md:hidden">Inc?</span><span className="hidden md:inline">Inc?</span>
                 </>
               ) : stories[currentSlide].title}
             </h2>

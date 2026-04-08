@@ -32,7 +32,7 @@ export default function Header() {
 
           <Link href="/">
             <h1 className="text-[13px] xs:text-base md:text-lg font-medium tracking-tighter text-black uppercase whitespace-nowrap">
-              ChrisPop Designs Incorporated and Innovation
+              Chris Pop Design Inc.
             </h1>
           </Link>
         </div>
