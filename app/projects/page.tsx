@@ -23,15 +23,14 @@ export default async function ProjectsPage() {
   return (
     <>
       <Header />
-      <main className="pt-24 xs:pt-32 md:pt-48 pb-32 px-6 xs:px-12 md:px-24 bg-white relative">
-        <section className="mb-12 xs:mb-24">
-          <span className="text-[10px] tracking-[0.5em] font-light text-black/40 uppercase mb-4 block">Archive</span>
+      <main className="pt-24 xs:pt-28 md:pt-40 pb-32 px-6 xs:px-12 md:px-24 bg-white relative">
+        <section className="mb-8 xs:mb-12 md:hidden">
           <h1 className="text-3xl xs:text-5xl md:text-8xl font-thin tracking-tighter text-black leading-none uppercase">
-            SELECTED<br/>PROJECTS
+            PROJECTS
           </h1>
         </section>
 
-        <div className="grid grid-cols-2 gap-4 xs:gap-12 md:gap-24">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 xs:gap-12 lg:gap-16">
           {projects.map((project) => (
             <div key={project.id} className="group overflow-hidden">
               {/* HIDDEN CHECKBOX TRIGGER */}
@@ -40,7 +39,7 @@ export default async function ProjectsPage() {
               {/* IMAGE WRAPPER AS LABEL */}
               <label 
                 htmlFor={`lightbox-${project.id}`}
-                className="aspect-[3/4] bg-surface-container-low overflow-hidden relative cursor-zoom-in block"
+                className="aspect-[3/4] lg:aspect-[3/2] bg-surface-container-low overflow-hidden relative cursor-zoom-in block"
               >
                 <div className="h-full w-full bg-surface-variant/20 group-hover:scale-105 transition-transform duration-1000 relative">
                   <Image 

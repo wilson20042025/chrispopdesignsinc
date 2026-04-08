@@ -56,13 +56,13 @@ export default function Header() {
             href="/contact"
             className="hidden md:flex font-inter font-light tracking-widest uppercase text-xs text-black border border-black/20 px-5 py-2.5 hover:bg-black hover:text-white transition-all duration-500 animate-contact"
           >
-            CONTACT
+            CONTACT US
           </Link>
           <Link
             href="/contact"
-            className="md:hidden font-inter font-light tracking-[0.1em] text-[10px] text-black border border-black/20 px-3 py-1.5 animate-contact"
+            className="md:hidden font-inter font-light tracking-[0.1em] text-[10px] text-white bg-black px-4 py-2 animate-shake active:scale-95 transition-transform"
           >
-            CONTACT
+            CONTACT US
           </Link>
         </div>
 
@@ -87,7 +87,7 @@ export default function Header() {
               href="/contact"
               className="text-3xl xs:text-4xl font-thin tracking-tighter text-black/40 hover:text-black transition-opacity"
             >
-              CONTACT
+              CONTACT US
             </Link>
           </div>
 
@@ -116,6 +116,15 @@ export default function Header() {
             60% { transform: translateX(2px); background-color: rgba(0,0,0,0.03); border-color: rgba(0,0,0,1); }
             65% { transform: translateX(-2px); }
             70% { transform: translateX(0); }
+          }
+          @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            10%, 30%, 50%, 70%, 90% { transform: rotate(-2deg); }
+            20%, 40%, 60%, 80% { transform: rotate(2deg); }
+          }
+          .animate-shake {
+            animation: shake 5s ease-in-out infinite;
+            transform-origin: center;
           }
           .animate-contact {
             animation: contactGlow 8s ease-in-out 6s infinite;

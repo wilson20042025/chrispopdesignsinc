@@ -86,7 +86,7 @@
     @apply border-outline-variant;
   }
   body {
-    @apply bg-surface text-on-surface font-body min-h-[max(884px,100dvh)];
+    @apply bg-surface text-on-surface font-body min-h-screen;
   }
 }
 

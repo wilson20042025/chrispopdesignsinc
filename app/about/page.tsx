@@ -16,24 +16,29 @@ export default function AboutPage() {
       role: "Specialized Design Team",
       bio: "Our studio is built on collaborative intelligence. We are a group of 12 architects, interior designers, and structural engineers working in unison.",
       image: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1775588190/7-1_mynluc.jpg" // Placeholder for Team
+    },
+    {
+      name: "The Process",
+      role: "Digital Precision",
+      bio: "Utilizing advanced BIM and generative design workflows to ensure every millimeter of the physical space is optimized for light and silence.",
+      image: "https://res.cloudinary.com/diqqmnnkv/image/upload/v1775589810/5-3_tblbu8.jpg" // Placeholder for Process
     }
   ];
 
   return (
     <>
       <Header />
-      <main className="pt-24 xs:pt-32 md:pt-48 pb-32 px-6 xs:px-12 md:px-24 bg-white relative">
+      <main className="pt-24 xs:pt-32 md:pt-32 pb-32 px-6 xs:px-12 md:px-24 bg-white relative">
         {/* Intro Section */}
-        <section className="mb-24 md:mb-32">
-          <span className="text-[10px] tracking-[0.5em] font-light text-black/40 uppercase mb-4 block animate-in fade-in duration-1000">Our Team</span>
-          <h1 className="text-3xl xs:text-5xl md:text-8xl font-thin tracking-tighter text-black leading-tight uppercase mb-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+        <section className="mb-24 md:mb-16">
+          <h1 className="text-3xl xs:text-5xl md:text-7xl font-thin tracking-tighter text-black leading-tight uppercase mb-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
             Meet Our<br/>Masterminds
           </h1>
         </section>
 
         {/* Founders and Team Section */}
-        <section>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 xs:gap-12 md:gap-24">
+        <section className="lg:max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 xs:gap-12 lg:gap-8">
             {team.map((member, index) => (
               <div key={index} className="space-y-4">
                 <div className="aspect-[3/4] bg-[#faf9f6] relative overflow-hidden group">

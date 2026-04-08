@@ -5,12 +5,12 @@ export default function Footer() {
   
   return (
     <footer className="w-full rounded-none bg-[#0a0a0a] border-t border-white/5">
-      <div className="flex flex-col-reverse md:flex-row justify-between items-center px-6 xs:px-12 py-12 xs:py-20 w-full text-center md:text-left gap-12 md:gap-0">
+      <div className="flex flex-col-reverse md:flex-row justify-between items-center px-6 xs:px-12 pt-12 xs:pt-20 pb-8 xs:pb-12 w-full text-center md:text-left gap-12 md:gap-0">
         <div className="flex flex-col gap-2">
-          <span className="font-inter font-light tracking-[0.2em] text-[10px] text-white/80 uppercase">
-            © {currentYear} CHRIS POP DESIGNS INC. ALL RIGHTS RESERVED.
+          <span className="font-inter font-light tracking-[0.2em] text-[10px] text-white/80">
+            © {currentYear} ChrisPopDesignInc. All rights reserved.
           </span>
-          <span className="font-inter font-light tracking-[0.2em] text-[8px] text-white/60 uppercase">
+          <span className="font-inter font-light tracking-[0.2em] text-[8px] text-white/60">
             Digital Development by Fritzgerald Wilson
           </span>
         </div>

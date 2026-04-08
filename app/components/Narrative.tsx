@@ -12,7 +12,7 @@ export default function Narrative() {
       text: "We are a team of passionate architects and designers who are dedicated to creating beautiful and functional spaces. We believe that everyone deserves to live and work in a space that inspires them and makes them feel happy."
     },
     {
-      title: "Our Craft & Philosophy",
+      title: "Our Craft & Core Beliefs",
       text: "Focusing on the intersection of silence and material, we craft spaces that breathe. Our approach blends digital precision with artisanal care to create timeless, high-impact environments."
     },
     {
@@ -29,34 +29,63 @@ export default function Narrative() {
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
         
         {/* Title Column */}
-        <div className="md:col-span-5">
-          <h2 key={`title-${currentSlide}`} className="text-2xl xs:text-3xl sm:text-4xl font-medium tracking-tight leading-snug text-on-surface animate-narrative">
-            {stories[currentSlide].title}
-          </h2>
+        <div className="md:col-span-6">
+          <div className="flex items-start gap-8">
+            <span className="hidden md:block text-[10px] tracking-[0.5em] font-light text-black/20 pt-2">
+              0{currentSlide + 1}
+            </span>
+            <h2 key={`title-${currentSlide}`} className="text-2xl xs:text-3xl sm:text-5xl md:text-7xl font-thin tracking-tighter leading-tight text-on-surface animate-narrative uppercase">
+              {currentSlide === 0 ? (
+                <>
+                  Why Chris Pop Designs <span className="md:hidden">Inc?</span><span className="hidden md:inline">Incorporated?</span>
+                </>
+              ) : stories[currentSlide].title}
+            </h2>
+          </div>
         </div>
 
         {/* Content Column */}
-        <div className="md:col-span-4 md:col-start-8">
-          <p key={`text-${currentSlide}`} className="text-sm font-light text-on-surface-variant leading-relaxed mb-8 animate-narrative">
+        <div className="md:col-span-4 md:col-start-9 space-y-12">
+          <p key={`text-${currentSlide}`} className="text-sm font-light text-on-surface-variant leading-relaxed animate-narrative">
             {stories[currentSlide].text}
           </p>
           
           <div className="flex justify-between items-center relative">
-            {currentSlide < 2 ? (
-              <Link 
-                href="/about"
-                className="inline-block text-[10px] tracking-[0.2em] font-medium border-b border-on-surface pb-1 hover:opacity-60 transition-opacity uppercase animate-narrative"
-              >
-                About Us 
-              </Link>
-            ) : (
+            <div className="flex items-center gap-12">
+                {currentSlide < 2 ? (
                 <Link 
-                    href="/contact"
-                    className="inline-block text-[10px] tracking-[0.5em] font-bold text-white bg-black px-6 py-3 hover:opacity-70 transition-all duration-700 uppercase animate-skate"
+                    href="/about"
+                    className="inline-block text-[10px] tracking-[0.3em] font-medium border-b border-on-surface pb-2 hover:opacity-60 transition-opacity uppercase animate-narrative"
                 >
-                    Inquire // Contact
+                    About Us 
                 </Link>
-            )}
+                ) : (
+                    <Link 
+                        href="/contact"
+                        className="inline-block text-[10px] tracking-[0.5em] font-bold text-white bg-black px-8 py-3.5 hover:opacity-70 transition-all duration-700 uppercase animate-skate"
+                    >
+                        Inquire // Contact
+                    </Link>
+                )}
+
+                {/* Desktop Navigation Arrows */}
+                <div className="hidden md:flex items-center gap-4">
+                    <button 
+                        onClick={prevSlide}
+                        className="p-2 text-on-surface/20 hover:text-on-surface transition-colors"
+                        aria-label="Previous section"
+                    >
+                        <span className="material-symbols-outlined text-sm !font-light">west</span>
+                    </button>
+                    <button 
+                        onClick={nextSlide}
+                        className="p-2 text-on-surface/20 hover:text-on-surface transition-colors"
+                        aria-label="Next section"
+                    >
+                        <span className="material-symbols-outlined text-sm !font-light">east</span>
+                    </button>
+                </div>
+            </div>
 
             {/* Mobile-Only Navigation Controls */}
             <div className="md:hidden flex items-center">

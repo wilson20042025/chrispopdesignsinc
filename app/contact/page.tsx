@@ -5,19 +5,19 @@ export default function ContactPage() {
   return (
     <>
       <Header />
-      <main className="pt-32 xs:pt-40 pb-32 px-6 xs:px-12 md:px-24 min-h-screen">
-        <section className="mb-12 xs:mb-24">
+      <main className="pt-20 md:pt-40 pb-20 px-6 xs:px-12 md:px-24 min-h-screen">
+        <section className="mb-8 md:mb-24">
           <span className="text-[10px] tracking-[0.5em] font-medium text-black uppercase mb-4 block">Let's build</span>
           <h1 className="text-4xl xs:text-6xl md:text-8xl font-thin tracking-tighter text-black leading-none uppercase">
             CONTACT US
           </h1>
         </section>
 
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-24">
-          <div className="space-y-16">
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
+          <div className="space-y-8 md:space-y-16">
             <div className="space-y-4">
               <span className="text-[10px] tracking-[0.3em] font-medium text-black uppercase block">Office</span>
-              <p className="text-2xl font-light leading-relaxed text-black">
+              <p className="text-lg md:text-2xl font-light leading-relaxed text-black">
                 10000, Paynesville,<br/>
                 Monrovia, Liberia
               </p>
@@ -25,7 +25,7 @@ export default function ContactPage() {
             
             <div className="space-y-4">
               <span className="text-[10px] tracking-[0.3em] font-medium text-black uppercase block">Global Inquiry</span>
-              <p className="text-2xl font-light hover:opacity-60 transition-opacity cursor-pointer">
+              <p className="text-lg md:text-2xl font-light hover:opacity-60 transition-opacity cursor-pointer">
               chrispopdesigninc@gmail.com
               </p>
             </div>
