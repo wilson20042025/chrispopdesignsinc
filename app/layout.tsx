@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Chris Pop Designs Inc | Minimalist Architectural Design",
+  title: "ChrisPop Designs Incorporated and Innovation | Minimalist Architectural Design",
   description: "A precision-focused architectural studio crafting spatial silence through digital precision and material materiality.",
 };
 

@@ -13,7 +13,7 @@ export default function ContactPage() {
     const data = new FormData(form);
     
     try {
-      const response = await fetch("https://formspree.io/f/xjgpzwpe", {
+      const response = await fetch("https://formspree.io/f/xzdkwgbk", {
         method: "POST",
         body: data,
         headers: {
@@ -57,7 +57,7 @@ export default function ContactPage() {
             <div className="space-y-4">
               <span className="text-[10px] tracking-[0.3em] font-medium text-black uppercase block">Global Inquiry</span>
               <p className="text-lg md:text-2xl font-light hover:opacity-60 transition-opacity cursor-pointer">
-              chrispopdesigninc@gmail.com
+              chrispopdesignsandinnovations@gmail.com
               </p>
             </div>
           </div>
