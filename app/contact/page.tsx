@@ -31,29 +31,47 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <form className="space-y-8 md:bg-surface-container-low p-0 md:p-12 lg:p-20">
+          <form 
+            action="https://formspree.io/f/xjgpzwpe"
+            method="POST"
+            className="space-y-8 md:bg-surface-container-low p-0 md:p-12 lg:p-20"
+          >
             <div className="space-y-4">
               <label className="text-[10px] tracking-[0.3em] font-light text-outline uppercase block">Name</label>
               <input 
+                name="name"
                 type="text" 
+                required
                 className="w-full bg-transparent border-b border-outline-variant/30 py-2 focus:outline-none focus:border-on-surface transition-colors placeholder:text-black/20"
                 placeholder="First Last"
               />
             </div>
 
             <div className="space-y-4">
+              <label className="text-[10px] tracking-[0.3em] font-light text-outline uppercase block">Email Address</label>
+              <input 
+                name="email"
+                type="email" 
+                required
+                className="w-full bg-transparent border-b border-outline-variant/30 py-2 focus:outline-none focus:border-on-surface transition-colors placeholder:text-black/20"
+                placeholder="[EMAIL_ADDRESS]"
+              />
+            </div>
+
+            <div className="space-y-4">
               <label className="text-[10px] tracking-[0.3em] font-light text-outline uppercase block">Project Type</label>
-              <select className="w-full bg-transparent border-b border-outline-variant/30 py-2 focus:outline-none focus:border-on-surface transition-colors appearance-none text-black/40">
-                <option>Residential</option>
-                <option>Commercial</option>
-                <option>Cultural</option>
-                <option>Other</option>
+              <select name="project_type" className="w-full bg-transparent border-b border-outline-variant/30 py-2 focus:outline-none focus:border-on-surface transition-colors appearance-none text-black/40">
+                <option value="residential">Residential</option>
+                <option value="commercial">Commercial</option>
+                <option value="cultural">Cultural</option>
+                <option value="other">Other</option>
               </select>
             </div>
 
             <div className="space-y-4">
               <label className="text-[10px] tracking-[0.3em] font-light text-outline uppercase block">Message</label>
               <textarea 
+                name="message"
                 rows={4}
                 className="w-full bg-transparent border-b border-outline-variant/30 py-2 focus:outline-none focus:border-on-surface transition-colors resize-none placeholder:text-black/20"
                 placeholder="Tell us about your vision"
