@@ -18,7 +18,7 @@ export default function Footer() {
           {[
             { name: "INSTAGRAM", href: "https://instagram.com/chrispoparch" },
             { name: "LINKEDIN", href: "https://linkedin.com/in/chris-pop-designs" },
-            { name: "WHATSAPP", href: "https://wa.me/23188679661?text=Hello%20Chris%20Pop%20Designs%20%26%20Innovation,%20I'm%20interested%20in%20starting%20a%20project%20together!" }
+            { name: "WHATSAPP", href: "https://wa.me/231886796691?text=Hello%20Chris%20Pop%20Designs%20%26%20Innovation,%20I'm%20interested%20in%20starting%20a%20project%20together!" }
           ].map((social) => (
             <a 
               key={social.name} 
