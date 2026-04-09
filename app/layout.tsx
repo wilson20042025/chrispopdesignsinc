@@ -9,8 +9,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Chris Pop Design Inc. | Minimalist Architectural Design",
-  description: "A precision-focused architectural studio crafting spatial silence through digital precision and material materiality.",
+  title: "Chris Pop Design Innovation | Architecture and 3D Fabrication..",
+  description: "We bridge the gap between architectural design and 3D fabrication, creating innovative spaces that are as functional as they are beautiful.",
 };
 
 export default function RootLayout({

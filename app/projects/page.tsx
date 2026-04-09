@@ -12,13 +12,15 @@ interface Project {
   slug: string;
 }
 
+export const revalidate = 10;
+ 
 export default async function ProjectsPage() {
   const projects: Project[] = await client.fetch(`*[_type == "project"] | order(_createdAt desc) {
     "id": _id,
     title,
     "image": images[0],
     "slug": slug.current
-  }`);
+  }`) || [];
 
   return (
     <>

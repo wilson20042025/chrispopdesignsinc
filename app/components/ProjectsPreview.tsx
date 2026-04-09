@@ -16,7 +16,7 @@ export default async function ProjectsPreview() {
     title,
     "image": images[0],
     "slug": slug.current
-  }`);
+  }`) || [];
 
   return (
     <section className="py-16 xs:py-20 md:pt-16 md:pb-32 px-6 xs:px-12 md:px-24 bg-white">

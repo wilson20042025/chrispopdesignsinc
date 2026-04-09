@@ -4,6 +4,8 @@ import Narrative from "./components/Narrative";
 import ProjectsPreview from "./components/ProjectsPreview";
 import Footer from "./components/Footer";
 
+export const revalidate = 10;
+
 export default function Home() {
   return (
     <>

@@ -6,6 +6,8 @@ import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { notFound } from "next/navigation";
 
+export const revalidate = 10;
+
 interface Photo {
   id: string;
   src: string;
@@ -139,7 +141,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
              <span className="text-lg leading-none">←</span> Back to Archive
             </Link>
             <span className="hidden xs:block text-[10px] tracking-[0.3em] font-light text-black/20 uppercase">
-              Chris Pop Design Inc.
+              Chris Pop Design Innovation
             </span>
           </section>
         </main>

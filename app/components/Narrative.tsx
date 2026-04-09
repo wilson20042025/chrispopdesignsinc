@@ -8,7 +8,7 @@ export default function Narrative() {
 
   const stories = [
     {
-      title: "Why Chris Pop Design Inc.?",
+      title: "Why Chris Pop Designs & Innovation?",
       text: "We are a team of passionate architects and designers who are dedicated to creating beautiful and functional spaces. We believe that everyone deserves to live and work in a space that inspires them and makes them feel happy."
     },
     {
@@ -27,7 +27,7 @@ export default function Narrative() {
   return (
     <section className="py-16 xs:py-20 md:py-32 px-6 xs:px-12 md:px-24 bg-surface overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-        
+
         {/* Title Column */}
         <div className="md:col-span-6">
           <div className="flex items-start gap-8">
@@ -37,7 +37,7 @@ export default function Narrative() {
             <h2 key={`title-${currentSlide}`} className="text-2xl xs:text-3xl sm:text-5xl md:text-7xl font-thin tracking-tighter leading-tight text-on-surface animate-narrative uppercase">
               {currentSlide === 0 ? (
                 <>
-                  Why Chris Pop Design <span className="md:hidden">Inc?</span><span className="hidden md:inline">Inc?</span>
+                  Why Chris Pop Design Innovation?
                 </>
               ) : stories[currentSlide].title}
             </h2>
@@ -49,53 +49,53 @@ export default function Narrative() {
           <p key={`text-${currentSlide}`} className="text-sm font-light text-on-surface-variant leading-relaxed animate-narrative">
             {stories[currentSlide].text}
           </p>
-          
+
           <div className="flex justify-between items-center relative">
             <div className="flex items-center gap-12">
-                {currentSlide < 2 ? (
-                <Link 
-                    href="/about"
-                    className="inline-block text-[10px] tracking-[0.3em] font-medium border-b border-on-surface pb-2 hover:opacity-60 transition-opacity uppercase animate-narrative"
+              {currentSlide < 2 ? (
+                <Link
+                  href="/about"
+                  className="inline-block text-[10px] tracking-[0.3em] font-medium border-b border-on-surface pb-2 hover:opacity-60 transition-opacity uppercase animate-narrative"
                 >
-                    About Us 
+                  About Us
                 </Link>
-                ) : (
-                    <Link 
-                        href="/contact"
-                        className="inline-block text-[10px] tracking-[0.5em] font-bold text-white bg-black px-8 py-3.5 hover:opacity-70 transition-all duration-700 uppercase animate-skate"
-                    >
-                        Inquire // Contact
-                    </Link>
-                )}
+              ) : (
+                <Link
+                  href="/contact"
+                  className="inline-block text-[10px] tracking-[0.5em] font-bold text-white bg-black px-8 py-3.5 hover:opacity-70 transition-all duration-700 uppercase animate-skate"
+                >
+                  Inquire // Contact
+                </Link>
+              )}
 
-                {/* Desktop Navigation Arrows */}
-                <div className="hidden md:flex items-center gap-4">
-                    <button 
-                        onClick={prevSlide}
-                        className="p-2 text-on-surface/20 hover:text-on-surface transition-colors"
-                        aria-label="Previous section"
-                    >
-                        <span className="material-symbols-outlined text-sm !font-light">west</span>
-                    </button>
-                    <button 
-                        onClick={nextSlide}
-                        className="p-2 text-on-surface/20 hover:text-on-surface transition-colors"
-                        aria-label="Next section"
-                    >
-                        <span className="material-symbols-outlined text-sm !font-light">east</span>
-                    </button>
-                </div>
+              {/* Desktop Navigation Arrows */}
+              <div className="hidden md:flex items-center gap-4">
+                <button
+                  onClick={prevSlide}
+                  className="p-2 text-on-surface/20 hover:text-on-surface transition-colors"
+                  aria-label="Previous section"
+                >
+                  <span className="material-symbols-outlined text-sm !font-light">west</span>
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="p-2 text-on-surface/20 hover:text-on-surface transition-colors"
+                  aria-label="Next section"
+                >
+                  <span className="material-symbols-outlined text-sm !font-light">east</span>
+                </button>
+              </div>
             </div>
 
             {/* Mobile-Only Navigation Controls */}
             <div className="md:hidden flex items-center">
-              <button 
+              <button
                 onClick={nextSlide}
                 className="p-2 -mr-2 text-on-surface/40 hover:text-on-surface transition-colors active:scale-90"
                 aria-label="Next section"
               >
                 <span className="material-symbols-outlined text-xl !font-light">
-                    {currentSlide === 2 ? 'refresh' : 'east'}
+                  {currentSlide === 2 ? 'refresh' : 'east'}
                 </span>
               </button>
             </div>
@@ -103,7 +103,8 @@ export default function Narrative() {
         </div>
       </div>
 
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes narrativeFade {
           from { opacity: 0; transform: translateY(10px); }
           to { opacity: 1; transform: translateY(0); }

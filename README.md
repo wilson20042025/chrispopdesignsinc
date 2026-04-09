@@ -1,6 +1,6 @@
-# Chris Pop Design Inc.
+# Chris Pop Design Innovation
 
-A precision-focused architectural studio website built with Next.js, Tailwind CSS 4, and TypeScript.
+A design studio website blending architecture with 3D fabrication, built with Next.js and TypeScript.
 
 ## Project Structure
 
