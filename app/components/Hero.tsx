@@ -60,10 +60,10 @@ export default function Hero() {
         <div className="hidden md:flex absolute inset-0 z-10 flex-col justify-center items-center px-6 pointer-events-none">
           <div className="text-center max-w-4xl space-y-4">
             <span className="block text-[10px] tracking-[0.5em] font-light text-white uppercase">
-              Vision & Precision
+              Innovation & 3D Fabrication
             </span>
-            <h1 className="text-8xl font-thin tracking-tight text-white leading-none uppercase">
-              CRAFTING SPATIAL SILENCE
+            <h1 className="text-6xl md:text-8xl font-thin tracking-tight text-white leading-none uppercase">
+              Crafting <br className="md:hidden" /> New Dimensions
             </h1>
           </div>
         </div>

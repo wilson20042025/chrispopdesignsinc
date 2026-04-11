@@ -8,16 +8,16 @@ export default function Narrative() {
 
   const stories = [
     {
-      title: "Why Chris Pop Designs & Innovation?",
-      text: "We are a team of passionate architects and designers who are dedicated to creating beautiful and functional spaces. We believe that everyone deserves to live and work in a space that inspires them and makes them feel happy."
+      title: "Design Meets Advanced Fabrication",
+      text: "We are a team of passionate architects and precision fabricators. We believe that the most inspiring spaces are born from the perfect synergy between architectural design and advanced 3D fabrication technologies."
     },
     {
-      title: "Our Craft & Core Beliefs",
-      text: "Focusing on the intersection of silence and material, we craft spaces that breathe. Our approach blends digital precision with artisanal care to create timeless, high-impact environments."
+      title: "Precision Prototyping & Craft",
+      text: "By prioritizing 3D fabrication, we bring an unprecedented level of detail to our work. Our approach blends digital precision with artisanal care to create high-impact prototypes, models, and spatial elements."
     },
     {
       title: "Collaborate With Us",
-      text: "Every project begins with a simple conversation. Whether you're envisioning a residential refuge or a commercial landmark, we're ready to translate your ambitions into architectural reality."
+      text: "Whether you're developing a complex architectural project or require expert 3D fabrication and prototyping solutions, we're ready to translate your vision into a physical masterpiece."
     }
   ];
 

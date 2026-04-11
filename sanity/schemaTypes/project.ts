@@ -12,16 +12,24 @@ const project = {
     },
 
     {
-      name: 'type',
-      title: 'Project Type',
+      name: 'category',
+      title: 'Project Category',
       type: 'string',
       options: {
         list: [
-          { title: 'Residential', value: 'residential' },
-          { title: 'Resort', value: 'resort' },
-          { title: 'Commercial', value: 'commercial' },
+          { title: '3D Fabrication', value: 'fabrication' },
+          { title: 'Architectural Design', value: 'architecture' },
         ],
       },
+      validation: (Rule: any) => Rule.required(),
+      initialValue: 'architecture',
+    },
+
+    {
+      name: 'type',
+      title: 'Project Type',
+      type: 'string',
+      description: 'e.g. Residential, Resort, Commercial for Architecture OR Model, Prototype for Fabrication',
     },
 
     {

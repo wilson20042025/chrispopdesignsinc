@@ -18,7 +18,13 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
   console.log("Fetching project for slug:", slug);
   
   try {
-    const project = await client.fetch(`*[_type == "project" && slug.current == $slug][0]`, { slug });
+    const project = await client.fetch(`*[_type == "project" && slug.current == $slug][0] {
+      title,
+      summary,
+      images,
+      category,
+      type
+    }`, { slug });
 
     if (!project) {
       console.log("Project not found for slug:", slug);
@@ -30,6 +36,8 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
     const projectData = {
       title: project.title,
       description: project.summary || "",
+      category: project.category || "architecture",
+      type: project.type || "",
       images: (project.images || []).map((img: any, idx: number): Photo => ({
         id: `img${idx}`,
         src: img ? urlFor(img).url() : ""
@@ -44,6 +52,16 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
           <section className="px-6 xs:px-12 md:px-24 mb-16 xs:mb-32">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 md:gap-12">
               <div className="max-w-4xl">
+                <div className="mb-4 flex gap-4">
+                  <span className="text-[10px] tracking-[0.3em] font-medium text-black/40 uppercase bg-black/5 px-3 py-1">
+                    {projectData.category === 'fabrication' ? '3D Fabrication' : 'Architectural Design'}
+                  </span>
+                  {projectData.type && (
+                    <span className="text-[10px] tracking-[0.3em] font-light text-black/40 uppercase border border-black/10 px-3 py-1">
+                      {projectData.type}
+                    </span>
+                  )}
+                </div>
                 <h1 className="text-3xl xs:text-5xl md:text-9xl font-thin tracking-tighter text-black leading-[1.1] md:leading-none uppercase">
                   {projectData.title}
                 </h1>
@@ -141,7 +159,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
              <span className="text-lg leading-none">←</span> Back to Archive
             </Link>
             <span className="hidden xs:block text-[10px] tracking-[0.3em] font-light text-black/20 uppercase">
-              Chris Pop Design Innovation
+              ChrisPop Designs Inc.
             </span>
           </section>
         </main>

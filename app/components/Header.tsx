@@ -8,7 +8,8 @@ export default function Header() {
 
   const navItems = [
     { name: "HOME", path: "/" },
-    { name: "PROJECTS", path: "/projects" },
+    { name: "3D FABRICATION", path: "/projects?category=fabrication" },
+    { name: "ARCHITECTURAL DESIGN", path: "/projects?category=architecture" },
     { name: "ABOUT", path: "/about" },
   ];
 
@@ -32,18 +33,18 @@ export default function Header() {
 
           <Link href="/">
             <h1 className="text-[13px] xs:text-base md:text-lg font-medium tracking-tighter text-black uppercase whitespace-nowrap">
-              Chris Pop Design In
+              ChrisPop Designs Inc.
             </h1>
           </Link>
         </div>
 
         {/* Desktop Links - Stays hidden on small screens */}
-        <div className="hidden md:flex items-center gap-12">
+        <div className="hidden md:flex items-center gap-8 lg:gap-12">
           {navItems.map((item) => (
             <Link
               key={item.path}
               href={item.path}
-              className={`font-inter font-light tracking-widest uppercase text-xs transition-all duration-500 hover:opacity-70 ${pathname === item.path ? "text-black border-b border-black pb-1" : "text-black/60"
+              className={`font-inter font-light tracking-widest uppercase text-[10px] transition-all duration-500 hover:opacity-70 ${pathname === item.path ? "text-black border-b border-black pb-1" : "text-black/60"
                 }`}
             >
               {item.name}

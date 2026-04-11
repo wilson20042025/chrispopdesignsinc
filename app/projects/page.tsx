@@ -10,26 +10,47 @@ interface Project {
   title: string;
   image: any;
   slug: string;
+  category?: string;
 }
 
 export const revalidate = 10;
  
-export default async function ProjectsPage() {
-  const projects: Project[] = await client.fetch(`*[_type == "project"] | order(_createdAt desc) {
-    "id": _id,
-    title,
-    "image": images[0],
-    "slug": slug.current
-  }`) || [];
+export default async function ProjectsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string }>
+}) {
+  const category = (await searchParams).category;
+  
+  const query = category 
+    ? `*[_type == "project" && category == "${category}"] | order(_createdAt desc) {
+        "id": _id,
+        title,
+        "image": images[0],
+        "slug": slug.current,
+        category
+      }`
+    : `*[_type == "project"] | order(select(category == "fabrication" => 1, 0) desc, _createdAt desc) {
+        "id": _id,
+        title,
+        "image": images[0],
+        "slug": slug.current,
+        category
+      }`;
+
+  const projects: Project[] = await client.fetch(query) || [];
 
   return (
     <>
       <Header />
       <main className="pt-24 xs:pt-28 md:pt-40 pb-32 px-6 xs:px-12 md:px-24 bg-white relative">
-        <section className="mb-8 xs:mb-12 md:hidden">
+        <section className="mb-8 xs:mb-12">
           <h1 className="text-3xl xs:text-5xl md:text-8xl font-thin tracking-tighter text-black leading-none uppercase">
-            PROJECTS
+            {category === 'fabrication' ? '3D FABRICATION' : category === 'architecture' ? 'ARCHITECTURAL DESIGN' : 'PROJECTS'}
           </h1>
+          <p className="mt-4 text-[10px] tracking-[0.3em] font-light text-black/40 uppercase">
+            {category ? `Discover our expertise in ${category === 'fabrication' ? '3D fabrication and prototyping' : 'minimalist architectural design'}` : 'EXPLORING THE INTERSECTION OF FABRICATION & ARCHITECTURE'}
+          </p>
         </section>
 
         <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 xs:gap-12 lg:gap-16">

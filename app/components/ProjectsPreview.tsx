@@ -11,7 +11,7 @@ interface FeaturedProject {
 }
 
 export default async function ProjectsPreview() {
-  const featuredProjects: FeaturedProject[] = await client.fetch(`*[_type == "project"] | order(_createdAt desc)[0...6] {
+  const featuredProjects: FeaturedProject[] = await client.fetch(`*[_type == "project"] | order(select(category == "fabrication" => 1, 0) desc, _createdAt desc)[0...6] {
     "id": _id,
     title,
     "image": images[0],
@@ -20,10 +20,13 @@ export default async function ProjectsPreview() {
 
   return (
     <section className="py-16 xs:py-20 md:pt-16 md:pb-32 px-6 xs:px-12 md:px-24 bg-white">
-      <div className="flex justify-between items-end mb-12 xs:mb-24">
-        <h2 className="text-2xl xs:text-3xl sm:text-4xl font-medium tracking-tight text-black leading-none">
-          Recent Works
+      <div className="flex flex-col md:flex-row justify-between items-baseline mb-12 xs:mb-24 gap-4">
+        <h2 className="text-2xl xs:text-3xl sm:text-4xl font-medium tracking-tight text-black leading-none uppercase">
+          3D Fabrication & <span className="font-thin italic">Architectural Design</span>
         </h2>
+        <span className="text-[10px] tracking-[0.3em] font-light text-black/40 uppercase">
+          Selected Works
+        </span>
       </div>
 
       {/* Architectural Preview Grid - Pure CSS Checkbox logic */}
