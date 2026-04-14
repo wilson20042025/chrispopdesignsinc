@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
+import { ReactNode } from "react";
 
 interface FeaturedProject {
   id: string;
@@ -13,7 +14,7 @@ interface FeaturedProject {
 
 interface ProjectsPreviewProps {
   category?: "fabrication" | "architecture";
-  title?: string;
+  title?: ReactNode;
   subtitle?: string;
   isFullList?: boolean;
   id?: string;
