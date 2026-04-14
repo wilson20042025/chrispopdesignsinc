@@ -2,6 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ['192.168.29.100'],
+  experimental: {
+    // @ts-ignore - turbopack root is a valid but sometimes untyped property in some versions
+    turbopack: {
+      root: '.',
+    },
+  },
   images: {
     remotePatterns: [
       {

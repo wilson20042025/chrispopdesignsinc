@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 export default function AboutPage() {
@@ -27,11 +26,10 @@ export default function AboutPage() {
 
   return (
     <>
-      <Header />
       <main className="pt-24 xs:pt-32 md:pt-32 pb-32 px-6 xs:px-12 md:px-24 bg-white relative">
         {/* Intro Section */}
         <section className="mb-24 md:mb-16">
-          <h1 className="text-3xl xs:text-5xl md:text-7xl font-thin tracking-tighter text-black leading-tight uppercase mb-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+          <h1 className="text-3xl xs:text-5xl md:text-7xl font-thin tracking-tighter text-black leading-tight uppercase mb-12">
             Meet Our<br/>Masterminds
           </h1>
         </section>
@@ -46,7 +44,7 @@ export default function AboutPage() {
                     src={member.image}
                     alt={member.name}
                     fill
-                    className="object-cover transition-transform duration-1000 grayscale hover:grayscale-0"
+                    className="object-cover transition-all duration-1000 grayscale-0 group-hover:grayscale"
                   />
                   
                   {/* Overlay Meta Inside Container */}

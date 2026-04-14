@@ -57,6 +57,20 @@ const project = {
       type: 'text',
     },
   ],
+  preview: {
+    select: {
+      title: 'title',
+      subtitle: 'type',
+      media: 'images.0',
+    },
+    prepare({ title, subtitle, media }: any) {
+      return {
+        title: title || 'Untitled',
+        subtitle: subtitle || 'No type specified',
+        media: media,
+      }
+    },
+  },
 }
 
 export default project

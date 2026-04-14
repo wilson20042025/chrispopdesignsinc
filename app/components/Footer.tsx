@@ -5,7 +5,7 @@ export default function Footer() {
   
   return (
     <footer className="w-full rounded-none bg-[#0a0a0a] border-t border-white/5">
-      <div className="flex flex-col-reverse md:flex-row justify-between items-center px-6 xs:px-12 pt-12 xs:pt-20 pb-8 xs:pb-12 w-full text-center md:text-left gap-12 md:gap-0">
+      <div className="flex flex-col-reverse md:flex-row justify-between items-center px-6 xs:px-12 pt-10 xs:pt-12 pb-6 xs:pb-8 w-full text-center md:text-left gap-12 md:gap-0">
         <div className="flex flex-col gap-2">
           <span className="font-inter font-light tracking-[0.2em] text-[10px] text-white/80">
             © {currentYear} ChrisPop Designs Inc. & Innovation. All rights reserved.

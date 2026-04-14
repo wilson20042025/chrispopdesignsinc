@@ -70,7 +70,7 @@
   --radius-lg: 0px;
   --radius-xl: 0px;
   --radius-full: 9999px;
-  
+
   /* Animaton Overrides */
   --animate-transition-opacity: opacity 500ms ease;
   --animate-transition-transform: transform 700ms cubic-bezier(0.33, 1, 0.68, 1);
@@ -85,6 +85,7 @@
   * {
     @apply border-outline-variant;
   }
+
   body {
     @apply bg-surface text-on-surface font-body min-h-screen;
   }
@@ -101,4 +102,6 @@
   direction: ltr;
 }
 
-.text-vertical { writing-mode: vertical-rl; }
+.text-vertical {
+  writing-mode: vertical-rl;
+}

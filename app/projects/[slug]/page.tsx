@@ -1,4 +1,3 @@
-import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,7 +15,7 @@ interface Photo {
 export default async function ProjectDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   console.log("Fetching project for slug:", slug);
-  
+
   try {
     const project = await client.fetch(`*[_type == "project" && slug.current == $slug][0] {
       title,
@@ -46,7 +45,6 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
 
     return (
       <>
-        <Header />
         <main className="pt-24 xs:pt-32 md:pt-48 pb-32 bg-white">
           {/* Project Header Section */}
           <section className="px-6 xs:px-12 md:px-24 mb-16 xs:mb-32">
@@ -80,17 +78,17 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
 
           {/* Architectural Gallery */}
           <section className="space-y-4 xs:space-y-12 md:space-y-24 px-6 xs:px-12 md:px-24">
-            
+
             {/* 1. Main Hero Shot - Always first image */}
             {projectData.images.length > 0 && (
               <div className="group">
                 <input type="checkbox" id={`lightbox-${projectData.images[0].id}`} className="peer hidden" />
-                <label 
-                  htmlFor={`lightbox-${projectData.images[0].id}`} 
+                <label
+                  htmlFor={`lightbox-${projectData.images[0].id}`}
                   className="w-full aspect-[4/3] md:aspect-[16/9] bg-surface-container-low relative overflow-hidden group block cursor-zoom-in"
                 >
-                  <Image 
-                    src={projectData.images[0].src} 
+                  <Image
+                    src={projectData.images[0].src}
                     alt={projectData.title}
                     fill
                     className="object-cover transition-transform duration-1000 group-hover:scale-105"
@@ -100,7 +98,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
                 {/* Lightbox for Hero */}
                 <div className="fixed inset-0 z-[500] bg-black/95 backdrop-blur-xl opacity-0 invisible peer-checked:opacity-100 peer-checked:visible transition-all duration-300 flex items-center justify-center p-4 xs:p-8 md:p-24 cursor-zoom-out">
                   <label htmlFor={`lightbox-${projectData.images[0].id}`} className="absolute inset-0 z-[505]"></label>
-                  <label 
+                  <label
                     htmlFor={`lightbox-${projectData.images[0].id}`}
                     className="absolute top-8 right-8 text-white/40 hover:text-white transition-colors z-[510] p-4 group cursor-pointer"
                   >
@@ -119,14 +117,14 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
                 {projectData.images.slice(1).map((img: Photo, idx: number) => (
                   <div key={img.id} className="group">
                     <input type="checkbox" id={`lightbox-${img.id}`} className="peer hidden" />
-                    <label 
-                      htmlFor={`lightbox-${img.id}`} 
+                    <label
+                      htmlFor={`lightbox-${img.id}`}
                       className="aspect-[3/4] bg-surface-container-low relative overflow-hidden group block cursor-zoom-in"
                     >
-                      <Image 
-                        src={img.src} 
-                        alt={`Architecture detail ${idx + 1}`} 
-                        fill 
+                      <Image
+                        src={img.src}
+                        alt={`Architecture detail ${idx + 1}`}
+                        fill
                         className="object-cover transition-transform duration-1000 group-hover:scale-105"
                       />
                     </label>
@@ -134,7 +132,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
                     {/* Lightbox Overlay for each grid item */}
                     <div className="fixed inset-0 z-[500] bg-black/95 backdrop-blur-xl opacity-0 invisible peer-checked:opacity-100 peer-checked:visible transition-all duration-300 flex items-center justify-center p-4 xs:p-8 md:p-24 cursor-zoom-out">
                       <label htmlFor={`lightbox-${img.id}`} className="absolute inset-0 z-[505]"></label>
-                      <label 
+                      <label
                         htmlFor={`lightbox-${img.id}`}
                         className="absolute top-8 right-8 text-white/40 hover:text-white transition-colors z-[510] p-4 group cursor-pointer"
                       >
@@ -152,11 +150,11 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
 
           {/* Bottom Navigation */}
           <section className="mt-32 px-6 xs:px-12 md:px-24 flex justify-between items-center border-t border-black/10 pt-16">
-            <Link 
+            <Link
               href="/projects"
               className="text-[10px] tracking-[0.5em] font-light text-black/40 hover:text-black transition-all uppercase flex items-center gap-2"
             >
-             <span className="text-lg leading-none">←</span> Back to Archive
+              <span className="text-lg leading-none">←</span> Back to Archive
             </Link>
             <span className="hidden xs:block text-[10px] tracking-[0.3em] font-light text-black/20 uppercase">
               ChrisPop Designs Inc.

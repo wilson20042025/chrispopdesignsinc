@@ -8,6 +8,7 @@ interface FeaturedProject {
   title: string;
   image: any;
   slug: string;
+  category?: string;
 }
 
 export default async function ProjectsPreview() {
@@ -15,84 +16,127 @@ export default async function ProjectsPreview() {
     "id": _id,
     title,
     "image": images[0],
-    "slug": slug.current
+    "slug": slug.current,
+    category
   }`) || [];
 
+  const staticProjects: FeaturedProject[] = [
+    {
+      id: "laser-spec-01",
+      title: "Laser Precision Fabrication",
+      image: "/laser_cutting.png",
+      slug: "laser-precision",
+      category: "fabrication"
+    },
+    {
+      id: "drone-spec-02",
+      title: "Aerial Architectural Survey",
+      image: "/architectural_drone.png",
+      slug: "drone-survey",
+      category: "architecture"
+    },
+    {
+      id: "robot-spec-03",
+      title: "Robotic Prototype Assembly",
+      image: "/robotic_fabrication.png",
+      slug: "robotic-fabrication",
+      category: "fabrication"
+    },
+    {
+      id: "parametric-spec-05",
+      title: "Parametric Facade Research",
+      image: "/parametric_architectural_texture_detail_1775931276569.png",
+      slug: "parametric-research",
+      category: "fabrication"
+    },
+    {
+      id: "smart-spec-04",
+      title: "Smart Building Systems",
+      image: "/modern_architectural_innovation_building_1775931655490.png",
+      slug: "smart-systems",
+      category: "architecture"
+    }
+  ];
+
+  // Merge projects, prioritizing fetched ones but ensuring our new high-tech images are included
+  const allProjects = [...featuredProjects, ...staticProjects].slice(0, 7);
+
   return (
-    <section className="py-16 xs:py-20 md:pt-16 md:pb-32 px-6 xs:px-12 md:px-24 bg-white">
-      <div className="flex flex-col md:flex-row justify-between items-baseline mb-12 xs:mb-24 gap-4">
-        <h2 className="text-2xl xs:text-3xl sm:text-4xl font-medium tracking-tight text-black leading-none uppercase">
-          3D Fabrication & <span className="font-thin italic">Architectural Design</span>
-        </h2>
-        <span className="text-[10px] tracking-[0.3em] font-light text-black/40 uppercase">
-          Selected Works
-        </span>
-      </div>
+    <section id="projects" className="py-10 md:py-14 px-6 xs:px-12 md:px-24 bg-surface relative overflow-hidden">
+      {/* Decorative Grid Line */}
+      <div className="absolute top-0 right-1/2 w-px h-full bg-outline-variant/10 hidden md:block" />
 
-      {/* Architectural Preview Grid - Pure CSS Checkbox logic */}
-      <div className="grid grid-cols-2 gap-4 xs:gap-12 md:gap-24">
-        {featuredProjects.map((project: FeaturedProject, index: number) => (
-          <div key={index} className="group overflow-hidden">
-            {/* HIDDEN CHECKBOX TRIGGER */}
-            <input type="checkbox" id={`home-lightbox-${project.id}`} className="peer hidden" />
-
-            <label 
-              htmlFor={`home-lightbox-${project.id}`}
-              className="aspect-[3/4] md:aspect-[3/2] bg-[#faf9f6] overflow-hidden relative cursor-zoom-in block"
-            >
-              <Image 
-                alt={project.title} 
-                src={project.image ? urlFor(project.image).url() : ""}
-                fill
-                className={`w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 ${
-                  index < 2 ? "grayscale-0 contrast-100" : "grayscale hover:grayscale-0 contrast-110"
-                }`}
-              />
-            </label>
-            
-            <div className="mt-4 xs:mt-8">
-              <Link href={`/projects/${project.slug}`} className="block group/link">
-                <div className="flex flex-col xs:flex-row justify-between items-baseline border-b border-black/10 pb-4 gap-2">
-                  <h3 className="text-lg xs:text-2xl font-light tracking-tight text-black leading-tight group-hover/link:opacity-60 transition-opacity">
-                    {project.title}
-                  </h3>
-                </div>
-              </Link>
-            </div>
-
-            {/* LIGHTBOX OVERLAY (RESET ON REFRESH) */}
-            <div className="fixed inset-0 z-[500] bg-black/95 backdrop-blur-xl opacity-0 invisible peer-checked:opacity-100 peer-checked:visible transition-all duration-300 flex items-center justify-center p-4 xs:p-8 md:p-24 cursor-zoom-out">
-              <label 
-                htmlFor={`home-lightbox-${project.id}`}
-                className="absolute inset-0 z-[505] cursor-zoom-out"
-              ></label>
-              
-              <label 
-                htmlFor={`home-lightbox-${project.id}`}
-                className="absolute top-8 right-8 text-white/40 hover:text-white transition-colors z-[510] p-4 group cursor-pointer"
-              >
-                <span className="text-[10px] tracking-[0.5em] font-light uppercase block group-hover:translate-x-1 transition-transform">CLOSE ×</span>
-              </label>
-
-              <div className="relative w-full h-full z-[506] pointer-events-none">
-                <img 
-                  src={project.image ? urlFor(project.image).url() : ""} 
-                  alt={project.title} 
-                  className="w-full h-full object-contain select-none shadow-2xl" 
-                />
-              </div>
-            </div>
+      <div className="max-w-[1400px] mx-auto">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-14 gap-8">
+          <div className="space-y-4 max-w-2xl">
+            <span className="text-[10px] tracking-[0.5em] font-medium text-primary uppercase block">
+              Our Portfolio
+            </span>
+            <h2 className="text-4xl md:text-7xl font-thin tracking-tighter text-on-surface leading-[0.85] uppercase">
+              3D Fabrications & <br />
+              <span className="font-light italic text-outline">Architectural</span> Designs
+            </h2>
           </div>
-        ))}
-      </div>
+        </div>
 
-      <div className="mt-16 xs:mt-24 flex justify-center">
-        <Link 
-          href="/projects"
-          className="text-[10px] tracking-[0.5em] font-light text-black/40 hover:text-black transition-all duration-500 uppercase border-b border-transparent hover:border-black pb-2"
-        >
-          VIEW ARCHIVE // ALL PROJECTS
-        </Link>
+        {/* Staggered Editorial Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-x-12 md:gap-y-20">
+          {allProjects.map((project: FeaturedProject, index: number) => {
+            const isWide = index === 0 || index === 3;
+            const isTall = index === 1 || index === 4;
+
+            return (
+              <div
+                key={project.id}
+                className={`group relative ${isWide ? "md:col-span-12 lg:col-span-8" :
+                  isTall ? "md:col-span-6 lg:col-span-4" :
+                    "md:col-span-6 lg:col-span-4"
+                  } ${index % 2 !== 0 ? "md:mt-12" : ""}`}
+              >
+                <div className="relative overflow-hidden">
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    className={`block relative overflow-hidden bg-surface-container-high transition-all duration-700 ease-out cursor-pointer ${isWide ? "aspect-[21/9]" : "aspect-[4/3]"
+                      }`}
+                  >
+                    <Image
+                      alt={project.title}
+                      src={typeof project.image === 'string' ? project.image : (project.image ? urlFor(project.image).url() : "")}
+                      fill
+                      className="object-cover transition-all duration-1000 group-hover:scale-105 group-hover:opacity-90 grayscale-0 group-hover:grayscale"
+                    />
+
+                    {/* Hover Overlay Text */}
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8 md:p-12">
+                      <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
+                        <span className="text-[10px] tracking-[0.5em] font-medium text-white/50 uppercase block mb-3">
+                          {project.title}
+                        </span>
+                        <h4 className="text-2xl md:text-4xl font-thin text-white tracking-tighter uppercase leading-none">
+                          EXPLORE THIS PROJECT
+                        </h4>
+                      </div>
+                    </div>
+                  </Link>
+
+                  {/* Desktop Metadata Floating alongside - Hidden on desktop to prioritize hover state */}
+                  <div className="mt-8 md:hidden flex flex-col md:flex-row justify-between items-start md:items-center border-b border-outline-variant/20 pb-6 gap-4">
+                    <div className="space-y-4">
+                      <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
+                        <h3 className="text-xl md:text-2xl font-light tracking-tighter text-on-surface uppercase group-hover:text-primary transition-colors">
+                          {project.title}
+                        </h3>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+
       </div>
     </section>
   );

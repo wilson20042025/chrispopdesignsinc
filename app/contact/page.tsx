@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 export default function ContactPage() {
@@ -35,7 +34,6 @@ export default function ContactPage() {
 
   return (
     <>
-      <Header />
       <main className="pt-20 md:pt-40 pb-20 px-6 xs:px-12 md:px-24 min-h-screen">
         <section className="mb-8 md:mb-24">
           <span className="text-[10px] tracking-[0.5em] font-medium text-black uppercase mb-4 block">Let's build</span>
