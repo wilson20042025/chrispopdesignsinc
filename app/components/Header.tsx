@@ -7,24 +7,18 @@ import { Suspense } from "react";
 
 function HeaderContent() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const currentCategory = searchParams.get('category');
 
   // Hide header on studio pages
   if (pathname?.startsWith('/studio')) return null;
 
   const isActive = (path: string) => {
-    const [basePath, query] = path.split('?');
-    if (basePath !== pathname) return false;
-    if (!query) return !currentCategory;
-    const category = new URLSearchParams(query).get('category');
-    return currentCategory === category;
+    return path === pathname;
   };
 
   const navItems = [
     { name: "HOME", path: "/" },
-    { name: "3D FABRICATION", path: "/projects?category=fabrication" },
-    { name: "ARCHITECTURAL DESIGN", path: "/projects?category=architecture" },
+    { name: "3D FABRICATION", path: "/fabrication" },
+    { name: "ARCHITECTURAL DESIGN", path: "/architecture" },
     { name: "ABOUT", path: "/about" },
   ];
 

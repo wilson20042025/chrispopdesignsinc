@@ -151,10 +151,10 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
           {/* Bottom Navigation */}
           <section className="mt-32 px-6 xs:px-12 md:px-24 flex justify-between items-center border-t border-black/10 pt-16">
             <Link
-              href="/projects"
+              href={`/${projectData.category === 'fabrication' ? 'fabrication' : 'architecture'}`}
               className="text-[10px] tracking-[0.5em] font-light text-black/40 hover:text-black transition-all uppercase flex items-center gap-2"
             >
-              <span className="text-lg leading-none">←</span> Back to Archive
+              <span className="text-lg leading-none">←</span> Back to {projectData.category === 'fabrication' ? 'Fabrication' : 'Architecture'}
             </Link>
             <span className="hidden xs:block text-[10px] tracking-[0.3em] font-light text-black/20 uppercase">
               ChrisPop Designs Inc.

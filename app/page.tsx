@@ -11,7 +11,7 @@ export default function Home() {
     <>
       <Hero />
       <Narrative />
-      <ProjectsPreview />
+      <ProjectsPreview id="projects" subtitle="Featured Works" />
       <Pricing />
       <Footer />
     </>
