@@ -29,8 +29,8 @@ export default function AboutPage() {
     <>
       <main className="pt-24 xs:pt-32 md:pt-32 pb-32 px-6 xs:px-12 md:px-24 bg-white relative">
         {/* Intro Section */}
-        <section className="mb-24 md:mb-16">
-          <h1 className="text-3xl xs:text-5xl md:text-7xl font-thin tracking-tighter text-black leading-tight uppercase mb-12">
+        <section className="mb-12 md:mb-8">
+          <h1 className="text-3xl xs:text-5xl md:text-7xl font-thin tracking-tighter text-black leading-tight uppercase mb-6">
             Meet Our<br/>Masterminds
           </h1>
         </section>
@@ -61,19 +61,11 @@ export default function AboutPage() {
         </section>
 
         {/* Pricing Section */}
-        <section className="mt-48">
+        <section className="mt-24 md:mt-32">
           <Pricing />
         </section>
 
         {/* Bottom CTA */}
-        <section className="mt-48 md:mt-64 text-center">
-            <Link 
-                href="/contact"
-                className="inline-block text-[10px] tracking-[0.5em] font-light text-black border-b border-black pb-4 hover:opacity-60 transition-opacity uppercase"
-            >
-                Start a Dialogue // Inquire Now
-            </Link>
-        </section>
       </main>
       <Footer />
     </>
