@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 export default function FabricationPage() {
   return (
     <>
-      <main className="pt-24 md:pt-40">
+      <main className="pt-20 md:pt-24">
         <ProjectsPreview 
           category="fabrication" 
           title={<>Advanced <br />3D Fabrication</>} 

@@ -84,20 +84,20 @@ export default async function ProjectsPreview({ category, title, subtitle, isFul
 
   const allProjects = isFullList 
     ? [...featuredProjects, ...filteredStatic]
-    : [...featuredProjects, ...filteredStatic].slice(0, 7);
+    : [...featuredProjects, ...filteredStatic].slice(0, 4);
 
   return (
-    <section id={id} className="py-20 md:py-32 px-6 xs:px-12 md:px-24 bg-surface relative overflow-hidden">
+    <section id={id} className="py-8 md:py-12 px-6 xs:px-12 md:px-24 bg-surface overflow-hidden">
       {/* Decorative Grid Line */}
       <div className="absolute top-0 right-1/2 w-px h-full bg-outline-variant/10 hidden md:block" />
 
       <div className="max-w-[1400px] mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-24 gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-16 gap-8">
           <div className="space-y-4 max-w-3xl">
             <span className="text-[10px] tracking-[0.5em] font-medium text-primary uppercase block">
               {subtitle || (category === 'fabrication' ? 'The Workshop' : category === 'architecture' ? 'The Studio' : 'Our Portfolio')}
             </span>
-            <h2 className="text-4xl md:text-8xl font-thin tracking-tighter text-on-surface leading-[0.85] uppercase">
+            <h2 className="text-4xl md:text-7xl font-thin tracking-tighter text-on-surface leading-[0.85] uppercase">
               {title || (
                 <>
                   3D Fabrications & <br />
@@ -109,15 +109,15 @@ export default async function ProjectsPreview({ category, title, subtitle, isFul
         </div>
 
         {/* Staggered Editorial Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-x-12 md:gap-y-24">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-x-12 md:gap-y-12">
           {allProjects.map((project: FeaturedProject, index: number) => {
-            const isWide = index % 3 === 0;
-            const columnSpan = isWide ? "md:col-span-12 lg:col-span-8" : "md:col-span-6 lg:col-span-4";
+            const isWide = index % 4 === 0 || index % 4 === 3;
+            const columnSpan = isWide ? "md:col-span-8" : "md:col-span-4";
 
             return (
               <div
                 key={project.id}
-                className={`group relative ${columnSpan} ${index % 2 !== 0 && !isWide ? "md:mt-24" : ""}`}
+                className={`group relative ${columnSpan}`}
               >
                 <div className="relative overflow-hidden">
                   <Link 

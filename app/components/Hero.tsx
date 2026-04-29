@@ -14,7 +14,7 @@ export default function Hero() {
           <div className="lg:col-span-7 space-y-8">
             <div className="space-y-6">
 
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-thin tracking-tighter text-on-surface leading-[0.9] uppercase">
+              <h1 className="text-5xl md:text-7xl lg:text-7xl font-thin tracking-tighter text-on-surface leading-[0.9] uppercase">
                 Crafting <br />
                 <span className="font-light italic text-outline">Digital</span> <br />
                 Dimensions

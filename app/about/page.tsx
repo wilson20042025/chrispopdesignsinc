@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Pricing from "../components/Pricing";
 import Footer from "../components/Footer";
 
 export default function AboutPage() {
@@ -59,8 +60,13 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* Pricing Section */}
+        <section className="mt-48">
+          <Pricing />
+        </section>
+
         {/* Bottom CTA */}
-        <section className="mt-48 mt:mt-64 text-center">
+        <section className="mt-48 md:mt-64 text-center">
             <Link 
                 href="/contact"
                 className="inline-block text-[10px] tracking-[0.5em] font-light text-black border-b border-black pb-4 hover:opacity-60 transition-opacity uppercase"

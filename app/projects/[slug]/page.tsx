@@ -45,9 +45,9 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
 
     return (
       <>
-        <main className="pt-24 xs:pt-32 md:pt-48 pb-32 bg-white">
+        <main className="pt-20 xs:pt-24 md:pt-32 pb-24 bg-white">
           {/* Project Header Section */}
-          <section className="px-6 xs:px-12 md:px-24 mb-16 xs:mb-32">
+          <section className="px-6 xs:px-12 md:px-24 mb-8 xs:mb-16">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 md:gap-12">
               <div className="max-w-4xl">
                 <div className="mb-4 flex gap-4">
@@ -60,7 +60,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
                     </span>
                   )}
                 </div>
-                <h1 className="text-3xl xs:text-5xl md:text-9xl font-thin tracking-tighter text-black leading-[1.1] md:leading-none uppercase">
+                <h1 className="text-3xl xs:text-5xl md:text-7xl lg:text-8xl font-thin tracking-tighter text-black leading-[1.1] md:leading-none uppercase">
                   {projectData.title}
                 </h1>
               </div>
@@ -68,7 +68,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
           </section>
 
           {/* Narrative Description Section */}
-          <section className="px-6 xs:px-12 md:px-24 mb-16 xs:mb-32 md:mb-48">
+          <section className="px-6 xs:px-12 md:px-24 mb-12 xs:mb-20 md:mb-32">
             <div className="max-w-3xl">
               <p className="text-lg md:text-2xl font-thin leading-relaxed text-black/60 italic border-l border-black/10 pl-6 md:pl-12">
                 "{projectData.description}"
@@ -77,7 +77,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
           </section>
 
           {/* Architectural Gallery */}
-          <section className="space-y-4 xs:space-y-12 md:space-y-24 px-6 xs:px-12 md:px-24">
+          <section className="space-y-6 xs:space-y-12 md:space-y-20 px-6 xs:px-12 md:px-24">
 
             {/* 1. Main Hero Shot - Always first image */}
             {projectData.images.length > 0 && (

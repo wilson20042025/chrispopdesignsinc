@@ -25,7 +25,7 @@ export default function Narrative() {
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + stories.length) % stories.length);
 
   return (
-    <section className="py-10 md:py-14 px-6 xs:px-12 md:px-24 bg-surface overflow-hidden">
+    <section className="py-8 md:py-12 px-6 xs:px-12 md:px-24 bg-surface overflow-hidden">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
 
         {/* Title Column */}
