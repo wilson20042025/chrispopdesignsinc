@@ -19,6 +19,7 @@ function HeaderContent() {
     { name: "HOME", path: "/" },
     { name: "3D FABRICATION", path: "/fabrication" },
     { name: "ARCHITECTURAL DESIGN", path: "/architecture" },
+    { name: "INSIGHTS", path: "/blog" },
     { name: "ABOUT", path: "/about" },
   ];
 
@@ -73,9 +74,9 @@ function HeaderContent() {
         <div className="flex items-center z-[120]">
           <Link
             href="/contact"
-            className={`hidden md:flex font-inter font-light tracking-widest uppercase text-xs border px-5 py-2.5 transition-all duration-500 animate-contact ${isActive("/contact")
+            className={`hidden md:flex font-inter font-light tracking-widest uppercase text-xs border px-5 py-2.5 transition-all duration-500 ${isActive("/contact")
               ? "bg-black text-white border-black"
-              : "text-black border-black/20 hover:bg-black hover:text-white"
+              : "text-black border-black/20 hover:bg-black hover:text-white animate-contact"
               }`}
           >
             CONTACT US

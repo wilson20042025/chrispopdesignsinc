@@ -39,52 +39,10 @@ export default async function ProjectsPreview({ category, title, subtitle, isFul
 
   const featuredProjects: FeaturedProject[] = await client.fetch(query) || [];
 
-  const staticProjects: FeaturedProject[] = [
-    {
-      id: "laser-spec-01",
-      title: "Laser Precision Fabrication",
-      image: "/laser_cutting.png",
-      slug: "laser-precision",
-      category: "fabrication"
-    },
-    {
-      id: "drone-spec-02",
-      title: "Aerial Architectural Survey",
-      image: "/architectural_drone.png",
-      slug: "drone-survey",
-      category: "architecture"
-    },
-    {
-      id: "robot-spec-03",
-      title: "Robotic Prototype Assembly",
-      image: "/robotic_fabrication.png",
-      slug: "robotic-fabrication",
-      category: "fabrication"
-    },
-    {
-      id: "parametric-spec-05",
-      title: "Parametric Facade Research",
-      image: "/parametric_architectural_texture_detail_1775931276569.png",
-      slug: "parametric-research",
-      category: "fabrication"
-    },
-    {
-      id: "smart-spec-04",
-      title: "Smart Building Systems",
-      image: "/modern_architectural_innovation_building_1775931655490.png",
-      slug: "smart-systems",
-      category: "architecture"
-    }
-  ];
-
-  // Merge projects, filtering static by category if specified
-  const filteredStatic = category 
-    ? staticProjects.filter(p => p.category === category)
-    : staticProjects;
 
   const allProjects = isFullList 
-    ? [...featuredProjects, ...filteredStatic]
-    : [...featuredProjects, ...filteredStatic].slice(0, 4);
+    ? featuredProjects
+    : featuredProjects.slice(0, 4);
 
   return (
     <section id={id} className="py-8 md:py-12 px-6 xs:px-12 md:px-24 bg-surface overflow-hidden">
@@ -94,9 +52,11 @@ export default async function ProjectsPreview({ category, title, subtitle, isFul
       <div className="max-w-[1400px] mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-16 gap-8">
           <div className="space-y-4 max-w-3xl">
-            <span className="text-[10px] tracking-[0.5em] font-medium text-primary uppercase block">
-              {subtitle || (category === 'fabrication' ? 'The Workshop' : category === 'architecture' ? 'The Studio' : 'Our Portfolio')}
-            </span>
+            {subtitle !== "" && (
+              <span className="text-[10px] tracking-[0.5em] font-medium text-primary uppercase block">
+                {subtitle || (category === 'fabrication' ? 'The Workshop' : category === 'architecture' ? 'The Studio' : 'Our Portfolio')}
+              </span>
+            )}
             <h2 className="text-4xl md:text-7xl font-thin tracking-tighter text-on-surface leading-[0.85] uppercase">
               {title || (
                 <>

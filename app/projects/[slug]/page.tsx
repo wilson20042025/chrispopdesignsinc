@@ -4,6 +4,7 @@ import Link from "next/link";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { notFound } from "next/navigation";
+import ProjectGallery from "./ProjectGallery";
 
 export const revalidate = 10;
 
@@ -45,7 +46,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
 
     return (
       <>
-        <main className="pt-20 xs:pt-24 md:pt-32 pb-24 bg-white">
+        <main className="pt-16 xs:pt-20 md:pt-24 pb-16 bg-white">
           {/* Project Header Section */}
           <section className="px-6 xs:px-12 md:px-24 mb-8 xs:mb-16">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 md:gap-12">
@@ -68,7 +69,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
           </section>
 
           {/* Narrative Description Section */}
-          <section className="px-6 xs:px-12 md:px-24 mb-12 xs:mb-20 md:mb-32">
+          <section className="px-6 xs:px-12 md:px-24 mb-8 xs:mb-12 md:mb-20">
             <div className="max-w-3xl">
               <p className="text-lg md:text-2xl font-thin leading-relaxed text-black/60 italic border-l border-black/10 pl-6 md:pl-12">
                 "{projectData.description}"
@@ -77,79 +78,10 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
           </section>
 
           {/* Architectural Gallery */}
-          <section className="space-y-6 xs:space-y-12 md:space-y-20 px-6 xs:px-12 md:px-24">
-
-            {/* 1. Main Hero Shot - Always first image */}
-            {projectData.images.length > 0 && (
-              <div className="group">
-                <input type="checkbox" id={`lightbox-${projectData.images[0].id}`} className="peer hidden" />
-                <label
-                  htmlFor={`lightbox-${projectData.images[0].id}`}
-                  className="w-full aspect-[4/3] md:aspect-[16/9] bg-surface-container-low relative overflow-hidden group block cursor-zoom-in"
-                >
-                  <Image
-                    src={projectData.images[0].src}
-                    alt={projectData.title}
-                    fill
-                    className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                  />
-                </label>
-
-                {/* Lightbox for Hero */}
-                <div className="fixed inset-0 z-[500] bg-black/95 backdrop-blur-xl opacity-0 invisible peer-checked:opacity-100 peer-checked:visible transition-all duration-300 flex items-center justify-center p-4 xs:p-8 md:p-24 cursor-zoom-out">
-                  <label htmlFor={`lightbox-${projectData.images[0].id}`} className="absolute inset-0 z-[505]"></label>
-                  <label
-                    htmlFor={`lightbox-${projectData.images[0].id}`}
-                    className="absolute top-8 right-8 text-white/40 hover:text-white transition-colors z-[510] p-4 group cursor-pointer"
-                  >
-                    <span className="text-[10px] tracking-[0.5em] font-light uppercase block group-hover:translate-x-1 transition-transform">CLOSE ×</span>
-                  </label>
-                  <div className="relative w-full h-full z-[506] pointer-events-none">
-                    <img src={projectData.images[0].src} alt="Lightbox View" className="w-full h-full object-contain select-none shadow-2xl" />
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* 2. Dynamic Grid for all remaining images */}
-            {projectData.images.length > 1 && (
-              <div className="grid grid-cols-2 gap-4 xs:gap-12 md:gap-24">
-                {projectData.images.slice(1).map((img: Photo, idx: number) => (
-                  <div key={img.id} className="group">
-                    <input type="checkbox" id={`lightbox-${img.id}`} className="peer hidden" />
-                    <label
-                      htmlFor={`lightbox-${img.id}`}
-                      className="aspect-[3/4] bg-surface-container-low relative overflow-hidden group block cursor-zoom-in"
-                    >
-                      <Image
-                        src={img.src}
-                        alt={`Architecture detail ${idx + 1}`}
-                        fill
-                        className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                      />
-                    </label>
-
-                    {/* Lightbox Overlay for each grid item */}
-                    <div className="fixed inset-0 z-[500] bg-black/95 backdrop-blur-xl opacity-0 invisible peer-checked:opacity-100 peer-checked:visible transition-all duration-300 flex items-center justify-center p-4 xs:p-8 md:p-24 cursor-zoom-out">
-                      <label htmlFor={`lightbox-${img.id}`} className="absolute inset-0 z-[505]"></label>
-                      <label
-                        htmlFor={`lightbox-${img.id}`}
-                        className="absolute top-8 right-8 text-white/40 hover:text-white transition-colors z-[510] p-4 group cursor-pointer"
-                      >
-                        <span className="text-[10px] tracking-[0.5em] font-light uppercase block group-hover:translate-x-1 transition-transform">CLOSE ×</span>
-                      </label>
-                      <div className="relative w-full h-full z-[506] pointer-events-none">
-                        <img src={img.src} alt="Lightbox View" className="w-full h-full object-contain select-none shadow-2xl" />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </section>
+          <ProjectGallery images={projectData.images} title={projectData.title} />
 
           {/* Bottom Navigation */}
-          <section className="mt-32 px-6 xs:px-12 md:px-24 flex justify-between items-center border-t border-black/10 pt-16">
+          <section className="mt-20 px-6 xs:px-12 md:px-24 flex justify-between items-center border-t border-black/10 pt-12">
             <Link
               href={`/${projectData.category === 'fabrication' ? 'fabrication' : 'architecture'}`}
               className="text-[10px] tracking-[0.5em] font-light text-black/40 hover:text-black transition-all uppercase flex items-center gap-2"

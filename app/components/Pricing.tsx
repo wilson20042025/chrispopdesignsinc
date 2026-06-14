@@ -46,10 +46,7 @@ export default function Pricing() {
       <div className="absolute left-1/2 top-0 w-px h-full bg-black/[0.03] hidden lg:block" />
 
       <div className="max-w-[1400px] mx-auto">
-        <div className="mb-10 md:mb-14">
-          <span className="text-[10px] tracking-[0.5em] font-medium text-black/40 uppercase block mb-4">
-            Investment Structure
-          </span>
+        <div className="mb-8 md:mb-10">
           <h2 className="text-4xl md:text-7xl font-thin tracking-tighter text-black leading-[0.85] uppercase">
             Services & <br />
             <span className="font-light opacity-50">Consultancy</span>
@@ -58,16 +55,16 @@ export default function Pricing() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-16">
           {pricingPlans.map((plan) => (
-            <div key={plan.index} className="group flex flex-col h-full border-t border-black/10 pt-8 md:pt-12">
+            <div key={plan.index} className="group flex flex-col h-full border-t border-black/10 pt-6 md:pt-8">
               <div className="flex-1">
                 <h3 className="text-2xl md:text-3xl font-light tracking-tight text-black uppercase mb-4 group-hover:opacity-60 transition-opacity">
                   {plan.name}
                 </h3>
-                <p className="text-sm font-light text-black/70 leading-relaxed mb-10 max-w-[280px]">
+                <p className="text-sm font-light text-black/70 leading-relaxed mb-6 md:mb-8 max-w-[280px]">
                   {plan.description}
                 </p>
 
-                <div className="space-y-4 mb-12">
+                <div className="space-y-3 mb-8 md:mb-10">
                   {plan.features.map((feature) => (
                     <div key={feature} className="flex items-center gap-3">
                       <div className="w-1 h-1 bg-black/20 rounded-full" />
@@ -77,7 +74,7 @@ export default function Pricing() {
                 </div>
               </div>
 
-              <div className="mt-auto space-y-6 pt-8 border-t border-black/[0.05]">
+              <div className="mt-auto space-y-4 md:space-y-5 pt-6 md:pt-8 border-t border-black/[0.05]">
                 <div className="flex justify-between items-baseline">
                   <span className="text-[10px] tracking-widest text-black/50 uppercase">Investment</span>
                   <span className="text-sm md:text-base font-light text-black uppercase">{plan.price}</span>

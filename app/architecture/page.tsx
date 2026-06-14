@@ -8,7 +8,7 @@ export default function ArchitecturePage() {
         <ProjectsPreview 
           category="architecture" 
           title={<>Architectural <br />Design & Strategy</>} 
-          subtitle="Spatial Innovation"
+          subtitle=""
           isFullList={true}
         />
       </main>

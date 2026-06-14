@@ -24,58 +24,26 @@ export default async function BlogPreview() {
     "slug": slug.current
   }`) || [];
 
-  const staticPosts: BlogPost[] = [
-    {
-      id: "post-1",
-      title: "The Future of Robotic Fabrication",
-      date: "April 12, 2024",
-      category: "Innovation",
-      image: "/robotic_fabrication.png",
-      excerpt: "Exploring how automated assembly lines are redefining precision.",
-      slug: "future-of-robotic-fabrication"
-    },
-    {
-      id: "post-2",
-      title: "Parametric Design: Beyond Aesthetics",
-      date: "March 28, 2024",
-      category: "Design",
-      image: "/parametric_architectural_texture_detail_1775931276569.png",
-      excerpt: "How algorithms optimize environmental performance.",
-      slug: "parametric-design-beyond-aesthetics"
-    },
-    {
-      id: "post-3",
-      title: "Digital Dimensions: A New Era",
-      date: "March 15, 2024",
-      category: "Philosophy",
-      image: "/modern_architectural_innovation_building_1775931655490.png",
-      excerpt: "Bridging the gap between digital models and space.",
-      slug: "digital-dimensions-new-era"
-    },
-    {
-      id: "post-4",
-      title: "Structural Minimalism: Power of Less",
-      date: "March 10, 2024",
-      category: "Architecture",
-      image: "/gab.jpeg",
-      excerpt: "Synthesizing material honesty and spatial clarity.",
-      slug: "structural-minimalism-power-of-less"
-    }
-  ];
-
-  const allPosts = sanityPosts.length > 0 ? sanityPosts : staticPosts;
+  const allPosts = sanityPosts;
 
   return (
     <section className="py-12 md:py-20 px-6 xs:px-12 md:px-24 bg-white relative">
       <div className="max-w-[1400px] mx-auto">
-        <div className="mb-12 md:mb-16">
-          <span className="text-[10px] tracking-[0.5em] font-medium text-black/40 uppercase block mb-4">
-            Insights & Ideas
-          </span>
-          <h2 className="text-4xl md:text-7xl font-thin tracking-tighter text-black leading-[0.85] uppercase">
-            From the <br />
-            <span className="font-light italic opacity-50">Journal</span>
-          </h2>
+        <div className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div>
+
+            <h2 className="text-4xl md:text-7xl font-thin tracking-tighter text-black leading-[0.85] uppercase">
+              Our <br />
+              <span className="font-light italic opacity-50">Insights</span>
+            </h2>
+          </div>
+          <Link 
+            href="/blog" 
+            className="group flex items-center gap-4 text-[10px] tracking-[0.5em] font-medium text-black uppercase pb-2 border-b border-black/10 hover:border-black transition-all"
+          >
+            <span>Read Insights</span>
+            <span className="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">east</span>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-12">

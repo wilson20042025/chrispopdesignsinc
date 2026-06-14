@@ -8,7 +8,7 @@ export default function FabricationPage() {
         <ProjectsPreview 
           category="fabrication" 
           title={<>Advanced <br />3D Fabrication</>} 
-          subtitle="Precision Prototyping"
+          subtitle=""
           isFullList={true}
         />
       </main>

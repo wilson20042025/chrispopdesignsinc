@@ -10,7 +10,7 @@ export default function ContactPage() {
     e.preventDefault();
     const form = e.currentTarget;
     const data = new FormData(form);
-    
+
     try {
       const response = await fetch("https://formspree.io/f/xzdkwgbk", {
         method: "POST",
@@ -19,7 +19,7 @@ export default function ContactPage() {
           'Accept': 'application/json'
         }
       });
-      
+
       if (response.ok) {
         setStatus("SUCCESS");
         form.reset();
@@ -34,76 +34,91 @@ export default function ContactPage() {
 
   return (
     <>
-      <main className="pt-20 md:pt-40 pb-20 px-6 xs:px-12 md:px-24 min-h-screen">
-        <section className="mb-8 md:mb-24">
-          <span className="text-[10px] tracking-[0.5em] font-medium text-black uppercase mb-4 block">Let's build</span>
-          <h1 className="text-4xl xs:text-6xl md:text-8xl font-thin tracking-tighter text-black leading-none uppercase">
+      <main className="pt-20 md:pt-32 pb-20 px-6 xs:px-12 md:px-24 min-h-screen">
+        <section className="mb-8 md:mb-16">
+          <h1 className="text-4xl xs:text-6xl md:text-7xl font-thin tracking-tighter text-black leading-none uppercase">
             CONTACT US
           </h1>
         </section>
 
         <section className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24">
-          <div className="space-y-8 md:space-y-16">
-            <div className="space-y-4">
-              <span className="text-[10px] tracking-[0.3em] font-medium text-black uppercase block">Office</span>
-              <p className="text-lg md:text-2xl font-light leading-relaxed text-black">
-                10000, Paynesville,<br/>
-                Monrovia, Liberia
-              </p>
+          <div className="flex flex-col h-full">
+            <div className="space-y-8 md:space-y-16">
+              <div className="space-y-4">
+                <span className="text-[10px] tracking-[0.3em] font-medium text-black uppercase block">Global Inquiry</span>
+                <p className="text-lg md:text-2xl font-light hover:opacity-60 transition-opacity cursor-pointer">
+                  chrispopdesignsinc@gmail.com
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <span className="text-[10px] tracking-[0.3em] font-medium text-black uppercase block">Office</span>
+                <p className="text-lg md:text-2xl font-light leading-relaxed text-black">
+                  10000, Paynesville,<br />
+                  Monrovia, Liberia
+                </p>
+              </div>
             </div>
-            
-            <div className="space-y-4">
-              <span className="text-[10px] tracking-[0.3em] font-medium text-black uppercase block">Global Inquiry</span>
-              <p className="text-lg md:text-2xl font-light hover:opacity-60 transition-opacity cursor-pointer">
-              chrispopdesignsandinnovations@gmail.com
-              </p>
+
+            {/* Google Map - Desktop Only */}
+            <div className="hidden md:flex flex-1 flex-col pt-16 w-full">
+              <div className="flex-1 w-full bg-surface-container-low relative overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127536.03842106096!2d-10.787754353457182!3d6.281862993888371!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xf09f0df7e20b601%3A0xe5cdcdb4e073c683!2sPaynesville%2C%20Liberia!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+                  width="100%" 
+                  height="100%" 
+                  style={{ border: 0 }} 
+                  allowFullScreen={false} 
+                  loading="lazy" 
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="absolute inset-0 w-full h-full"
+                ></iframe>
+              </div>
             </div>
           </div>
 
-          <form 
+          <form
             onSubmit={handleSubmit}
-            className="space-y-8 md:bg-surface-container-low p-0 md:p-12 lg:p-20"
+            className="space-y-6 md:bg-surface-container-low p-0 md:p-8 lg:p-12"
           >
             {/* ... form fields remain same ... */}
             <div className="space-y-4">
-              <label className="text-[10px] tracking-[0.3em] font-light text-outline uppercase block">Name</label>
-              <input 
+              <input
                 name="name"
-                type="text" 
+                type="text"
                 required
-                className="w-full bg-transparent border-b border-outline-variant/30 py-2 focus:outline-none focus:border-on-surface transition-colors placeholder:text-black/20"
-                placeholder="First Last"
+                className="w-full bg-transparent border-b border-outline-variant/30 py-2 focus:outline-none focus:border-on-surface transition-colors placeholder:text-black/40"
+                placeholder="Your name"
               />
             </div>
 
             <div className="space-y-4">
-              <label className="text-[10px] tracking-[0.3em] font-light text-outline uppercase block">Email Address</label>
-              <input 
+              <input
                 name="email"
-                type="email" 
+                type="email"
                 required
-                className="w-full bg-transparent border-b border-outline-variant/30 py-2 focus:outline-none focus:border-on-surface transition-colors placeholder:text-black/20"
-                placeholder="example@email.com"
+                className="w-full bg-transparent border-b border-outline-variant/30 py-2 focus:outline-none focus:border-on-surface transition-colors placeholder:text-black/40"
+                placeholder="Email Address"
               />
             </div>
 
             <div className="space-y-4">
-              <label className="text-[10px] tracking-[0.3em] font-light text-outline uppercase block">Project Type</label>
-              <select name="project_type" className="w-full bg-transparent border-b border-outline-variant/30 py-2 focus:outline-none focus:border-on-surface transition-colors appearance-none text-black/40">
+              <select name="project_type" required defaultValue="" className="w-full bg-transparent border-b border-outline-variant/30 py-2 focus:outline-none focus:border-on-surface transition-colors appearance-none text-black/40">
+                <option value="" disabled hidden>Click & Select Project Type</option>
                 <option value="residential">Residential</option>
                 <option value="commercial">Commercial</option>
-                <option value="cultural">Cultural</option>
+                <option value="fabrication">Fabrication</option>
                 <option value="other">Other</option>
               </select>
             </div>
 
             <div className="space-y-4">
-              <label className="text-[10px] tracking-[0.3em] font-light text-outline uppercase block">Message</label>
-              <textarea 
+              <textarea
                 name="message"
                 rows={4}
-                className="w-full bg-transparent border-b border-outline-variant/30 py-2 focus:outline-none focus:border-on-surface transition-colors resize-none placeholder:text-black/20"
-                placeholder="Tell us about your vision"
+                required
+                className="w-full bg-transparent border-b border-outline-variant/30 py-2 focus:outline-none focus:border-on-surface transition-colors resize-none placeholder:text-black/40"
+                placeholder="Leave a message...."
               />
             </div>
 
@@ -111,7 +126,7 @@ export default function ContactPage() {
               <button type="submit" className="w-full md:w-auto text-[10px] tracking-[0.5em] font-medium text-white bg-black uppercase px-12 py-6 hover:opacity-80 transition-all duration-500">
                 Send Inquiry
               </button>
-              
+
               {status === "SUCCESS" && (
                 <p className="text-[10px] tracking-[0.2em] text-green-600 uppercase animate-in fade-in slide-in-from-left-2">
                   Thank you. Your inquiry has been sent.
