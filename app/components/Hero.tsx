@@ -22,7 +22,7 @@ export default function Hero() {
             </div>
 
             <p className="max-w-md text-sm md:text-base text-on-surface-variant font-light leading-relaxed">
-              ChrisPop Designs Incorporated and Innovation merges advanced 3D fabrication with avant-garde architectural principles to redefine the limits of space and form.
+              Chris Pop Designs  and Innovation merges advanced 3D fabrication with avant-garde architectural principles to redefine the limits of space and form.
             </p>
 
             <div className="flex items-center gap-8 pt-4">
@@ -86,7 +86,7 @@ export default function Hero() {
       </div>
 
       {/* Vertical Metadata */}
-      <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden xl:flex flex-col items-center gap-12 z-20">
+      {/* <div className="absolute right-8 top-1/2 -translate-y-1/2 hidden xl:flex flex-col items-center gap-12 z-20">
         <span className="text-vertical text-[10px] tracking-[0.8em] font-light text-on-surface-variant uppercase">
           Innovation & Design
         </span>
@@ -94,7 +94,7 @@ export default function Hero() {
         <span className="text-vertical text-[10px] tracking-[0.8em] font-light text-on-surface-variant uppercase">
           2024 Series
         </span>
-      </div>
+      </div> */}
 
       <style dangerouslySetInnerHTML={{
         __html: `

@@ -52,7 +52,7 @@ function HeaderContent() {
               />
             </div>
             <h1 className="text-[13px] xs:text-base md:text-lg font-medium tracking-tighter text-black uppercase whitespace-nowrap">
-              ChrisPop Designs Inc.
+              ChrisPop Designs
             </h1>
           </Link>
         </div>

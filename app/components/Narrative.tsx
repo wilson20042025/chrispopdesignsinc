@@ -9,7 +9,7 @@ export default function Narrative() {
   const stories = [
     {
       title: "Design Meets Advanced Fabrication",
-      text: "We are a team of passionate architects and precision fabricators. We believe that the most inspiring spaces are born from the perfect synergy between architectural design and advanced 3D fabrication technologies."
+      text: "We are a team of passionate architects and precision fabricators. We believe that the most inspiring spaces are born from the perfect synergy between architectural design and  fabrication technologies."
     },
     {
       title: "Precision Prototyping & Craft",

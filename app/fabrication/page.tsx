@@ -7,7 +7,7 @@ export default function FabricationPage() {
       <main className="pt-20 md:pt-24">
         <ProjectsPreview 
           category="fabrication" 
-          title={<>Advanced <br />3D Fabrication</>} 
+          title={<>3D Fabrication</>} 
           subtitle=""
           isFullList={true}
         />
