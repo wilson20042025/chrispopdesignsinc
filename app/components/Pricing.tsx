@@ -1,9 +1,10 @@
 import Link from "next/link";
+import PdfDownloadForm from "./PdfDownloadForm";
 
 const pricingPlans = [
   {
     index: "01",
-    name: "Digital Fabrication",
+    name: "3D Printing &\nRapid Prototyping",
     description: "Advanced prototyping and technical manufacturing solutions.",
     price: "Starting at $1,250",
     features: [
@@ -15,7 +16,7 @@ const pricingPlans = [
   },
   {
     index: "02",
-    name: "Architectural Vision",
+    name: "CNC Routing & \nPrecision Machining",
     description: "Concept-driven spatial design and architectural strategy.",
     price: "Starting at $3,500",
     features: [
@@ -27,7 +28,7 @@ const pricingPlans = [
   },
   {
     index: "03",
-    name: "Strategic Integration",
+    name: "Laser Cutting & \nEngraving",
     description: "Full-scale design and robotic construction management.",
     price: "Custom Quote",
     features: [
@@ -36,12 +37,24 @@ const pricingPlans = [
       "Project Management",
       "Sustainability Audit"
     ]
+  },
+  {
+    index: "04",
+    name: "Parametric Design &\nOptimization",
+    description: "Algorithmic design generation and structural optimization workflows.",
+    price: "Starting at $2,000",
+    features: [
+      "Algorithmic Generation",
+      "Structural Analysis",
+      "Performance Optimization",
+      "Digital Twin Creation"
+    ]
   }
 ];
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="py-8 md:py-12 px-6 xs:px-12 md:px-24 bg-white relative overflow-hidden">
+    <section id="pricing" className="pt-8 md:pt-12 pb-2 md:pb-4 px-6 xs:px-12 md:px-24 bg-white relative overflow-hidden">
       {/* Decorative vertical line */}
       <div className="absolute left-1/2 top-0 w-px h-full bg-black/[0.03] hidden lg:block" />
 
@@ -53,11 +66,11 @@ export default function Pricing() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 lg:gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8 lg:gap-16">
           {pricingPlans.map((plan) => (
             <div key={plan.index} className="group flex flex-col h-full border-t border-black/10 pt-6 md:pt-8">
               <div className="flex-1">
-                <h3 className="text-2xl md:text-3xl font-light tracking-tight text-black uppercase mb-4 group-hover:opacity-60 transition-opacity">
+                <h3 className="text-xl md:text-2xl font-light tracking-tight text-black mb-4 group-hover:opacity-60 transition-opacity whitespace-pre-line">
                   {plan.name}
                 </h3>
                 <p className="text-sm font-light text-black/70 leading-relaxed mb-6 md:mb-8 max-w-[280px]">
@@ -74,21 +87,13 @@ export default function Pricing() {
                 </div>
               </div>
 
-              <div className="mt-auto space-y-4 md:space-y-5 pt-6 md:pt-8 border-t border-black/[0.05]">
-                <div className="flex justify-between items-baseline">
-                  <span className="text-[10px] tracking-widest text-black/50 uppercase">Investment</span>
-                  <span className="text-sm md:text-base font-light text-black uppercase">{plan.price}</span>
-                </div>
 
-                <Link
-                  href="/contact"
-                  className="block w-full text-center py-5 border border-black/10 bg-black text-white md:bg-transparent md:text-black text-[10px] tracking-[0.4em] uppercase font-medium hover:bg-black hover:text-white transition-all duration-500"
-                >
-                  Inquire Now
-                </Link>
-              </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-8 md:mt-12">
+          <PdfDownloadForm />
         </div>
       </div>
     </section>

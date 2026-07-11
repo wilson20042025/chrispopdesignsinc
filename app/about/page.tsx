@@ -61,7 +61,7 @@ export default function AboutPage() {
         </section>
 
         {/* Pricing Section */}
-        <section className="mt-24 md:mt-32">
+        <section className="mt-24 md:mt-32 -mx-6 xs:-mx-12 md:-mx-24">
           <Pricing />
         </section>
 
