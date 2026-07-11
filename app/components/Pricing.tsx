@@ -66,7 +66,7 @@ export default function Pricing() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8 lg:gap-16">
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8 lg:gap-16">
           {pricingPlans.map((plan) => (
             <div key={plan.index} className="group flex flex-col h-full border-t border-black/10 pt-6 md:pt-8">
               <div className="flex-1">
