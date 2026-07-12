@@ -13,12 +13,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
 
-    // Replace this with your actual verified domain in Resend. 
-    // By default, Resend onboarding allows sending from onboarding@resend.dev but only TO the verified email address.
-    const fromAddress = process.env.FROM_EMAIL_ADDRESS || "onboarding@resend.dev";
-
     const data = await resend.emails.send({
-      from: `ChrisPop Designs & Innovation <${fromAddress}>`,
+      from: `ChrisPop Designs & Innovation <contact@chrispopdesignsinc.com>`,
       to: [email],
       subject: "Our Services Overview PDF",
       html: `
