@@ -5,7 +5,7 @@ const pricingPlans = [
   {
     index: "01",
     name: "3D Printing &\nRapid Prototyping",
-    description: "Advanced prototyping and technical manufacturing solutions.",
+    description: "FDM and resin-based 3D printing for prototypes, consumer goods, architectural models, medical aids, spare parts and custom objects across all sectors. ",
     price: "Starting at $1,250",
     features: [
       "Computational Modeling",
@@ -17,7 +17,7 @@ const pricingPlans = [
   {
     index: "02",
     name: "CNC Routing & \nPrecision Machining",
-    description: "Concept-driven spatial design and architectural strategy.",
+    description: "Computer Numerical Control routing of wood, acrylic, foam, aluminium, and composite panels for furniture, signage, interior fittings, and industrial components.",
     price: "Starting at $3,500",
     features: [
       "Spatial Narrative",
@@ -29,7 +29,7 @@ const pricingPlans = [
   {
     index: "03",
     name: "Laser Cutting & \nEngraving",
-    description: "Full-scale design and robotic construction management.",
+    description: "High-precision laser cutting and engraving on acrylic, wood, leather, fabric and metal for awards, branding materials, packaging, custom gifts and industrial markings.",
     price: "Custom Quote",
     features: [
       "End-to-End Fabrication",
@@ -40,8 +40,8 @@ const pricingPlans = [
   },
   {
     index: "04",
-    name: "Parametric Design &\nOptimization",
-    description: "Algorithmic design generation and structural optimization workflows.",
+    name: "Graphic Design &\nDigital Branding",
+    description: "Brand identity, product packaging, marketing materials, digital assets and UI/UX design for Liberian and regional businesses. ",
     price: "Starting at $2,000",
     features: [
       "Algorithmic Generation",
@@ -76,15 +76,6 @@ export default function Pricing() {
                 <p className="text-sm font-light text-black/70 leading-relaxed mb-6 md:mb-8 max-w-[280px]">
                   {plan.description}
                 </p>
-
-                <div className="space-y-3 mb-8 md:mb-10">
-                  {plan.features.map((feature) => (
-                    <div key={feature} className="flex items-center gap-3">
-                      <div className="w-1 h-1 bg-black/20 rounded-full" />
-                      <span className="text-[11px] tracking-wider font-light text-black/80 uppercase">{feature}</span>
-                    </div>
-                  ))}
-                </div>
               </div>
 
 

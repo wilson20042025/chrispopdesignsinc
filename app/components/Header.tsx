@@ -17,8 +17,7 @@ function HeaderContent() {
 
   const navItems = [
     { name: "HOME", path: "/" },
-    { name: "3D FABRICATION", path: "/fabrication" },
-    { name: "ARCHITECTURAL DESIGN", path: "/architecture" },
+    { name: "OUR WORKS", path: "/projects" },
     { name: "INSIGHTS", path: "/blog" },
     { name: "ABOUT", path: "/about" },
   ];

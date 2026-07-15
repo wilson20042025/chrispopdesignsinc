@@ -21,7 +21,7 @@ export async function POST(request: Request) {
         <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; color: #000;">
           <h1 style="font-weight: 300; text-transform: uppercase; letter-spacing: 2px;">ChrisPop Designs & Innovation</h1>
           <p style="line-height: 1.6;">Thank you for your interest in our services.</p>
-          <p style="line-height: 1.6;">You can download our full services PDF using the secure link below:</p>
+          <p style="line-height: 1.6;">You can download our full services PDF using the secure link below: 👇👇👇👇</p>
           
           <div style="margin: 40px 0;">
             <a href="${origin}/Services%26Pricing.pdf" style="background: #000; color: #fff; padding: 15px 30px; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: 12px; display: inline-block;">Download PDF</a>

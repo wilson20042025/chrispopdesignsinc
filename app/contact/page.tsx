@@ -47,7 +47,7 @@ export default function ContactPage() {
               <div className="space-y-4">
                 <span className="text-[10px] tracking-[0.3em] font-medium text-black uppercase block">Global Inquiry</span>
                 <p className="text-lg md:text-2xl font-light hover:opacity-60 transition-opacity cursor-pointer">
-                  chrispopdesignsinc@gmail.com
+                  chrispopdesignsinno@gmail.com
                 </p>
               </div>
 
@@ -105,9 +105,12 @@ export default function ContactPage() {
             <div className="space-y-4">
               <select name="project_type" required defaultValue="" className="w-full bg-transparent border-b border-outline-variant/30 py-2 focus:outline-none focus:border-on-surface transition-colors appearance-none text-black/40">
                 <option value="" disabled hidden>Click & Select Project Type</option>
-                <option value="residential">Residential</option>
-                <option value="commercial">Commercial</option>
-                <option value="fabrication">Fabrication</option>
+                <option value="3D Printing & Rapid Prototyping">3D Printing & Rapid Prototyping</option>
+                <option value="CNC Routing & Precision Machining"> CNC Routing & Precision Machining </option>
+                <option value="Laser Cutting & Engraving">Laser Cutting & Engraving </option>
+                <option value="Graphic Design & Digital Branding"> Graphic Design & Digital Branding </option>
+                <option value="Digital Fabrication & Experimental Media"> Digital Fabrication & Experimental Media </option>
+                <option value="Technical Training & CPDI Academy"> Technical Training & CPDI Academy </option>
                 <option value="other">Other</option>
               </select>
             </div>

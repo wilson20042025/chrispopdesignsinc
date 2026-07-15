@@ -11,6 +11,14 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Chris Pop Design Innovation | Architecture and 3D Fabrication..",
   description: "We bridge the gap between architectural design and 3D fabrication, creating innovative spaces that are as functional as they are beautiful.",
+  icons: {
+    icon: [
+      { url: '/favicon.png' },
+      new URL('/favicon.png', 'https://chrispopdesignsinc.com'),
+    ],
+    shortcut: '/favicon.png',
+    apple: '/chrispop(thumbnail).png',
+  },
 };
 
 import Header from "./components/Header";

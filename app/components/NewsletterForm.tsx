@@ -34,8 +34,8 @@ export default function NewsletterForm() {
   return (
     <div className="max-w-2xl mx-auto space-y-12 relative">
       <span className="text-[10px] tracking-[0.5em] font-medium text-black/40 uppercase">Stay Connected</span>
-      <h2 className="text-3xl md:text-5xl font-thin tracking-tighter text-black uppercase leading-tight">
-        Subscribe to our <br /> digital architecture digest
+      <h2 className="text-3xl md:text-5xl font-thin tracking-tighter text-black leading-tight">
+        To Stay Updated
       </h2>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4 items-center justify-center max-w-md mx-auto relative">
         <input
