@@ -6,11 +6,37 @@ import { urlFor } from "@/sanity/lib/image";
 import { notFound } from "next/navigation";
 import ProjectGallery from "./ProjectGallery";
 
+import { Metadata } from "next";
+
 export const revalidate = 10;
 
 interface Photo {
   id: string;
   src: string;
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  
+  const project = await client.fetch(`*[_type == "project" && slug.current == $slug][0] {
+    title,
+    summary,
+    images
+  }`, { slug });
+
+  if (!project) {
+    return { title: "Project Not Found" };
+  }
+
+  return {
+    title: `${project.title} | Chris Pop Design Innovation`,
+    description: project.summary || "Explore our architectural and fabrication projects.",
+    openGraph: {
+      title: `${project.title} | Chris Pop Design`,
+      description: project.summary || "Explore our architectural and fabrication projects.",
+      images: project.images && project.images[0] ? [urlFor(project.images[0]).url()] : [],
+    },
+  };
 }
 
 export default async function ProjectDetail({ params }: { params: Promise<{ slug: string }> }) {
@@ -22,8 +48,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
       title,
       summary,
       images,
-      category,
-      type
+      "category": category->title
     }`, { slug });
 
     if (!project) {
@@ -36,8 +61,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
     const projectData = {
       title: project.title,
       description: project.summary || "",
-      category: project.category || "architecture",
-      type: project.type || "",
+      category: project.category || "Project",
       images: (project.images || []).map((img: any, idx: number): Photo => ({
         id: `img${idx}`,
         src: img ? urlFor(img).url() : ""
@@ -53,15 +77,10 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
               <div className="max-w-4xl">
                 <div className="mb-4 flex gap-4">
                   <span className="text-[10px] tracking-[0.3em] font-medium text-black/40 uppercase bg-black/5 px-3 py-1">
-                    {projectData.category === 'fabrication' ? '3D Fabrication' : 'Architectural Design'}
+                    {projectData.category}
                   </span>
-                  {projectData.type && (
-                    <span className="text-[10px] tracking-[0.3em] font-light text-black/40 uppercase border border-black/10 px-3 py-1">
-                      {projectData.type}
-                    </span>
-                  )}
                 </div>
-                <h1 className="text-3xl xs:text-5xl md:text-7xl lg:text-8xl font-thin tracking-tighter text-black leading-[1.1] md:leading-none uppercase">
+                <h1 className="text-3xl xs:text-5xl md:text-6xl lg:text-7xl font-thin tracking-tighter text-black leading-[1.1] md:leading-none uppercase">
                   {projectData.title}
                 </h1>
               </div>
@@ -78,15 +97,15 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
           </section>
 
           {/* Architectural Gallery */}
-          <ProjectGallery images={projectData.images} title={projectData.title} />
+          <ProjectGallery images={projectData.images} title={projectData.title} description={projectData.description} />
 
           {/* Bottom Navigation */}
           <section className="mt-20 px-6 xs:px-12 md:px-24 flex justify-between items-center border-t border-black/10 pt-12">
             <Link
-              href={`/${projectData.category === 'fabrication' ? 'fabrication' : 'architecture'}`}
+              href="/our-work"
               className="text-[10px] tracking-[0.5em] font-light text-black/40 hover:text-black transition-all uppercase flex items-center gap-2"
             >
-              <span className="text-lg leading-none">←</span> Back to {projectData.category === 'fabrication' ? 'Fabrication' : 'Architecture'}
+              <span className="text-lg leading-none">←</span> Back to Works
             </Link>
             <span className="hidden xs:block text-[10px] tracking-[0.3em] font-light text-black/20 uppercase">
               ChrisPop Designs Inc.

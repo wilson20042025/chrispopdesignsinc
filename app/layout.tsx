@@ -13,10 +13,10 @@ export const metadata: Metadata = {
   description: "We bridge the gap between architectural design and 3D fabrication, creating innovative spaces that are as functional as they are beautiful.",
   icons: {
     icon: [
-      { url: '/favicon.png' },
-      new URL('/favicon.png', 'https://chrispopdesignsinc.com'),
+      { url: '/favicon_rounded.png' },
+      new URL('/favicon_rounded.png', 'https://chrispopdesignsinc.com'),
     ],
-    shortcut: '/favicon.png',
+    shortcut: '/favicon_rounded.png',
     apple: '/chrispop(thumbnail).png',
   },
 };

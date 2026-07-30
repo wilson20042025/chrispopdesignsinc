@@ -22,7 +22,7 @@ export default function Hero() {
             </div>
 
             <p className="max-w-md text-sm md:text-base text-on-surface-variant font-light leading-relaxed">
-              Chris Pop Designs  and Innovation merges advanced 3D fabrication with avant-garde architectural principles to redefine the limits of space and form.
+              Chris Pop Designs  and Innovation is a multi-disciplinary company that aim to specialize into architectural design, 3D &  Rapid Prototyping, CNC Routing, and 3D printing. 
             </p>
 
             <div className="flex items-center gap-8 pt-4">

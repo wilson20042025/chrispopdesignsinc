@@ -8,7 +8,7 @@ interface Photo {
   src: string;
 }
 
-export default function ProjectGallery({ images, title }: { images: Photo[], title: string }) {
+export default function ProjectGallery({ images, title, description }: { images: Photo[], title: string, description?: string }) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const openLightbox = (index: number) => setLightboxIndex(index);
@@ -25,6 +25,30 @@ export default function ProjectGallery({ images, title }: { images: Photo[], tit
     e.stopPropagation();
     if (lightboxIndex !== null) {
       setLightboxIndex((lightboxIndex - 1 + images.length) % images.length);
+    }
+  };
+
+  const handleShare = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const shareData = {
+      title: title,
+      text: description || title,
+      url: window.location.href,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        console.log("Sharing cancelled or failed", err);
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(`${shareData.title}\n${shareData.text}\n\n${shareData.url}`);
+        alert("Project link and description copied to clipboard!");
+      } catch (err) {
+        console.error("Failed to copy text: ", err);
+      }
     }
   };
 
@@ -109,6 +133,14 @@ export default function ProjectGallery({ images, title }: { images: Photo[], tit
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 text-[10px] tracking-[0.3em] font-light uppercase">
             {lightboxIndex + 1} / {images.length}
           </div>
+
+          <button
+            onClick={handleShare}
+            className="absolute bottom-8 right-8 text-white/40 hover:text-white transition-colors z-[510] p-4 group cursor-pointer flex items-center gap-2"
+          >
+            <span className="text-[10px] tracking-[0.3em] font-light uppercase hidden xs:block">Share</span>
+            <span className="material-symbols-outlined text-xl">share</span>
+          </button>
         </div>
       )}
     </>

@@ -17,7 +17,7 @@ function HeaderContent() {
 
   const navItems = [
     { name: "HOME", path: "/" },
-    { name: "OUR WORKS", path: "/projects" },
+    { name: "OUR WORKS", path: "/our-work" },
     { name: "INSIGHTS", path: "/blog" },
     { name: "ABOUT", path: "/about" },
   ];

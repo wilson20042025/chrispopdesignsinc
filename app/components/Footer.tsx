@@ -8,10 +8,10 @@ export default function Footer() {
       <div className="flex flex-col-reverse md:flex-row justify-between items-center px-6 xs:px-12 pt-10 xs:pt-12 pb-6 xs:pb-8 w-full text-center md:text-left gap-12 md:gap-0">
         <div className="flex flex-col gap-2">
           <span className="font-inter font-light tracking-[0.2em] text-[10px] text-white/80">
-            © {currentYear} ChrisPop Designs Inc. & Innovation. All rights reserved.
+            © {currentYear} ChrisPop Designs & Innovation. All rights reserved.
           </span>
           <span className="font-inter font-light tracking-[0.2em] text-[8px] text-white/60">
-            Digital Development by Fritzgerald Wilson
+            Designed & Developed by Fritzgerald Wilson
           </span>
         </div>
         <div className="flex gap-6 xs:gap-12 transition-all">

@@ -5,36 +5,34 @@ export const structure: StructureResolver = (S) =>
   S.list()
     .title('ChrisPop Studio')
     .items([
-      // 1. 3D Fabrication Section
       S.listItem()
-        .title('3D Fabrication')
+        .title('Categories')
         .child(
-          S.documentList()
-            .title('Fabrication Projects')
-            .schemaType('project')
-            .filter('_type == "project" && category == "fabrication"')
-            .initialValueTemplates([
-              S.initialValueTemplateItem('project-fabrication')
-            ])
+          S.documentTypeList('category')
+            .title('Categories')
+            .child((categoryId) =>
+              S.documentList()
+                .title('Projects')
+                .schemaType('project')
+                .filter('_type == "project" && category._ref == $categoryId')
+                .params({ categoryId })
+                .initialValueTemplates([
+                  S.initialValueTemplateItem('project', { category: categoryId })
+                ])
+            )
         ),
-
-      // 2. Architectural Design Section
+      
       S.listItem()
-        .title('Architectural Design')
+        .title('All Projects')
         .child(
-          S.documentList()
-            .title('Architectural Projects')
-            .schemaType('project')
-            .filter('_type == "project" && category == "architecture"')
-            .initialValueTemplates([
-              S.initialValueTemplateItem('project-architecture')
-            ])
+          S.documentTypeList('project')
+            .title('All Projects')
         ),
 
       S.divider(),
 
-      // 3. Fallback for all other document types (like media or settings if added later)
+      // Fallback for all other document types (like media or settings if added later)
       ...S.documentTypeListItems().filter(
-        (listItem) => !['project'].includes(listItem.getId() || '')
+        (listItem) => !['project', 'category'].includes(listItem.getId() || '')
       ),
     ])

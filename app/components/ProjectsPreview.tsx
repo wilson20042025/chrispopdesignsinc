@@ -18,23 +18,24 @@ interface ProjectsPreviewProps {
   subtitle?: string;
   isFullList?: boolean;
   id?: string;
+  hideHeader?: boolean;
 }
 
-export default async function ProjectsPreview({ category, title, subtitle, isFullList, id }: ProjectsPreviewProps) {
+export default async function ProjectsPreview({ category, title, subtitle, isFullList, id, hideHeader }: ProjectsPreviewProps) {
   const query = category 
-    ? `*[_type == "project" && category == "${category}"] | order(_createdAt desc)${isFullList ? "" : "[0...6]"} {
+    ? `*[_type == "project" && category->slug.current == "${category}"] | order(_createdAt desc)${isFullList ? "" : "[0...6]"} {
         "id": _id,
         title,
         "image": images[0],
         "slug": slug.current,
-        category
+        "category": category->slug.current
       }`
-    : `*[_type == "project"] | order(select(category == "fabrication" => 1, 0) desc, _createdAt desc)[0...7] {
+    : `*[_type == "project"] | order(select(category->slug.current == "fabrication" => 1, 0) desc, _createdAt desc)[0...7] {
         "id": _id,
         title,
         "image": images[0],
         "slug": slug.current,
-        category
+        "category": category->slug.current
       }`;
 
   const featuredProjects: FeaturedProject[] = await client.fetch(query) || [];
@@ -50,23 +51,25 @@ export default async function ProjectsPreview({ category, title, subtitle, isFul
       <div className="absolute top-0 right-1/2 w-px h-full bg-outline-variant/10 hidden md:block" />
 
       <div className="max-w-[1400px] mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-16 gap-8">
-          <div className="space-y-4 max-w-3xl">
-            {subtitle !== "" && (
-              <span className="text-[10px] tracking-[0.5em] font-medium text-primary uppercase block">
-                {subtitle || (category === 'fabrication' ? 'The Workshop' : category === 'architecture' ? 'The Studio' : 'Our Portfolio')}
-              </span>
-            )}
-            <h2 className="text-4xl md:text-7xl font-thin tracking-tighter text-on-surface leading-[0.85] uppercase">
-              {title || (
-                <>
-                  3D Fabrications & <br />
-                  <span className="font-light italic text-outline">Architectural</span> Designs
-                </>
+        {!hideHeader && (
+          <div className="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-16 gap-8">
+            <div className="space-y-4 max-w-3xl">
+              {subtitle !== "" && (
+                <span className="text-[10px] tracking-[0.5em] font-medium text-primary uppercase block">
+                  {subtitle || (category === 'fabrication' ? 'The Workshop' : category === 'architecture' ? 'The Studio' : 'Our Portfolio')}
+                </span>
               )}
-            </h2>
+              <h2 className="text-4xl md:text-7xl font-thin tracking-tighter text-on-surface leading-[0.85] uppercase">
+                {title || (
+                  <>
+                    3D Fabrications & <br />
+                    <span className="font-light italic text-outline">Architectural</span> Designs
+                  </>
+                )}
+              </h2>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Staggered Editorial Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-x-12 md:gap-y-12">
@@ -81,7 +84,7 @@ export default async function ProjectsPreview({ category, title, subtitle, isFul
               >
                 <div className="relative overflow-hidden">
                   <Link 
-                    href={`/projects/${project.slug}`}
+                    href={`/our-work/${project.slug}`}
                     className={`block relative overflow-hidden bg-surface-container-high transition-all duration-700 ease-out cursor-pointer ${isWide ? "aspect-[21/9]" : "aspect-[4/5]"
                       }`}
                   >
@@ -95,9 +98,6 @@ export default async function ProjectsPreview({ category, title, subtitle, isFul
                     {/* Hover Overlay Text */}
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8 md:p-12">
                       <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
-                        <span className="text-[10px] tracking-[0.5em] font-medium text-white/50 uppercase block mb-3">
-                          {project.category === 'fabrication' ? '3D Fabrication' : 'Architectural Design'}
-                        </span>
                         <h4 className="text-2xl md:text-4xl font-thin text-white tracking-tighter uppercase leading-none">
                           {project.title}
                         </h4>

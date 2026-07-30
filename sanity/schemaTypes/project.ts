@@ -2,71 +2,93 @@ const project = {
   name: 'project',
   title: 'Project',
   type: 'document',
+  fieldsets: [
+    { 
+      name: 'basic', 
+      title: '1. Basic Information', 
+      description: 'Core details about the project like title, category, and summary.',
+      options: { collapsible: true, collapsed: false } 
+    },
+    { 
+      name: 'media', 
+      title: '2. Media & Specifications', 
+      description: 'Images and specific details/specs about the project.',
+      options: { collapsible: true, collapsed: false } 
+    }
+  ],
   fields: [
-    { name: 'title', type: 'string' },
-
+    { 
+      name: 'title', 
+      title: 'Project Title',
+      type: 'string',
+      description: 'The main name of the project. This will be displayed on the website.',
+      fieldset: 'basic',
+      validation: (Rule: any) => Rule.required(),
+    },
     {
       name: 'slug',
+      title: 'URL Slug',
       type: 'slug',
-      options: { source: 'title' },
+      description: 'The unique URL path for this project. Just click "Generate" to automatically create it from the title.',
+      options: { source: 'title', maxLength: 96 },
+      fieldset: 'basic',
+      validation: (Rule: any) => Rule.required(),
     },
-
     {
       name: 'category',
       title: 'Project Category',
-      type: 'string',
-      options: {
-        list: [
-          { title: '3D Fabrication', value: 'fabrication' },
-          { title: 'Architectural Design', value: 'architecture' },
-        ],
-      },
+      type: 'reference',
+      to: [{ type: 'category' }],
+      description: 'Which category does this project belong to? (e.g. Architecture or Fabrication)',
       validation: (Rule: any) => Rule.required(),
-      initialValue: 'architecture',
+      fieldset: 'basic',
     },
-
     {
-      name: 'type',
-      title: 'Project Type',
-      type: 'string',
-      description: 'e.g. Residential, Resort, Commercial for Architecture OR Model, Prototype for Fabrication',
+      name: 'summary',
+      title: 'Project Summary / Description',
+      type: 'text',
+      description: 'A brief description of the project. This gives visitors context about the work.',
+      fieldset: 'basic',
     },
-
     {
       name: 'images',
+      title: 'Project Images',
       type: 'array',
-      of: [{ type: 'image' }],
+      description: 'Upload high-quality images of the project. The first image will often be used as the cover photo.',
+      of: [{ type: 'image', options: { hotspot: true } }],
+      fieldset: 'media',
     },
-
     {
       name: 'details',
+      title: 'Project Specifications / Details',
       type: 'array',
+      description: 'Add specific details or specs about the project. (e.g. Label: "Location", Value: "New York, NY")',
+      fieldset: 'media',
       of: [
         {
           type: 'object',
           fields: [
-            { name: 'label', type: 'string' },
-            { name: 'value', type: 'string' },
+            { name: 'label', title: 'Detail Label', type: 'string', description: 'e.g. Client, Year, Location, Materials' },
+            { name: 'value', title: 'Detail Value', type: 'string', description: 'e.g. John Doe, 2024, Miami FL, Wood & Steel' },
           ],
+          preview: {
+            select: {
+              title: 'label',
+              subtitle: 'value'
+            }
+          }
         },
       ],
-    },
-
-    {
-      name: 'summary',
-      type: 'text',
     },
   ],
   preview: {
     select: {
       title: 'title',
-      subtitle: 'type',
       media: 'images.0',
     },
-    prepare({ title, subtitle, media }: any) {
+    prepare({ title, media }: any) {
       return {
         title: title || 'Untitled',
-        subtitle: subtitle || 'No type specified',
         media: media,
       }
     },
