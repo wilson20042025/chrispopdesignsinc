@@ -39,22 +39,22 @@ export default async function ProjectsPage() {
   }));
 
   return (
-    <main className="min-h-screen pt-20 bg-surface">
-      <section className="py-8 md:py-12 px-6 xs:px-12 md:px-24 bg-surface overflow-hidden relative">
+    <main className="min-h-screen pt-20 bg-[#fafafa] dark:bg-[#0a0a0a]">
+      <section className="relative pt-8 pb-24 md:pt-12 md:pb-32 px-6 xs:px-12 md:px-24 bg-[#fafafa] dark:bg-[#0a0a0a] overflow-hidden border-t border-black/10 dark:border-white/10">
+        {/* Subtle grid background */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.02] z-0"
+          style={{
+            backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }}>
+        </div>
+
         {/* Decorative Grid Line */}
-        <div className="absolute top-0 right-1/2 w-px h-full bg-outline-variant/10 hidden md:block" />
+        <div className="absolute top-0 right-1/2 w-px h-full bg-black/10 dark:bg-white/10 hidden md:block z-0" />
 
         <div className="max-w-[1400px] mx-auto relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-16 gap-8">
-            <div className="space-y-4 max-w-3xl">
-              <h2 className="text-4xl md:text-7xl font-thin tracking-tighter text-on-surface leading-[0.85] uppercase">
-                <span className="hidden"></span>
-              </h2>
-            </div>
-          </div>
-
           {/* Staggered Editorial Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-x-12 md:gap-y-12">
+          <div className="grid grid-cols-2 md:grid-cols-12 gap-4 sm:gap-8 md:gap-x-12 md:gap-y-12">
             {categories.map((category: CategoryData, index: number) => {
               const isWide = index % 4 === 0 || index % 4 === 3;
               const columnSpan = isWide ? "md:col-span-8" : "md:col-span-4";
@@ -64,12 +64,11 @@ export default async function ProjectsPage() {
                   key={category.id}
                   className={`group relative ${columnSpan}`}
                 >
-                  <div className="relative overflow-hidden">
+                  <div className="relative overflow-hidden border border-black/10 dark:border-white/10 p-2 sm:p-4 bg-[#fafafa] dark:bg-[#0a0a0a]">
                     <Link
                       href={`/our-work/category/${category.slug}`}
-                      className={`block relative overflow-hidden bg-surface-container-high transition-all duration-700 ease-out cursor-pointer ${
-                        isWide ? "aspect-[21/9]" : "aspect-[4/5]"
-                      }`}
+                      className={`block relative overflow-hidden bg-black/5 dark:bg-white/5 transition-all duration-700 ease-out cursor-pointer aspect-square ${isWide ? "md:aspect-[21/9]" : "md:aspect-[4/5]"
+                        }`}
                     >
                       {category.image && (
                         <Image
@@ -80,18 +79,18 @@ export default async function ProjectsPage() {
                         />
                       )}
 
-                      {/* Hover Overlay Text */}
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-8 md:p-12">
-                        <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
+                      {/* Desktop hover overlay (hidden on mobile) */}
+                      <div className="absolute inset-0 bg-black/40 opacity-0 md:group-hover:opacity-100 transition-opacity duration-700 hidden md:flex flex-col justify-end p-4 sm:p-8 md:p-12">
+                        <div className="translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-700">
                           <span className="text-[10px] tracking-[0.5em] font-medium text-white/80 uppercase block mb-4">
                             {category.subtitle}
                           </span>
-                          <h4 className="text-2xl md:text-4xl font-thin text-white tracking-tighter uppercase leading-none">
+                          <h4 className="text-xl sm:text-2xl md:text-4xl font-thin text-white tracking-tighter leading-none">
                             {category.title}
                           </h4>
-                          <div className="mt-6 flex items-center gap-2 text-white/60">
-                            <span className="text-[10px] tracking-widest uppercase font-light">Explore Category</span>
-                            <div className="w-8 h-px bg-white/40 group-hover:w-12 transition-all duration-700" />
+                          <div className="mt-4 md:mt-6 flex items-center gap-2 text-white/80 md:text-white/60">
+                            <span className="text-[10px] tracking-widest uppercase font-light">View Category</span>
+                            <div className="w-8 h-px bg-white/60 md:bg-white/40 md:group-hover:w-12 transition-all duration-700" />
                           </div>
                         </div>
                       </div>

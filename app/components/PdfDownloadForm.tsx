@@ -57,7 +57,7 @@ export default function PdfDownloadForm() {
           onClick={() => setIsOpen(true)}
           className="block w-full lg:max-w-2xl mx-auto text-center py-6 border border-black text-black bg-transparent md:text-xs text-[10px] tracking-[0.4em] uppercase font-medium hover:bg-black hover:text-white transition-all duration-500"
         >
-          Download Full Services PDF
+          View Our Full Services PDF
         </button>
       )}
 

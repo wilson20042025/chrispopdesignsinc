@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Narrative() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -9,7 +10,7 @@ export default function Narrative() {
   const stories = [
     {
       title: "Design Meets Advanced Fabrication",
-      text: "We are a team of passionate architects and precision fabricators. We believe that the most inspiring spaces are born from the perfect synergy between architectural design and  fabrication technologies."
+      text: "We are a team of passionate architects and precision fabricators. We believe that the most inspiring spaces are born from the perfect synergy between architectural design and fabrication technologies."
     },
     {
       title: "Precision Prototyping & Craft",
@@ -25,87 +26,116 @@ export default function Narrative() {
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + stories.length) % stories.length);
 
   return (
-    <section className="py-8 md:py-12 px-6 xs:px-12 md:px-24 bg-surface overflow-hidden">
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+    <section className="lg:hidden relative py-16 md:py-32 px-6 xs:px-12 md:px-24 bg-[#fafafa] dark:bg-[#0a0a0a] overflow-hidden border-t border-black/10 dark:border-white/10">
+      {/* Subtle grid background */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.02]" 
+           style={{
+             backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
+             backgroundSize: '40px 40px'
+           }}>
+      </div>
 
-        {/* Title Column */}
-        <div className="md:col-span-6">
-          <div className="flex items-start gap-8">
-            <span className="hidden md:block text-[10px] tracking-[0.5em] font-light text-black/20 pt-2">
-              0{currentSlide + 1}
-            </span>
-            <h2 key={`title-${currentSlide}`} className="text-2xl xs:text-3xl sm:text-5xl md:text-7xl font-thin tracking-tighter leading-tight text-on-surface uppercase">
-              {currentSlide === 0 ? (
-                <>
-                  Why Chris Pop Design & Innovations?
-                </>
-              ) : stories[currentSlide].title}
-            </h2>
+      <div className="max-w-[1400px] mx-auto relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
+          
+          {/* Title Area */}
+          <div className="lg:col-span-7 relative">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full"
+              >
+                <div className="flex flex-col gap-6">
+                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-thin tracking-tighter leading-[0.9] text-black dark:text-white uppercase pr-4">
+                    {stories[currentSlide].title}
+                  </h2>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
-        </div>
 
-        {/* Content Column */}
-        <div className="md:col-span-4 md:col-start-9 space-y-12">
-          <p key={`text-${currentSlide}`} className="text-sm font-light text-on-surface-variant leading-relaxed">
-            {stories[currentSlide].text}
-          </p>
+          {/* Content Area */}
+          <div className="lg:col-span-4 lg:col-start-9 flex flex-col justify-between h-full mt-4 lg:mt-0">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+                className="mb-6"
+              >
+                <p className="text-sm md:text-base font-light text-black/60 dark:text-white/60 leading-relaxed border-l border-black/20 dark:border-white/20 pl-6">
+                  {stories[currentSlide].text}
+                </p>
+              </motion.div>
+            </AnimatePresence>
 
-          <div className="flex justify-between items-center relative">
-            <div className="flex items-center gap-12">
-              {currentSlide < 2 ? (
-                <Link
-                  href="/about"
-                  className="inline-block text-[10px] tracking-[0.3em] font-medium border-b border-on-surface pb-2 hover:opacity-60 transition-opacity uppercase"
+            <div className="flex justify-between items-end border-t border-black/10 dark:border-white/10 pt-8 mt-auto">
+              {/* Call to action */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentSlide < 2 ? "about" : "contact"}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4 }}
                 >
-                  About Us
-                </Link>
-              ) : (
-                <Link
-                  href="/contact"
-                  className="inline-block text-[10px] tracking-[0.5em] font-bold text-white bg-black px-8 py-3.5 hover:opacity-70 transition-all duration-700 uppercase"
-                >
-                  Inquire // Contact
-                </Link>
-              )}
+                  {currentSlide < 2 ? (
+                    <Link
+                      href="/about"
+                      className="group flex items-center gap-4 text-[10px] tracking-widest uppercase font-semibold text-black dark:text-white relative"
+                    >
+                      <span>About Us</span>
+                      <span className="w-8 h-[1px] bg-black dark:bg-white group-hover:w-16 transition-all duration-500 ease-out"></span>
+                    </Link>
+                  ) : (
+                    <Link
+                      href="/contact"
+                      className="group flex items-center gap-4 text-[10px] tracking-widest uppercase font-semibold text-black dark:text-white relative"
+                    >
+                      <span>Inquire // Contact</span>
+                      <span className="w-8 h-[1px] bg-black dark:bg-white group-hover:w-16 transition-all duration-500 ease-out"></span>
+                    </Link>
+                  )}
+                </motion.div>
+              </AnimatePresence>
 
-              {/* Desktop Navigation Arrows */}
-              <div className="hidden md:flex items-center gap-4">
+              {/* Navigation Controls (Custom SVGs) */}
+              <div className="flex items-center gap-2">
                 <button
                   onClick={prevSlide}
-                  className="p-2 text-on-surface/20 hover:text-on-surface transition-colors"
+                  className="w-10 h-10 border border-black/20 dark:border-white/20 flex items-center justify-center hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300"
                   aria-label="Previous section"
                 >
-                  <span className="material-symbols-outlined text-sm !font-light">west</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                  </svg>
                 </button>
+                <div className="text-[10px] font-mono mx-2 text-black/30 dark:text-white/30 hidden md:block">
+                  0{currentSlide + 1} / 0{stories.length}
+                </div>
                 <button
                   onClick={nextSlide}
-                  className="p-2 text-on-surface/20 hover:text-on-surface transition-colors"
+                  className="w-10 h-10 border border-black/20 dark:border-white/20 flex items-center justify-center hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300"
                   aria-label="Next section"
                 >
-                  <span className="material-symbols-outlined text-sm !font-light">east</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
                 </button>
               </div>
             </div>
-
-            {/* Mobile-Only Navigation Controls */}
-            <div className="md:hidden flex items-center">
-              <button
-                onClick={nextSlide}
-                className="p-2 -mr-2 text-on-surface/40 hover:text-on-surface transition-colors active:scale-90"
-                aria-label="Next section"
-              >
-                <span className="material-symbols-outlined text-xl !font-light">
-                  {currentSlide === 2 ? 'refresh' : 'east'}
-                </span>
-              </button>
-            </div>
           </div>
+
         </div>
       </div>
-
-      <style dangerouslySetInnerHTML={{
-        __html: `
-      ` }} />
     </section>
   );
 }

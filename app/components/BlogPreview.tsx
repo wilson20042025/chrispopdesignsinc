@@ -27,14 +27,14 @@ export default async function BlogPreview() {
   const allPosts = sanityPosts;
 
   return (
-    <section className="py-12 md:py-20 px-6 xs:px-12 md:px-24 bg-white relative">
-      <div className="max-w-[1400px] mx-auto">
+    <section className="py-12 md:py-20 bg-white relative">
+      <div className="container mx-auto px-6 md:px-12">
         <div className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div>
 
             <h2 className="text-4xl md:text-7xl font-thin tracking-tighter text-black leading-[0.85] uppercase">
               Our <br />
-              <span className="font-light italic opacity-50">Insights</span>
+              <span className="font-light opacity-50">Insights</span>
             </h2>
           </div>
           <Link 

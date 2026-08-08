@@ -89,8 +89,8 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
 
           {/* Narrative Description Section */}
           <section className="px-6 xs:px-12 md:px-24 mb-8 xs:mb-12 md:mb-20">
-            <div className="max-w-3xl">
-              <p className="text-lg md:text-2xl font-thin leading-relaxed text-black/60 italic border-l border-black/10 pl-6 md:pl-12">
+            <div className="w-full">
+              <p className="text-lg md:text-2xl font-light leading-relaxed text-black/80 italic border-l border-black/20 pl-6 md:pl-12">
                 "{projectData.description}"
               </p>
             </div>
@@ -105,7 +105,7 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
               href="/our-work"
               className="text-[10px] tracking-[0.5em] font-light text-black/40 hover:text-black transition-all uppercase flex items-center gap-2"
             >
-              <span className="text-lg leading-none">←</span> Back to Works
+              <span className="text-lg leading-none">←</span> Back Page
             </Link>
             <span className="hidden xs:block text-[10px] tracking-[0.3em] font-light text-black/20 uppercase">
               ChrisPop Designs Inc.

@@ -54,11 +54,11 @@ const pricingPlans = [
 
 export default function Pricing() {
   return (
-    <section id="pricing" className="pt-8 md:pt-12 pb-2 md:pb-4 px-6 xs:px-12 md:px-24 bg-white relative overflow-hidden">
+    <section id="pricing" className="pt-8 md:pt-12 pb-2 md:pb-4 bg-white relative overflow-hidden">
       {/* Decorative vertical line */}
       <div className="absolute left-1/2 top-0 w-px h-full bg-black/[0.03] hidden lg:block" />
 
-      <div className="max-w-[1400px] mx-auto">
+      <div className="container mx-auto px-6 md:px-12">
         <div className="mb-8 md:mb-10">
           <h2 className="text-4xl md:text-7xl font-thin tracking-tighter text-black leading-[0.85] uppercase">
             Services & <br />

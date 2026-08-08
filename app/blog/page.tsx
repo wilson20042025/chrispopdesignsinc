@@ -39,7 +39,7 @@ export default async function JournalPage() {
 
             <h1 className="text-4xl md:text-7xl font-thin tracking-tighter text-black leading-[0.85] uppercase">
               Latest <br />
-              <span className="font-light italic opacity-50">Insights</span>
+              <span className="font-light opacity-50">Insights</span>
             </h1>
             <div className="mt-12 max-w-lg">
               <p className="text-sm font-light text-black/60 leading-relaxed">

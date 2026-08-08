@@ -33,20 +33,20 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
   return (
     <main className="min-h-screen pt-20 flex flex-col">
-      <div className="flex-1">
+      <div className="flex-1 bg-[#fafafa] dark:bg-[#0a0a0a]">
         <ProjectsPreview 
           category={category.slug.current as any} 
           isFullList={true} 
           hideHeader={true}
         />
-        
+
         {/* Back Button */}
         <section className="px-6 xs:px-12 md:px-24 pb-16 pt-8 max-w-[1400px] mx-auto w-full">
           <Link
             href="/our-work"
-            className="text-[10px] tracking-[0.5em] font-light text-on-surface/60 hover:text-on-surface transition-all uppercase flex items-center gap-2 w-max"
+            className="text-[10px] tracking-[0.5em] font-light text-black/60 dark:text-white/60 hover:text-black dark:hover:text-white transition-all uppercase flex items-center gap-2 w-max"
           >
-            <span className="text-lg leading-none">←</span> Back to Categories
+            <span className="text-lg leading-none">←</span> Back Page
           </Link>
         </section>
       </div>

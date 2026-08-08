@@ -12,7 +12,6 @@ export default function Home() {
     <>
       <Hero />
       <Narrative />
-      <ProjectsPreview id="projects" subtitle="What We Do?" />
       <Pricing />
       <BlogPreview />
       <Footer />
