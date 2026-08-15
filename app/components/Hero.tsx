@@ -27,10 +27,10 @@ export default function Hero() {
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + stories.length) % stories.length);
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-[#fafafa] dark:bg-[#0a0a0a] pt-24 md:pt-0 flex items-center selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
+    <section className="relative min-h-screen w-full overflow-hidden bg-[#fafafa]  pt-24 md:pt-0 flex items-center selection:bg-black selection:text-white  ">
 
       {/* Architectural Grid Background */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.02]"
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03] "
         style={{
           backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
           backgroundSize: '40px 40px'
@@ -42,13 +42,13 @@ export default function Hero() {
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute top-1/3 left-0 w-full h-[1px] bg-black/10 dark:bg-white/10 origin-left"
+        className="absolute top-1/3 left-0 w-full h-[1px] bg-black/10  origin-left"
       />
       <motion.div
         initial={{ scaleY: 0 }}
         animate={{ scaleY: 1 }}
         transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-        className="absolute top-0 left-1/4 w-[1px] h-full bg-black/10 dark:bg-white/10 origin-top"
+        className="absolute top-0 left-1/4 w-[1px] h-full bg-black/10  origin-top"
       />
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
@@ -65,13 +65,13 @@ export default function Hero() {
                     initial={{ y: "100%" }}
                     animate={{ y: 0 }}
                     transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                    className="inline-block text-[10px] tracking-[0.3em] font-medium text-black/50 dark:text-white/50 uppercase mb-4"
+                    className="inline-block text-[10px] tracking-[0.3em] font-medium text-black/50  uppercase mb-4"
                   >
                     Project 01 // Masterplan
                   </motion.span>
                 </motion.div>
 
-                <h1 className="text-5xl md:text-7xl font-thin tracking-tighter text-black dark:text-white leading-[0.9] uppercase relative">
+                <h1 className="text-5xl md:text-7xl font-thin tracking-tighter text-black  leading-[0.9] uppercase relative">
                   <motion.span
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -84,7 +84,7 @@ export default function Hero() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-                    className="block font-light italic text-transparent [-webkit-text-stroke:1px_black] dark:[-webkit-text-stroke:1px_white]"
+                    className="block font-light italic text-transparent [-webkit-text-stroke:1px_black] "
                   >
                     Digital
                   </motion.span>
@@ -103,7 +103,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.7 }}
-                className="max-w-md text-sm md:text-base text-black/60 dark:text-white/60 font-light leading-relaxed border-l border-black/20 dark:border-white/20 pl-6"
+                className="max-w-md text-sm md:text-base text-black/60  font-light leading-relaxed border-l border-black/20  pl-6"
               >
                 Chris Pop Designs and Innovation is a multi-disciplinary studio specializing in architectural design, rapid prototyping, CNC routing, and advanced 3D fabrication.
               </motion.p>
@@ -114,15 +114,15 @@ export default function Hero() {
                 transition={{ duration: 1, delay: 1 }}
                 className="flex items-center gap-8 pt-4"
               >
-                <Link href="#projects" className="group flex items-center gap-4 text-[10px] tracking-widest uppercase font-semibold text-black dark:text-white relative">
+                <Link href="#projects" className="group flex items-center gap-4 text-[10px] tracking-widest uppercase font-semibold text-black  relative">
                   <span>View Works</span>
-                  <span className="w-8 h-[1px] bg-black dark:bg-white group-hover:w-16 transition-all duration-500 ease-out"></span>
+                  <span className="w-8 h-[1px] bg-black  group-hover:w-16 transition-all duration-500 ease-out"></span>
 
                   {/* Architectural node dot */}
-                  <span className="absolute -right-1 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full border border-black dark:border-white bg-transparent group-hover:translate-x-8 transition-all duration-500 ease-out opacity-0 group-hover:opacity-100" />
+                  <span className="absolute -right-1 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full border border-black  bg-transparent group-hover:translate-x-8 transition-all duration-500 ease-out opacity-0 group-hover:opacity-100" />
                 </Link>
-                <div className="h-12 w-[1px] bg-black/20 dark:bg-white/20"></div>
-                <div className="text-[10px] tracking-widest uppercase text-black/50 dark:text-white/50 leading-tight font-mono">
+                <div className="h-12 w-[1px] bg-black/20 "></div>
+                <div className="text-[10px] tracking-widest uppercase text-black/50  leading-tight font-mono">
                   Est. 2024 <br />
                   Scale 1:100
                 </div>
@@ -142,7 +142,7 @@ export default function Hero() {
                     className="w-full"
                   >
                     <div className="flex flex-col gap-6">
-                      <h2 className="text-4xl md:text-5xl lg:text-6xl font-thin tracking-tighter leading-[0.9] text-black dark:text-white uppercase pr-4">
+                      <h2 className="text-4xl md:text-5xl lg:text-6xl font-thin tracking-tighter leading-[0.9] text-black  uppercase pr-4">
                         {stories[currentSlide].title}
                       </h2>
                     </div>
@@ -160,13 +160,13 @@ export default function Hero() {
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
                     className="mb-6"
                   >
-                    <p className="text-sm md:text-base font-light text-black/60 dark:text-white/60 leading-relaxed border-l border-black/20 dark:border-white/20 pl-6 max-w-lg">
+                    <p className="text-sm md:text-base font-light text-black/60  leading-relaxed border-l border-black/20  pl-6 max-w-lg">
                       {stories[currentSlide].text}
                     </p>
                   </motion.div>
                 </AnimatePresence>
 
-                <div className="flex justify-between items-end border-t border-black/10 dark:border-white/10 pt-8 mt-auto pr-12">
+                <div className="flex justify-between items-end border-t border-black/10  pt-8 mt-auto pr-12">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={currentSlide < 2 ? "about" : "contact"}
@@ -178,18 +178,18 @@ export default function Hero() {
                       {currentSlide < 2 ? (
                         <Link
                           href="/about"
-                          className="group flex items-center gap-4 text-[10px] tracking-widest uppercase font-semibold text-black dark:text-white relative"
+                          className="group flex items-center gap-4 text-[10px] tracking-widest uppercase font-semibold text-black  relative"
                         >
                           <span>About Us</span>
-                          <span className="w-8 h-[1px] bg-black dark:bg-white group-hover:w-16 transition-all duration-500 ease-out"></span>
+                          <span className="w-8 h-[1px] bg-black  group-hover:w-16 transition-all duration-500 ease-out"></span>
                         </Link>
                       ) : (
                         <Link
                           href="/contact"
-                          className="group flex items-center gap-4 text-[10px] tracking-widest uppercase font-semibold text-black dark:text-white relative"
+                          className="group flex items-center gap-4 text-[10px] tracking-widest uppercase font-semibold text-black  relative"
                         >
                           <span>Inquire // Contact</span>
-                          <span className="w-8 h-[1px] bg-black dark:bg-white group-hover:w-16 transition-all duration-500 ease-out"></span>
+                          <span className="w-8 h-[1px] bg-black  group-hover:w-16 transition-all duration-500 ease-out"></span>
                         </Link>
                       )}
                     </motion.div>
@@ -198,7 +198,7 @@ export default function Hero() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={prevSlide}
-                      className="w-10 h-10 border border-black/20 dark:border-white/20 flex items-center justify-center hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300"
+                      className="w-10 h-10 border border-black/20  flex items-center justify-center hover:bg-black hover:text-white   transition-all duration-300"
                       aria-label="Previous section"
                     >
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
@@ -206,12 +206,12 @@ export default function Hero() {
                         <polyline points="12 19 5 12 12 5"></polyline>
                       </svg>
                     </button>
-                    <div className="text-[10px] font-mono mx-2 text-black/30 dark:text-white/30 hidden md:block">
+                    <div className="text-[10px] font-mono mx-2 text-black/30  hidden md:block">
                       0{currentSlide + 1} / 0{stories.length}
                     </div>
                     <button
                       onClick={nextSlide}
-                      className="w-10 h-10 border border-black/20 dark:border-white/20 flex items-center justify-center hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300"
+                      className="w-10 h-10 border border-black/20  flex items-center justify-center hover:bg-black hover:text-white   transition-all duration-300"
                       aria-label="Next section"
                     >
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
@@ -232,13 +232,13 @@ export default function Hero() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
-              className="relative aspect-[4/5] w-full p-4 border border-black/10 dark:border-white/10 group"
+              className="relative aspect-[4/5] w-full p-4 border border-black/10  group"
             >
               {/* Corner crosshairs */}
-              <div className="absolute -top-2 -left-2 w-4 h-4 border-t border-l border-black/40 dark:border-white/40" />
-              <div className="absolute -top-2 -right-2 w-4 h-4 border-t border-r border-black/40 dark:border-white/40" />
-              <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b border-l border-black/40 dark:border-white/40" />
-              <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b border-r border-black/40 dark:border-white/40" />
+              <div className="absolute -top-2 -left-2 w-4 h-4 border-t border-l border-black/40 " />
+              <div className="absolute -top-2 -right-2 w-4 h-4 border-t border-r border-black/40 " />
+              <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b border-l border-black/40 " />
+              <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b border-r border-black/40 " />
 
               {/* Main Image */}
               <div className="relative w-full h-full overflow-hidden">
@@ -277,13 +277,13 @@ export default function Hero() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 1.2 }}
-                className="absolute top-8 -right-12 z-40 bg-white/80 dark:bg-black/80 backdrop-blur-md px-4 py-2 border border-black/10 dark:border-white/10 hidden md:block shadow-sm"
+                className="absolute top-8 -right-12 z-40 bg-white/80  backdrop-blur-md px-4 py-2 border border-black/10  hidden md:block shadow-sm"
               >
                 <div className="flex flex-col gap-1">
-                  <span className="text-[8px] tracking-[0.3em] font-medium text-black dark:text-white uppercase whitespace-nowrap">
+                  <span className="text-[8px] tracking-[0.3em] font-medium text-black  uppercase whitespace-nowrap">
                     Fabrication
                   </span>
-                  <span className="text-[10px] font-mono text-black/50 dark:text-white/50">
+                  <span className="text-[10px] font-mono text-black/50 ">
                     STATUS: ACTIVE
                   </span>
                 </div>
@@ -294,7 +294,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 1.5 }}
-                className="absolute -bottom-12 -left-12 w-2/3 aspect-[4/3] border border-black/10 dark:border-white/10 p-2 bg-[#fafafa] dark:bg-[#0a0a0a] shadow-xl z-30 hidden md:block"
+                className="absolute -bottom-12 -left-12 w-2/3 aspect-[4/3] border border-black/10  p-2 bg-[#fafafa]  shadow-xl z-30 hidden md:block"
               >
                 <div className="relative w-full h-full overflow-hidden">
                   <Image

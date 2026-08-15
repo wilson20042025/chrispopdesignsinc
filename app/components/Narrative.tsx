@@ -26,9 +26,9 @@ export default function Narrative() {
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + stories.length) % stories.length);
 
   return (
-    <section className="lg:hidden relative py-16 md:py-32 px-6 xs:px-12 md:px-24 bg-[#fafafa] dark:bg-[#0a0a0a] overflow-hidden border-t border-black/10 dark:border-white/10">
+    <section className="lg:hidden relative py-16 md:py-32 px-6 xs:px-12 md:px-24 bg-[#fafafa]  overflow-hidden border-t border-black/10 ">
       {/* Subtle grid background */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.02]" 
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03] " 
            style={{
              backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
              backgroundSize: '40px 40px'
@@ -50,7 +50,7 @@ export default function Narrative() {
                 className="w-full"
               >
                 <div className="flex flex-col gap-6">
-                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-thin tracking-tighter leading-[0.9] text-black dark:text-white uppercase pr-4">
+                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-thin tracking-tighter leading-[0.9] text-black  uppercase pr-4">
                     {stories[currentSlide].title}
                   </h2>
                 </div>
@@ -69,13 +69,13 @@ export default function Narrative() {
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
                 className="mb-6"
               >
-                <p className="text-sm md:text-base font-light text-black/60 dark:text-white/60 leading-relaxed border-l border-black/20 dark:border-white/20 pl-6">
+                <p className="text-sm md:text-base font-light text-black/60  leading-relaxed border-l border-black/20  pl-6">
                   {stories[currentSlide].text}
                 </p>
               </motion.div>
             </AnimatePresence>
 
-            <div className="flex justify-between items-end border-t border-black/10 dark:border-white/10 pt-8 mt-auto">
+            <div className="flex justify-between items-end border-t border-black/10  pt-8 mt-auto">
               {/* Call to action */}
               <AnimatePresence mode="wait">
                 <motion.div
@@ -88,18 +88,18 @@ export default function Narrative() {
                   {currentSlide < 2 ? (
                     <Link
                       href="/about"
-                      className="group flex items-center gap-4 text-[10px] tracking-widest uppercase font-semibold text-black dark:text-white relative"
+                      className="group flex items-center gap-4 text-[10px] tracking-widest uppercase font-semibold text-black  relative"
                     >
                       <span>About Us</span>
-                      <span className="w-8 h-[1px] bg-black dark:bg-white group-hover:w-16 transition-all duration-500 ease-out"></span>
+                      <span className="w-8 h-[1px] bg-black  group-hover:w-16 transition-all duration-500 ease-out"></span>
                     </Link>
                   ) : (
                     <Link
                       href="/contact"
-                      className="group flex items-center gap-4 text-[10px] tracking-widest uppercase font-semibold text-black dark:text-white relative"
+                      className="group flex items-center gap-4 text-[10px] tracking-widest uppercase font-semibold text-black  relative"
                     >
                       <span>Inquire // Contact</span>
-                      <span className="w-8 h-[1px] bg-black dark:bg-white group-hover:w-16 transition-all duration-500 ease-out"></span>
+                      <span className="w-8 h-[1px] bg-black  group-hover:w-16 transition-all duration-500 ease-out"></span>
                     </Link>
                   )}
                 </motion.div>
@@ -109,7 +109,7 @@ export default function Narrative() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={prevSlide}
-                  className="w-10 h-10 border border-black/20 dark:border-white/20 flex items-center justify-center hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300"
+                  className="w-10 h-10 border border-black/20  flex items-center justify-center hover:bg-black hover:text-white   transition-all duration-300"
                   aria-label="Previous section"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
@@ -117,12 +117,12 @@ export default function Narrative() {
                     <polyline points="12 19 5 12 12 5"></polyline>
                   </svg>
                 </button>
-                <div className="text-[10px] font-mono mx-2 text-black/30 dark:text-white/30 hidden md:block">
+                <div className="text-[10px] font-mono mx-2 text-black/30  hidden md:block">
                   0{currentSlide + 1} / 0{stories.length}
                 </div>
                 <button
                   onClick={nextSlide}
-                  className="w-10 h-10 border border-black/20 dark:border-white/20 flex items-center justify-center hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300"
+                  className="w-10 h-10 border border-black/20  flex items-center justify-center hover:bg-black hover:text-white   transition-all duration-300"
                   aria-label="Next section"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">

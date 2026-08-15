@@ -46,9 +46,9 @@ export default async function ProjectsPreview({ category, title, subtitle, isFul
     : featuredProjects.slice(0, 4);
 
   return (
-    <section id={id} className="relative pt-8 pb-24 md:pt-12 md:pb-32 px-6 xs:px-12 md:px-24 bg-[#fafafa] dark:bg-[#0a0a0a] overflow-hidden border-t border-black/10 dark:border-white/10">
+    <section id={id} className="relative pt-8 pb-24 md:pt-12 md:pb-32 px-6 xs:px-12 md:px-24 bg-[#fafafa]  overflow-hidden border-t border-black/10 ">
       {/* Subtle grid background */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.02] z-0"
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03]  z-0"
         style={{
           backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
           backgroundSize: '40px 40px'
@@ -56,22 +56,22 @@ export default async function ProjectsPreview({ category, title, subtitle, isFul
       </div>
 
       {/* Decorative Grid Line */}
-      <div className="absolute top-0 right-1/2 w-px h-full bg-black/10 dark:bg-white/10 hidden md:block z-0" />
+      <div className="absolute top-0 right-1/2 w-px h-full bg-black/10  hidden md:block z-0" />
 
       <div className="max-w-[1400px] mx-auto relative z-10">
         {!hideHeader && (
           <div className="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-12 gap-8">
             <div className="space-y-4 max-w-3xl">
               {subtitle !== "" && (
-                <span className="text-[10px] tracking-[0.5em] font-medium text-black/40 dark:text-white/40 uppercase block">
+                <span className="text-[10px] tracking-[0.5em] font-medium text-black/40  uppercase block">
                   {subtitle || (category === 'fabrication' ? 'The Workshop' : category === 'architecture' ? 'The Studio' : 'Our Portfolio')}
                 </span>
               )}
-              <h2 className="text-4xl md:text-7xl font-thin tracking-tighter text-black dark:text-white leading-[0.85] uppercase">
+              <h2 className="text-4xl md:text-7xl font-thin tracking-tighter text-black  leading-[0.85] uppercase">
                 {title || (
                   <>
                     3D Fabrications & <br />
-                    <span className="font-light italic text-transparent [-webkit-text-stroke:1px_black] dark:[-webkit-text-stroke:1px_white]">Architectural</span> Designs
+                    <span className="font-light italic text-transparent [-webkit-text-stroke:1px_black] ">Architectural</span> Designs
                   </>
                 )}
               </h2>
@@ -90,10 +90,10 @@ export default async function ProjectsPreview({ category, title, subtitle, isFul
                 key={project.id}
                 className={`group relative ${columnSpan}`}
               >
-                <div className="relative overflow-hidden border border-black/10 dark:border-white/10 p-2 sm:p-4 bg-[#fafafa] dark:bg-[#0a0a0a]">
+                <div className="relative overflow-hidden border border-black/10  p-2 sm:p-4 bg-[#fafafa] ">
                   <Link
                     href={`/our-work/${project.slug}`}
-                    className={`block relative overflow-hidden bg-black/5 dark:bg-white/5 transition-all duration-700 ease-out cursor-pointer ${isWide ? "aspect-[21/9]" : "aspect-[4/5]"
+                    className={`block relative overflow-hidden bg-black/5  transition-all duration-700 ease-out cursor-pointer ${isWide ? "aspect-[21/9]" : "aspect-[4/5]"
                       }`}
                   >
                     <Image

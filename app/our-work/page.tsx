@@ -39,10 +39,10 @@ export default async function ProjectsPage() {
   }));
 
   return (
-    <main className="min-h-screen pt-20 bg-[#fafafa] dark:bg-[#0a0a0a]">
-      <section className="relative pt-8 pb-24 md:pt-12 md:pb-32 px-6 xs:px-12 md:px-24 bg-[#fafafa] dark:bg-[#0a0a0a] overflow-hidden border-t border-black/10 dark:border-white/10">
+    <main className="min-h-screen pt-20 bg-[#fafafa] ">
+      <section className="relative pt-8 pb-24 md:pt-12 md:pb-32 px-6 xs:px-12 md:px-24 bg-[#fafafa]  overflow-hidden border-t border-black/10 ">
         {/* Subtle grid background */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.03] dark:opacity-[0.02] z-0"
+        <div className="absolute inset-0 pointer-events-none opacity-[0.03]  z-0"
           style={{
             backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
             backgroundSize: '40px 40px'
@@ -50,7 +50,7 @@ export default async function ProjectsPage() {
         </div>
 
         {/* Decorative Grid Line */}
-        <div className="absolute top-0 right-1/2 w-px h-full bg-black/10 dark:bg-white/10 hidden md:block z-0" />
+        <div className="absolute top-0 right-1/2 w-px h-full bg-black/10  hidden md:block z-0" />
 
         <div className="max-w-[1400px] mx-auto relative z-10">
           {/* Staggered Editorial Grid */}
@@ -64,10 +64,10 @@ export default async function ProjectsPage() {
                   key={category.id}
                   className={`group relative ${columnSpan}`}
                 >
-                  <div className="relative overflow-hidden border border-black/10 dark:border-white/10 p-2 sm:p-4 bg-[#fafafa] dark:bg-[#0a0a0a]">
+                  <div className="relative overflow-hidden border border-black/10  p-2 sm:p-4 bg-[#fafafa] ">
                     <Link
                       href={`/our-work/category/${category.slug}`}
-                      className={`block relative overflow-hidden bg-black/5 dark:bg-white/5 transition-all duration-700 ease-out cursor-pointer aspect-square ${isWide ? "md:aspect-[21/9]" : "md:aspect-[4/5]"
+                      className={`block relative overflow-hidden bg-black/5  transition-all duration-700 ease-out cursor-pointer aspect-square ${isWide ? "md:aspect-[21/9]" : "md:aspect-[4/5]"
                         }`}
                     >
                       {category.image && (
