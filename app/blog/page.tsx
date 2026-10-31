@@ -47,10 +47,10 @@ export default async function JournalPage() {
                     </div>
 
                     <div className="space-y-4">
-                      <h2 className="text-4xl md:text-7xl font-thin tracking-tighter text-black leading-[0.85] uppercase">
+                      <h2 className="text-xl md:text-2xl font-light tracking-tight text-black uppercase leading-snug group-hover:opacity-60 transition-opacity">
                         {post.title}
                       </h2>
-                      <p className="text-[13px] font-light text-black/60 leading-relaxed max-w-sm line-clamp-3">
+                      <p className="text-sm font-light text-black/60 leading-relaxed max-w-sm line-clamp-3">
                         {post.excerpt}
                       </p>
                       <div className="flex items-center gap-3">
