@@ -8,8 +8,8 @@ import { Suspense } from "react";
 function HeaderContent() {
   const pathname = usePathname();
 
-  // Hide header on studio pages
-  if (pathname?.startsWith('/studio')) return null;
+  // Hide header on admin and studio pages
+  if (pathname?.startsWith('/admin') || pathname?.startsWith('/studio')) return null;
 
   const isActive = (path: string) => {
     return path === pathname;

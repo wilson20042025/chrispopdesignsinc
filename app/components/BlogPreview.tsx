@@ -1,48 +1,28 @@
 import Image from "next/image";
 import Link from "next/link";
-import { client } from "@/sanity/lib/client";
-import { urlFor } from "@/sanity/lib/image";
-
-interface BlogPost {
-  id: string;
-  title: string;
-  date: string;
-  category: string;
-  image: any;
-  excerpt: string;
-  slug: string;
-}
+import { getPosts } from "@/lib/data";
 
 export default async function BlogPreview() {
-  const sanityPosts: BlogPost[] = await client.fetch(`*[_type == "post"] | order(publishedAt desc)[0...4] {
-    "id": _id,
-    title,
-    "date": publishedAt,
-    category,
-    "image": mainImage,
-    excerpt,
-    "slug": slug.current
-  }`) || [];
-
-  const allPosts = sanityPosts;
+  const allPosts = (await getPosts()).slice(0, 4);
 
   return (
     <section className="py-12 md:py-20 bg-white relative">
       <div className="container mx-auto px-6 md:px-12">
         <div className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div>
-
             <h2 className="text-4xl md:text-7xl font-thin tracking-tighter text-black leading-[0.85] uppercase">
               Our <br />
               <span className="font-light opacity-50">Insights</span>
             </h2>
           </div>
-          <Link 
-            href="/blog" 
+          <Link
+            href="/blog"
             className="group flex items-center gap-4 text-[10px] tracking-[0.5em] font-medium text-black uppercase pb-2 border-b border-black/10 hover:border-black transition-all"
           >
             <span>Read Insights</span>
-            <span className="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">east</span>
+            <span className="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">
+              east
+            </span>
           </Link>
         </div>
 
@@ -52,7 +32,7 @@ export default async function BlogPreview() {
               <Link href={`/blog/${post.slug}`} className="block space-y-6">
                 <div className="aspect-[16/10] overflow-hidden bg-surface-container-high relative">
                   <Image
-                    src={typeof post.image === 'string' ? post.image : (post.image ? urlFor(post.image).url() : "")}
+                    src={post.image || "/robotic_fabrication.png"}
                     alt={post.title}
                     fill
                     className="object-cover transition-all duration-1000 group-hover:scale-105"
@@ -75,7 +55,9 @@ export default async function BlogPreview() {
                     {post.excerpt}
                   </p>
                   <div className="pt-2 flex items-center gap-3">
-                    <span className="text-[8px] tracking-[0.3em] font-medium text-black uppercase">Read Insights</span>
+                    <span className="text-[8px] tracking-[0.3em] font-medium text-black uppercase">
+                      Read Insights
+                    </span>
                     <div className="w-6 h-px bg-black/20 group-hover:w-10 transition-all duration-500" />
                   </div>
                 </div>

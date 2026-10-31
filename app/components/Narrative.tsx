@@ -9,15 +9,15 @@ export default function Narrative() {
 
   const stories = [
     {
-      title: "Design Meets Advanced Fabrication",
+      title: "Design Philosophy",
       text: "We are a team of passionate architects and precision fabricators. We believe that the most inspiring spaces are born from the perfect synergy between architectural design and fabrication technologies."
     },
     {
-      title: "Precision Prototyping & Craft",
+      title: "Advanced Fabrication",
       text: "By prioritizing 3D fabrication, we bring an unprecedented level of detail to our work. Our approach blends digital precision with artisanal care to create high-impact prototypes, models, and spatial elements."
     },
     {
-      title: "Collaborate With Us",
+      title: "Strategic Partnerships",
       text: "Whether you're developing a complex architectural project or require expert 3D fabrication and prototyping solutions, we're ready to translate your vision into a physical masterpiece."
     }
   ];
@@ -26,18 +26,18 @@ export default function Narrative() {
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + stories.length) % stories.length);
 
   return (
-    <section className="lg:hidden relative py-16 md:py-32 px-6 xs:px-12 md:px-24 bg-[#fafafa]  overflow-hidden border-t border-black/10 ">
+    <section className="lg:hidden relative pt-28 pb-16 md:pt-36 md:pb-32 px-6 xs:px-12 md:px-24 bg-[#fafafa]  overflow-hidden border-t border-black/10 ">
       {/* Subtle grid background */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03] " 
-           style={{
-             backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
-             backgroundSize: '40px 40px'
-           }}>
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03] "
+        style={{
+          backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
+          backgroundSize: '40px 40px'
+        }}>
       </div>
 
       <div className="max-w-[1400px] mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
-          
+
           {/* Title Area */}
           <div className="lg:col-span-7 relative">
             <AnimatePresence mode="wait">
@@ -69,7 +69,7 @@ export default function Narrative() {
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
                 className="mb-6"
               >
-                <p className="text-sm md:text-base font-light text-black/60  leading-relaxed border-l border-black/20  pl-6">
+                <p className="text-sm md:text-base font-light text-black/60  leading-relaxed">
                   {stories[currentSlide].text}
                 </p>
               </motion.div>
@@ -117,7 +117,7 @@ export default function Narrative() {
                     <polyline points="12 19 5 12 12 5"></polyline>
                   </svg>
                 </button>
-                <div className="text-[10px] font-mono mx-2 text-black/30  hidden md:block">
+                <div className="text-[10px] font-mono mx-2 text-black  hidden md:block">
                   0{currentSlide + 1} / 0{stories.length}
                 </div>
                 <button

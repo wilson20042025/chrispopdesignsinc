@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
@@ -11,7 +10,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Chris Pop Design Innovation | Architecture and 3D Fabrication..",
-  description: "We bridge the gap between architectural design and 3D fabrication, creating innovative spaces that are as functional as they are beautiful.",
+  description:
+    "We bridge the gap between architectural design and 3D fabrication, creating innovative spaces that are as functional as they are beautiful.",
   icons: {
     icon: [
       { url: '/favicon_rounded.png' },
@@ -35,13 +35,12 @@ export default function RootLayout({
       className={`${inter.variable} h-full antialiased font-inter scroll-smooth`}
     >
       <head>
-        <link 
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" 
-          rel="stylesheet" 
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          rel="stylesheet"
         />
-        <Script
+        <script
           id="crypto-polyfill"
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               if (typeof window !== 'undefined' && (!window.crypto || !window.crypto.randomUUID)) {
@@ -49,7 +48,8 @@ export default function RootLayout({
                 if (!window.crypto.randomUUID) {
                   window.crypto.randomUUID = function() {
                     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                      var r = Math.random() * 16 | 0,
+                          v = c == 'x' ? r : (r & 0x3 | 0x8);
                       return v.toString(16);
                     });
                   };

@@ -1,14 +1,11 @@
 import Footer from "../../components/Footer";
-import Image from "next/image";
 import Link from "next/link";
-import { client } from "@/sanity/lib/client";
-import { urlFor } from "@/sanity/lib/image";
+import { getProjectBySlug } from "@/lib/data";
 import { notFound } from "next/navigation";
 import ProjectGallery from "./ProjectGallery";
-
 import { Metadata } from "next";
 
-export const revalidate = 10;
+export const revalidate = 0;
 
 interface Photo {
   id: string;
@@ -17,12 +14,7 @@ interface Photo {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  
-  const project = await client.fetch(`*[_type == "project" && slug.current == $slug][0] {
-    title,
-    summary,
-    images
-  }`, { slug });
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     return { title: "Project Not Found" };
@@ -34,89 +26,86 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     openGraph: {
       title: `${project.title} | Chris Pop Design`,
       description: project.summary || "Explore our architectural and fabrication projects.",
-      images: project.images && project.images[0] ? [urlFor(project.images[0]).url()] : [],
+      images: project.images && project.images[0] ? [project.images[0]] : [],
     },
   };
 }
 
 export default async function ProjectDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  console.log("Fetching project for slug:", slug);
+  const project = await getProjectBySlug(slug);
 
-  try {
-    const project = await client.fetch(`*[_type == "project" && slug.current == $slug][0] {
-      title,
-      summary,
-      images,
-      "category": category->title
-    }`, { slug });
-
-    if (!project) {
-      console.log("Project not found for slug:", slug);
-      notFound();
-    }
-
-    console.log("Found project:", project.title);
-
-    const projectData = {
-      title: project.title,
-      description: project.summary || "",
-      category: project.category || "Project",
-      images: (project.images || []).map((img: any, idx: number): Photo => ({
-        id: `img${idx}`,
-        src: img ? urlFor(img).url() : ""
-      })).filter((img: Photo) => img.src !== "")
-    };
-
-    return (
-      <>
-        <main className="pt-16 xs:pt-20 md:pt-24 pb-16 bg-white">
-          {/* Project Header Section */}
-          <section className="px-6 xs:px-12 md:px-24 mb-8 xs:mb-16">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 md:gap-12">
-              <div className="max-w-4xl">
-                <div className="mb-4 flex gap-4">
-                  <span className="text-[10px] tracking-[0.3em] font-medium text-black/40 uppercase bg-black/5 px-3 py-1">
-                    {projectData.category}
-                  </span>
-                </div>
-                <h1 className="text-3xl xs:text-5xl md:text-6xl lg:text-7xl font-thin tracking-tighter text-black leading-[1.1] md:leading-none uppercase">
-                  {projectData.title}
-                </h1>
-              </div>
-            </div>
-          </section>
-
-          {/* Narrative Description Section */}
-          <section className="px-6 xs:px-12 md:px-24 mb-8 xs:mb-12 md:mb-20">
-            <div className="w-full">
-              <p className="text-lg md:text-2xl font-light leading-relaxed text-black/80 italic border-l border-black/20 pl-6 md:pl-12">
-                "{projectData.description}"
-              </p>
-            </div>
-          </section>
-
-          {/* Architectural Gallery */}
-          <ProjectGallery images={projectData.images} title={projectData.title} description={projectData.description} />
-
-          {/* Bottom Navigation */}
-          <section className="mt-20 px-6 xs:px-12 md:px-24 flex justify-between items-center border-t border-black/10 pt-12">
-            <Link
-              href="/our-work"
-              className="text-[10px] tracking-[0.5em] font-light text-black/40 hover:text-black transition-all uppercase flex items-center gap-2"
-            >
-              <span className="text-lg leading-none">←</span> Back Page
-            </Link>
-            <span className="hidden xs:block text-[10px] tracking-[0.3em] font-light text-black/20 uppercase">
-              ChrisPop Designs Inc.
-            </span>
-          </section>
-        </main>
-        <Footer />
-      </>
-    );
-  } catch (error) {
-    console.error("Error fetching project:", error);
+  if (!project) {
     notFound();
   }
+
+  const projectData = {
+    title: project.title,
+    description: project.summary || "",
+    category: project.categoryTitle || project.category.toUpperCase() || "Project",
+    images: (project.images || []).map((imgSrc: string, idx: number): Photo => ({
+      id: `img${idx}`,
+      src: imgSrc,
+    })).filter((img: Photo) => !!img.src),
+    details: project.details || [],
+  };
+
+  return (
+    <>
+      <main className="pt-16 xs:pt-20 md:pt-24 pb-16 bg-white min-h-screen">
+
+
+        {/* Project Container / Specifications */}
+        <section className="px-6 xs:px-12 md:px-24 mb-8 xs:mb-12 md:mb-16">
+          <div className="border border-black/10 p-6 bg-[#fafafa]">
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 mb-6">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-light tracking-tight text-black uppercase">
+                {projectData.title}
+              </h1>
+              {projectData.category && (
+                <span className="text-[10px] tracking-[0.3em] font-medium text-black/40 uppercase bg-black/5 px-3 py-1 self-start sm:self-auto">
+                  {projectData.category}
+                </span>
+              )}
+            </div>
+            {projectData.details.length > 0 && (
+              <dl className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 pt-4 border-t border-black/5">
+                {projectData.details.map((detail, idx) => (
+                  <div key={idx} className="border-b border-black/5 pb-2">
+                    <dt className="text-[10px] tracking-wider text-black/40 uppercase font-medium">
+                      {detail.label}
+                    </dt>
+                    <dd className="text-sm font-light text-black mt-0.5">
+                      {detail.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+          </div>
+        </section>
+
+        {/* Architectural Gallery */}
+        <ProjectGallery
+          images={projectData.images}
+          title={projectData.title}
+          description={projectData.description}
+        />
+
+        {/* Bottom Navigation */}
+        <section className="mt-20 px-6 xs:px-12 md:px-24 flex justify-between items-center border-t border-black/10 pt-12">
+          <Link
+            href="/our-work"
+            className="text-[10px] tracking-[0.5em] font-light text-black/40 hover:text-black transition-all uppercase flex items-center gap-2"
+          >
+            <span className="text-lg leading-none">←</span> Back Page
+          </Link>
+          <span className="hidden xs:block text-[10px] tracking-[0.3em] font-light text-black/20 uppercase">
+            ChrisPop Designs Inc.
+          </span>
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
 }

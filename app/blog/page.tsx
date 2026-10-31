@@ -1,62 +1,40 @@
-import { client } from "@/sanity/lib/client";
-import { urlFor } from "@/sanity/lib/image";
+import { getPosts } from "@/lib/data";
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "../components/Footer";
 import NewsletterForm from "../components/NewsletterForm";
 
-interface BlogPost {
-  id: string;
-  title: string;
-  date: string;
-  category: string;
-  image: any;
-  excerpt: string;
-  slug: string;
-}
-
-export const revalidate = 10;
+export const revalidate = 0;
 
 export default async function JournalPage() {
-  const sanityPosts: BlogPost[] = await client.fetch(`*[_type == "post"] | order(publishedAt desc) {
-    "id": _id,
-    title,
-    "date": publishedAt,
-    category,
-    "image": mainImage,
-    excerpt,
-    "slug": slug.current
-  }`) || [];
-
-  const allPosts = sanityPosts;
+  const allPosts = await getPosts();
 
   return (
     <>
-      <main className="pt-24 xs:pt-32 md:pt-32 pb-32 px-6 xs:px-12 md:px-24 bg-white relative min-h-screen">
-        <div className="">
+      <main className="pt-24 xs:pt-32 md:pt-32 pb-32 bg-white relative min-h-screen">
+        <div>
           {/* Header Section */}
-          <header className="max-w-[1400px] mx-auto mb-10 md:mb-16">
-
+          <header className="container mx-auto px-6 md:px-12 mb-10 md:mb-16">
             <h1 className="text-4xl md:text-7xl font-thin tracking-tighter text-black leading-[0.85] uppercase">
               Latest <br />
               <span className="font-light opacity-50">Insights</span>
             </h1>
             <div className="mt-12 max-w-lg">
-              <p className="text-sm font-light text-black/60 leading-relaxed">
+              <p className="text-sm md:text-base font-light text-black/60 leading-relaxed">
                 A collection of stories and ideas about how we use technology to design better homes and buildings for everyone.
               </p>
             </div>
           </header>
 
           {/* Posts Grid */}
-          <section className="max-w-[1400px] mx-auto">
+          <section className="container mx-auto px-6 md:px-12">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
               {allPosts.map((post) => (
                 <article key={post.id} className="group flex flex-col">
                   <Link href={`/blog/${post.slug}`} className="block space-y-8 flex-1">
                     <div className="aspect-[16/10] overflow-hidden bg-surface-container-high relative">
                       <Image
-                        src={typeof post.image === 'string' ? post.image : (post.image ? urlFor(post.image).url() : "")}
+                        src={post.image || "/modern_architectural_innovation_building_1775931655490.png"}
                         alt={post.title}
                         fill
                         className="object-cover transition-all duration-1000 group-hover:scale-105"
@@ -69,8 +47,7 @@ export default async function JournalPage() {
                     </div>
 
                     <div className="space-y-4">
-
-                      <h2 className="text-2xl md:text-3xl font-light tracking-tight text-black uppercase leading-[1.1] group-hover:opacity-60 transition-opacity">
+                      <h2 className="text-4xl md:text-7xl font-thin tracking-tighter text-black leading-[0.85] uppercase">
                         {post.title}
                       </h2>
                       <p className="text-[13px] font-light text-black/60 leading-relaxed max-w-sm line-clamp-3">

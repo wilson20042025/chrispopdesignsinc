@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  
+
   return (
     <footer className="w-full rounded-none bg-[#0a0a0a] border-t border-white/5">
       <div className="flex flex-col-reverse md:flex-row justify-between items-center px-6 xs:px-12 pt-10 xs:pt-12 pb-6 xs:pb-8 w-full text-center md:text-left gap-12 md:gap-0">
@@ -20,8 +20,8 @@ export default function Footer() {
             { name: "LINKEDIN", href: "https://linkedin.com/in/chris-pop-designs" },
             { name: "WHATSAPP", href: "https://wa.me/231886796691?text=Hello%20Chris%20Pop%20Designs%20%26%20Innovation,%20I'm%20interested%20in%20starting%20a%20project%20together!" }
           ].map((social) => (
-            <a 
-              key={social.name} 
+            <a
+              key={social.name}
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"

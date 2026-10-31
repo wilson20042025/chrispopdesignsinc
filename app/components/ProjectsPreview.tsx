@@ -1,19 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
-import { client } from "@/sanity/lib/client";
-import { urlFor } from "@/sanity/lib/image";
+import { getProjects } from "@/lib/data";
 import { ReactNode } from "react";
 
 interface FeaturedProject {
   id: string;
   title: string;
-  image: any;
+  image: string;
   slug: string;
   category?: string;
 }
 
 interface ProjectsPreviewProps {
-  category?: "fabrication" | "architecture";
+  category?: "fabrication" | "architecture" | string;
   title?: ReactNode;
   subtitle?: string;
   isFullList?: boolean;
@@ -21,57 +20,60 @@ interface ProjectsPreviewProps {
   hideHeader?: boolean;
 }
 
-export default async function ProjectsPreview({ category, title, subtitle, isFullList, id, hideHeader }: ProjectsPreviewProps) {
-  const query = category
-    ? `*[_type == "project" && category->slug.current == "${category}"] | order(_createdAt desc)${isFullList ? "" : "[0...6]"} {
-        "id": _id,
-        title,
-        "image": images[0],
-        "slug": slug.current,
-        "category": category->slug.current
-      }`
-    : `*[_type == "project"] | order(select(category->slug.current == "fabrication" => 1, 0) desc, _createdAt desc)[0...7] {
-        "id": _id,
-        title,
-        "image": images[0],
-        "slug": slug.current,
-        "category": category->slug.current
-      }`;
+export default async function ProjectsPreview({
+  category,
+  title,
+  subtitle,
+  isFullList,
+  id,
+  hideHeader,
+}: ProjectsPreviewProps) {
+  const allLoaded = await getProjects();
 
-  const featuredProjects: FeaturedProject[] = await client.fetch(query) || [];
+  let filtered = category
+    ? allLoaded.filter((p) => p.category?.toLowerCase() === category.toLowerCase())
+    : allLoaded;
 
+  const featuredProjects: FeaturedProject[] = filtered.map((p) => ({
+    id: p.id,
+    title: p.title,
+    image: p.images?.[0] || "/modern_architectural_innovation_building_1775931655490.png",
+    slug: p.slug,
+    category: p.category,
+  }));
 
   const allProjects = isFullList
     ? featuredProjects
     : featuredProjects.slice(0, 4);
 
   return (
-    <section id={id} className="relative pt-8 pb-24 md:pt-12 md:pb-32 px-6 xs:px-12 md:px-24 bg-[#fafafa]  overflow-hidden border-t border-black/10 ">
+    <section id={id} className="relative pt-8 pb-24 md:pt-12 md:pb-32 bg-[#fafafa] overflow-hidden border-t border-black/10">
       {/* Subtle grid background */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03]  z-0"
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.03] z-0"
         style={{
           backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
-          backgroundSize: '40px 40px'
-        }}>
-      </div>
+          backgroundSize: '40px 40px',
+        }}
+      />
 
       {/* Decorative Grid Line */}
-      <div className="absolute top-0 right-1/2 w-px h-full bg-black/10  hidden md:block z-0" />
+      <div className="absolute top-0 right-1/2 w-px h-full bg-black/10 hidden md:block z-0" />
 
-      <div className="max-w-[1400px] mx-auto relative z-10">
+      <div className="container mx-auto px-6 md:px-12 relative z-10">
         {!hideHeader && (
           <div className="flex flex-col md:flex-row justify-between items-end mb-8 md:mb-12 gap-8">
             <div className="space-y-4 max-w-3xl">
               {subtitle !== "" && (
-                <span className="text-[10px] tracking-[0.5em] font-medium text-black/40  uppercase block">
+                <span className="text-[10px] tracking-[0.5em] font-medium text-black/40 uppercase block">
                   {subtitle || (category === 'fabrication' ? 'The Workshop' : category === 'architecture' ? 'The Studio' : 'Our Portfolio')}
                 </span>
               )}
-              <h2 className="text-4xl md:text-7xl font-thin tracking-tighter text-black  leading-[0.85] uppercase">
+              <h2 className="text-4xl md:text-7xl font-thin tracking-tighter text-black leading-[0.85] uppercase">
                 {title || (
                   <>
                     3D Fabrications & <br />
-                    <span className="font-light italic text-transparent [-webkit-text-stroke:1px_black] ">Architectural</span> Designs
+                    <span className="font-light italic text-transparent [-webkit-text-stroke:1px_black]">Architectural</span> Designs
                   </>
                 )}
               </h2>
@@ -90,15 +92,16 @@ export default async function ProjectsPreview({ category, title, subtitle, isFul
                 key={project.id}
                 className={`group relative ${columnSpan}`}
               >
-                <div className="relative overflow-hidden border border-black/10  p-2 sm:p-4 bg-[#fafafa] ">
+                <div className="relative overflow-hidden border border-black/10 p-2 sm:p-4 bg-[#fafafa]">
                   <Link
                     href={`/our-work/${project.slug}`}
-                    className={`block relative overflow-hidden bg-black/5  transition-all duration-700 ease-out cursor-pointer ${isWide ? "aspect-[21/9]" : "aspect-[4/5]"
-                      }`}
+                    className={`block relative overflow-hidden bg-black/5 transition-all duration-700 ease-out cursor-pointer ${
+                      isWide ? "aspect-[21/9]" : "aspect-[4/5]"
+                    }`}
                   >
                     <Image
                       alt={project.title}
-                      src={typeof project.image === 'string' ? project.image : (project.image ? urlFor(project.image).url() : "")}
+                      src={project.image}
                       fill
                       className="object-cover transition-all duration-1000 group-hover:scale-105"
                     />

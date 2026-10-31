@@ -1,0 +1,35 @@
+[
+  {
+    "id": "post-computational-design",
+    "title": "Computational Form-Finding in Modern Tropical Architecture",
+    "slug": "computational-form-finding-tropical-architecture",
+    "date": "2025-03-05T08:00:00.000Z",
+    "category": "Architecture",
+    "excerpt": "Exploring how parametric modeling and algorithmic simulations can dramatically reduce solar radiation while enhancing natural airflow in tropical environments.",
+    "image": "/modern_architectural_innovation_building_1775931655490.png",
+    "body": "Computational design marks a paradigm shift from drafting fixed geometry to orchestrating intelligent generative systems. By encoding environmental constraints—such as incident solar radiation, humidity gradients, and prevailing wind vectors—directly into parametric models, architects can discover micro-climatic geometries that are simultaneously ecologically responsible and visually captivating.\n\nAt ChrisPop Designs, our studio tests dynamic facades where each louvre angle is algorithmically calculated based on sun path telemetry. This ensures optimal thermal comfort without relying entirely on mechanical HVAC systems.",
+    "createdAt": "2025-03-05T08:00:00.000Z"
+  },
+  {
+    "id": "post-robotic-craftsmanship",
+    "title": "The Convergence of Robotic Fabrication and Vernacular Craft",
+    "slug": "robotic-fabrication-vernacular-craft",
+    "date": "2025-02-18T11:00:00.000Z",
+    "category": "Innovation",
+    "excerpt": "How multi-axis industrial robotics allow us to reintroduce complex organic timber joinery at scale without losing the warmth of artisanal craft.",
+    "image": "/digital_fabrication_architectural_robotic_arm_1775931259375.png",
+    "body": "For decades, industrial automation was synonymous with monotony and repetitive standardization. Today, digital fabrication is rewriting that narrative. By marrying 6-axis robotic arms with real-time sensor feedback, we can mill timber joints with tolerances previously achievable only by master woodworkers over months of labor.\n\nThis synthesis allows bespoke architectural components to be produced on-demand directly from CAD models, eliminating waste and enabling unprecedented spatial expressions.",
+    "createdAt": "2025-02-18T11:00:00.000Z"
+  },
+  {
+    "id": "post-drone-digital-twins",
+    "title": "Drone LiDAR & The Evolution of Real-Time Digital Twins",
+    "slug": "drone-lidar-digital-twins",
+    "date": "2025-01-22T14:30:00.000Z",
+    "category": "Design",
+    "excerpt": "From point clouds to millimeter-accurate BIM models: how autonomous drone photogrammetry is transforming architectural site analysis.",
+    "image": "/architectural_drone.png",
+    "body": "Topographic surveys traditionally demanded days of strenuous ground measurement. With high-density LiDAR payloads integrated into autonomous UAV platforms, millions of spatial coordinates can now be captured in minutes.\n\nThese point clouds feed directly into our BIM workflows, allowing us to simulate structural loads, daylight penetration, and rainwater collection on the exact topography before ground is ever broken.",
+    "createdAt": "2025-01-22T14:30:00.000Z"
+  }
+]

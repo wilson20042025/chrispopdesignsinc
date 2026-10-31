@@ -10,15 +10,15 @@ export default function Hero() {
 
   const stories = [
     {
-      title: "Why Do We Exist?",
+      title: "Design Philosophy",
       text: "We are a team of passionate architects and precision fabricators. We believe that the most inspiring spaces are born from the perfect synergy between architectural design and fabrication technologies."
     },
     {
-      title: "Precision Prototyping & Craft",
+      title: "Advanced Fabrication",
       text: "By prioritizing 3D fabrication, we bring an unprecedented level of detail to our work. Our approach blends digital precision with artisanal care to create high-impact prototypes, models, and spatial elements."
     },
     {
-      title: "Collaborate With Us",
+      title: "Strategic Partnerships",
       text: "Whether you're developing a complex architectural project or require expert 3D fabrication and prototyping solutions, we're ready to translate your vision into a physical masterpiece."
     }
   ];
@@ -27,7 +27,7 @@ export default function Hero() {
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + stories.length) % stories.length);
 
   return (
-    <section className="relative min-h-screen w-full overflow-hidden bg-[#fafafa]  pt-24 md:pt-0 flex items-center selection:bg-black selection:text-white  ">
+    <section className="relative lg:min-h-screen w-full overflow-hidden bg-[#fafafa]  pt-24 md:pt-0 hidden lg:flex items-center selection:bg-black selection:text-white  ">
 
       {/* Architectural Grid Background */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.03] "
@@ -57,77 +57,6 @@ export default function Hero() {
           {/* Left Column: Typography & Narrative */}
           <div className="lg:col-span-7 space-y-12 h-full flex flex-col justify-center">
 
-            {/* MOBILE ONLY: Original Static Text */}
-            <div className="lg:hidden space-y-12">
-              <div className="space-y-6">
-                <motion.div className="overflow-hidden">
-                  <motion.span
-                    initial={{ y: "100%" }}
-                    animate={{ y: 0 }}
-                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                    className="inline-block text-[10px] tracking-[0.3em] font-medium text-black/50  uppercase mb-4"
-                  >
-                    Project 01 // Masterplan
-                  </motion.span>
-                </motion.div>
-
-                <h1 className="text-5xl md:text-7xl font-thin tracking-tighter text-black  leading-[0.9] uppercase relative">
-                  <motion.span
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
-                    className="block"
-                  >
-                    Crafting
-                  </motion.span>
-                  <motion.span
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-                    className="block font-light italic text-transparent [-webkit-text-stroke:1px_black] "
-                  >
-                    Digital
-                  </motion.span>
-                  <motion.span
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-                    className="block"
-                  >
-                    Dimensions
-                  </motion.span>
-                </h1>
-              </div>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.7 }}
-                className="max-w-md text-sm md:text-base text-black/60  font-light leading-relaxed border-l border-black/20  pl-6"
-              >
-                Chris Pop Designs and Innovation is a multi-disciplinary studio specializing in architectural design, rapid prototyping, CNC routing, and advanced 3D fabrication.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 1 }}
-                className="flex items-center gap-8 pt-4"
-              >
-                <Link href="#projects" className="group flex items-center gap-4 text-[10px] tracking-widest uppercase font-semibold text-black  relative">
-                  <span>View Works</span>
-                  <span className="w-8 h-[1px] bg-black  group-hover:w-16 transition-all duration-500 ease-out"></span>
-
-                  {/* Architectural node dot */}
-                  <span className="absolute -right-1 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full border border-black  bg-transparent group-hover:translate-x-8 transition-all duration-500 ease-out opacity-0 group-hover:opacity-100" />
-                </Link>
-                <div className="h-12 w-[1px] bg-black/20 "></div>
-                <div className="text-[10px] tracking-widest uppercase text-black/50  leading-tight font-mono">
-                  Est. 2024 <br />
-                  Scale 1:100
-                </div>
-              </motion.div>
-            </div>
 
             {/* DESKTOP ONLY: Narrative Slider */}
             <div className="hidden lg:flex flex-col justify-center h-full gap-6 py-24">
@@ -160,7 +89,7 @@ export default function Hero() {
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
                     className="mb-6"
                   >
-                    <p className="text-sm md:text-base font-light text-black/60  leading-relaxed border-l border-black/20  pl-6 max-w-lg">
+                    <p className="text-sm md:text-base font-light text-black/60  leading-relaxed max-w-lg">
                       {stories[currentSlide].text}
                     </p>
                   </motion.div>
@@ -178,7 +107,7 @@ export default function Hero() {
                       {currentSlide < 2 ? (
                         <Link
                           href="/about"
-                          className="group flex items-center gap-4 text-[10px] tracking-widest uppercase font-semibold text-black  relative"
+                          className="group flex items-center gap-4 text-[12px] uppercase tracking-widest font-semibold text-black  relative"
                         >
                           <span>About Us</span>
                           <span className="w-8 h-[1px] bg-black  group-hover:w-16 transition-all duration-500 ease-out"></span>
@@ -206,7 +135,7 @@ export default function Hero() {
                         <polyline points="12 19 5 12 12 5"></polyline>
                       </svg>
                     </button>
-                    <div className="text-[10px] font-mono mx-2 text-black/30  hidden md:block">
+                    <div className="text-[10px] font-mono mx-2 text-black  hidden md:block">
                       0{currentSlide + 1} / 0{stories.length}
                     </div>
                     <button
@@ -226,7 +155,7 @@ export default function Hero() {
           </div>
 
           {/* Right Column: Visual Showcase */}
-          <div className="lg:col-span-5 relative mt-16 lg:mt-0">
+          <div className="hidden md:block lg:col-span-5 relative mt-16 lg:mt-0">
             {/* Main structural bounding box */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}

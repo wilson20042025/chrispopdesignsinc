@@ -2,15 +2,14 @@ import Footer from "../components/Footer";
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { client } from "@/sanity/lib/client";
-import { urlFor } from "@/sanity/lib/image";
+import { getCategories, getProjects } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "Our Works | Chris Pop Design Innovation",
   description: "Explore our complete portfolio spanning architectural design and advanced 3D fabrication.",
 };
 
-export const revalidate = 10;
+export const revalidate = 0;
 
 interface CategoryData {
   id: string;
@@ -21,38 +20,44 @@ interface CategoryData {
 }
 
 export default async function ProjectsPage() {
-  // Fetch categories and for each category, optionally fetch the latest project image if coverImage is not set
-  const categoriesData = await client.fetch(`*[_type == "category"] | order(_createdAt asc) {
-    "id": _id,
-    title,
-    subtitle,
-    "slug": slug.current,
-    "image": coalesce(
-      coverImage,
-      *[_type == "project" && references(^._id)] | order(_createdAt desc)[0].images[0]
-    )
-  }`);
+  const [categoriesData, projects] = await Promise.all([
+    getCategories(),
+    getProjects(),
+  ]);
 
-  const categories: CategoryData[] = categoriesData.map((category: any) => ({
-    ...category,
-    image: category.image ? urlFor(category.image).url() : "",
-  }));
+  const categories: CategoryData[] = categoriesData.map((category) => {
+    let image = category.coverImage || "";
+    if (!image) {
+      const matchedProject = projects.find((p) => p.category === category.slug && p.images?.length > 0);
+      if (matchedProject) {
+        image = matchedProject.images[0];
+      }
+    }
+    return {
+      id: category.id,
+      title: category.title,
+      subtitle: category.subtitle,
+      slug: category.slug,
+      image: image || "/modern_architectural_innovation_building_1775931655490.png",
+    };
+  });
 
   return (
-    <main className="min-h-screen pt-20 bg-[#fafafa] ">
-      <section className="relative pt-8 pb-24 md:pt-12 md:pb-32 px-6 xs:px-12 md:px-24 bg-[#fafafa]  overflow-hidden border-t border-black/10 ">
+    <main className="min-h-screen pt-20 bg-[#fafafa]">
+      <section className="relative pt-8 pb-24 md:pt-12 md:pb-32 bg-[#fafafa] overflow-hidden border-t border-black/10">
         {/* Subtle grid background */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.03]  z-0"
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.03] z-0"
           style={{
             backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
-            backgroundSize: '40px 40px'
-          }}>
-        </div>
+            backgroundSize: '40px 40px',
+          }}
+        />
 
         {/* Decorative Grid Line */}
-        <div className="absolute top-0 right-1/2 w-px h-full bg-black/10  hidden md:block z-0" />
+        <div className="absolute top-0 right-1/2 w-px h-full bg-black/10 hidden md:block z-0" />
 
-        <div className="max-w-[1400px] mx-auto relative z-10">
+        <div className="container mx-auto px-6 md:px-12 relative z-10">
           {/* Staggered Editorial Grid */}
           <div className="grid grid-cols-2 md:grid-cols-12 gap-4 sm:gap-8 md:gap-x-12 md:gap-y-12">
             {categories.map((category: CategoryData, index: number) => {
@@ -64,11 +69,12 @@ export default async function ProjectsPage() {
                   key={category.id}
                   className={`group relative ${columnSpan}`}
                 >
-                  <div className="relative overflow-hidden border border-black/10  p-2 sm:p-4 bg-[#fafafa] ">
+                  <div className="relative overflow-hidden border border-black/10 p-2 sm:p-4 bg-[#fafafa]">
                     <Link
                       href={`/our-work/category/${category.slug}`}
-                      className={`block relative overflow-hidden bg-black/5  transition-all duration-700 ease-out cursor-pointer aspect-square ${isWide ? "md:aspect-[21/9]" : "md:aspect-[4/5]"
-                        }`}
+                      className={`block relative overflow-hidden bg-black/5 transition-all duration-700 ease-out cursor-pointer aspect-square ${
+                        isWide ? "md:aspect-[21/9]" : "md:aspect-[4/5]"
+                      }`}
                     >
                       {category.image && (
                         <Image

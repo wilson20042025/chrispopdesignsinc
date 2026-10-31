@@ -1,0 +1,86 @@
+[
+  {
+    "id": "proj-parametric-facade",
+    "title": "Parametric Pavilion & Kinetic Facade",
+    "slug": "parametric-pavilion",
+    "category": "architecture",
+    "categoryTitle": "Architecture",
+    "summary": "A forward-thinking parametric architecture exploration balancing dynamic daylight filtration with structural origami geometry. Designed to withstand coastal humidity while optimizing natural ventilation and passive cooling.",
+    "images": [
+      "/modern_architectural_innovation_building_1775931655490.png",
+      "/parametric_architectural_texture_detail_1775931276569.png",
+      "/hero_fabrication_1.png"
+    ],
+    "details": [
+      { "label": "Typology", "value": "Cultural Pavilion & Research Space" },
+      { "label": "Year", "value": "2025" },
+      { "label": "Location", "value": "Paynesville, Monrovia" },
+      { "label": "Materials", "value": "Anodized Aluminum, Engineered Timber, Smart Glass" },
+      { "label": "Methodology", "value": "Computational Form-Finding & BIM 4D" }
+    ],
+    "featured": true,
+    "createdAt": "2025-02-15T10:00:00.000Z"
+  },
+  {
+    "id": "proj-robotic-timber",
+    "title": "Autonomous Robotic Timber Assembly",
+    "slug": "robotic-timber-assembly",
+    "category": "fabrication",
+    "categoryTitle": "Fabrication",
+    "summary": "Multi-axis industrial robotic arms programmed for precision joining of complex timber lattices without mechanical fasteners. Showcasing zero-tolerance digital craftsmanship and sustainable forestry utilization.",
+    "images": [
+      "/digital_fabrication_architectural_robotic_arm_1775931259375.png",
+      "/robotic_fabrication.png",
+      "/hero_fabrication_2.png"
+    ],
+    "details": [
+      { "label": "Process", "value": "6-Axis Robotic Milling & Spatial Assembly" },
+      { "label": "Year", "value": "2025" },
+      { "label": "Software", "value": "Grasshopper, Rhino, KUKA|prc" },
+      { "label": "Tolerance", "value": "±0.25mm Precision" }
+    ],
+    "featured": true,
+    "createdAt": "2025-02-20T14:30:00.000Z"
+  },
+  {
+    "id": "proj-acoustic-screens",
+    "title": "Laser-Cut Acoustic Partition System",
+    "slug": "laser-cut-acoustic-partitions",
+    "category": "fabrication",
+    "categoryTitle": "Fabrication",
+    "summary": "Laser micro-perforated acoustic baffling systems customized to geometric acoustic ray simulations. The layered screens provide zoning privacy, sound absorption, and atmospheric light diffusion.",
+    "images": [
+      "/laser_cutting.png",
+      "/hero_fabrication_3.png",
+      "/parametric_architectural_texture_detail_1775931276569.png"
+    ],
+    "details": [
+      { "label": "Application", "value": "Interior Acoustic Enclosure" },
+      { "label": "Year", "value": "2025" },
+      { "label": "Material", "value": "Acoustic Felt & Anodized Architectural Bronze" },
+      { "label": "Performance", "value": "NRC 0.85 Absorption Coefficient" }
+    ],
+    "featured": true,
+    "createdAt": "2025-03-01T09:15:00.000Z"
+  },
+  {
+    "id": "proj-drone-lidar-hangar",
+    "title": "Aerial LiDAR & Autonomous Drone Hangar",
+    "slug": "aerial-drone-hangar",
+    "category": "architecture",
+    "categoryTitle": "Architecture",
+    "summary": "An integrated aerial topography facility designed for automated drone fleet operations, structural LiDAR inspection, and digital twin synchronization across metropolitan infrastructure projects.",
+    "images": [
+      "/architectural_drone.png",
+      "/modern_architectural_innovation_building_1775931655490.png"
+    ],
+    "details": [
+      { "label": "Typology", "value": "Infrastructure & Robotics Facility" },
+      { "label": "Year", "value": "2025" },
+      { "label": "Location", "value": "Liberia Innovation Corridor" },
+      { "label": "System", "value": "Autonomous Charging Pad & Meteorological Sensor Array" }
+    ],
+    "featured": true,
+    "createdAt": "2025-03-10T16:00:00.000Z"
+  }
+]

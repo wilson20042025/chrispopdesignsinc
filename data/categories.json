@@ -1,0 +1,18 @@
+[
+  {
+    "id": "cat-architecture",
+    "title": "Architecture",
+    "slug": "architecture",
+    "subtitle": "The Studio",
+    "coverImage": "/modern_architectural_innovation_building_1775931655490.png",
+    "createdAt": "2025-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "cat-fabrication",
+    "title": "Fabrication",
+    "slug": "fabrication",
+    "subtitle": "The Workshop",
+    "coverImage": "/digital_fabrication_architectural_robotic_arm_1775931259375.png",
+    "createdAt": "2025-01-02T00:00:00.000Z"
+  }
+]

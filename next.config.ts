@@ -2,12 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ['192.168.29.100'],
-  experimental: {
-    // @ts-ignore - turbopack root is a valid but sometimes untyped property in some versions
-    turbopack: {
-      root: '.',
-    },
-  },
+
   images: {
     remotePatterns: [
       {
@@ -24,7 +19,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'cdn.sanity.io',
+        hostname: 'images.unsplash.com',
         port: '',
         pathname: '/**',
       },
@@ -33,13 +28,13 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: '/fabrication',
-        destination: '/projects',
-        permanent: true,
+        source: '/studio/:path*',
+        destination: '/admin',
+        permanent: false,
       },
       {
-        source: '/architecture',
-        destination: '/projects',
+        source: '/fabrication',
+        destination: '/our-work/category/fabrication',
         permanent: true,
       },
     ];
