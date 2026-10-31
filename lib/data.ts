@@ -75,16 +75,13 @@ async function readProjectsData(): Promise<Project[]> {
   if (redis) {
     try {
       const data = await redis.get<Project[]>(REDIS_KEYS.PROJECTS);
-      if (Array.isArray(data) && data.length > 0) {
+      if (data !== null && Array.isArray(data)) {
         return data;
       }
-      // Auto-seed Redis with initial seed data from repository
+      // Auto-seed Redis if key is null
       const localSeed = await readLocalFile<Project>(PROJECTS_FILE);
-      if (localSeed.length > 0) {
-        await redis.set(REDIS_KEYS.PROJECTS, localSeed);
-        return localSeed;
-      }
-      return [];
+      await redis.set(REDIS_KEYS.PROJECTS, localSeed);
+      return localSeed;
     } catch (err) {
       console.error('Redis readProjects error, falling back to local file:', err);
     }
@@ -110,16 +107,13 @@ async function readCategoriesData(): Promise<Category[]> {
   if (redis) {
     try {
       const data = await redis.get<Category[]>(REDIS_KEYS.CATEGORIES);
-      if (Array.isArray(data) && data.length > 0) {
+      if (data !== null && Array.isArray(data)) {
         return data;
       }
-      // Auto-seed Redis with initial seed data
+      // Auto-seed Redis if key is null
       const localSeed = await readLocalFile<Category>(CATEGORIES_FILE);
-      if (localSeed.length > 0) {
-        await redis.set(REDIS_KEYS.CATEGORIES, localSeed);
-        return localSeed;
-      }
-      return [];
+      await redis.set(REDIS_KEYS.CATEGORIES, localSeed);
+      return localSeed;
     } catch (err) {
       console.error('Redis readCategories error, falling back to local file:', err);
     }
@@ -145,16 +139,13 @@ async function readPostsData(): Promise<BlogPost[]> {
   if (redis) {
     try {
       const data = await redis.get<BlogPost[]>(REDIS_KEYS.POSTS);
-      if (Array.isArray(data) && data.length > 0) {
+      if (data !== null && Array.isArray(data)) {
         return data;
       }
-      // Auto-seed Redis with initial seed data
+      // Auto-seed Redis if key is null
       const localSeed = await readLocalFile<BlogPost>(POSTS_FILE);
-      if (localSeed.length > 0) {
-        await redis.set(REDIS_KEYS.POSTS, localSeed);
-        return localSeed;
-      }
-      return [];
+      await redis.set(REDIS_KEYS.POSTS, localSeed);
+      return localSeed;
     } catch (err) {
       console.error('Redis readPosts error, falling back to local file:', err);
     }

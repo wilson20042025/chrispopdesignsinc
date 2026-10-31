@@ -82,48 +82,59 @@ export default async function ProjectsPreview({
         )}
 
         {/* Staggered Editorial Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-x-12 md:gap-y-12">
-          {allProjects.map((project: FeaturedProject, index: number) => {
-            const isWide = index % 4 === 0 || index % 4 === 3;
-            const columnSpan = isWide ? "md:col-span-8" : "md:col-span-4";
+        {allProjects.length === 0 ? (
+          <div className="py-20 text-center border border-dashed border-black/15 p-12 bg-white/50">
+            <span className="text-[10px] tracking-[0.4em] font-medium text-black/40 uppercase block mb-3">
+              Portfolio
+            </span>
+            <p className="text-sm md:text-base font-light text-black/60">
+              No projects published in this section yet.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-x-12 md:gap-y-12">
+            {allProjects.map((project: FeaturedProject, index: number) => {
+              const isWide = index % 4 === 0 || index % 4 === 3;
+              const columnSpan = isWide ? "md:col-span-8" : "md:col-span-4";
 
-            return (
-              <div
-                key={project.id}
-                className={`group relative ${columnSpan}`}
-              >
-                <div className="relative overflow-hidden border border-black/10 p-2 sm:p-4 bg-[#fafafa]">
-                  <Link
-                    href={`/our-work/${project.slug}`}
-                    className={`block relative overflow-hidden bg-black/5 transition-all duration-700 ease-out cursor-pointer ${
-                      isWide ? "aspect-[21/9]" : "aspect-[4/5]"
-                    }`}
-                  >
-                    <Image
-                      alt={project.title}
-                      src={project.image}
-                      fill
-                      className="object-cover transition-all duration-1000 group-hover:scale-105"
-                    />
+              return (
+                <div
+                  key={project.id}
+                  className={`group relative ${columnSpan}`}
+                >
+                  <div className="relative overflow-hidden border border-black/10 p-2 sm:p-4 bg-[#fafafa]">
+                    <Link
+                      href={`/our-work/${project.slug}`}
+                      className={`block relative overflow-hidden bg-black/5 transition-all duration-700 ease-out cursor-pointer ${
+                        isWide ? "aspect-[21/9]" : "aspect-[4/5]"
+                      }`}
+                    >
+                      <Image
+                        alt={project.title}
+                        src={project.image}
+                        fill
+                        className="object-cover transition-all duration-1000 group-hover:scale-105"
+                      />
 
-                    {/* Mobile visible overlay / Desktop hover overlay */}
-                    <div className="absolute inset-0 bg-black/40 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-4 sm:p-8 md:p-12">
-                      <div className="translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-700">
-                        <h4 className="text-xl sm:text-2xl md:text-4xl font-thin text-white tracking-tighter leading-none">
-                          {project.title}
-                        </h4>
-                        <div className="mt-4 md:mt-6 flex items-center gap-2 text-white/80 md:text-white/60">
-                          <span className="text-[10px] tracking-widest uppercase font-light">View</span>
-                          <div className="w-8 h-px bg-white/60 md:bg-white/40 md:group-hover:w-12 transition-all duration-700" />
+                      {/* Mobile visible overlay / Desktop hover overlay */}
+                      <div className="absolute inset-0 bg-black/40 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-700 flex flex-col justify-end p-4 sm:p-8 md:p-12">
+                        <div className="translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-700">
+                          <h4 className="text-xl sm:text-2xl md:text-4xl font-thin text-white tracking-tighter leading-none">
+                            {project.title}
+                          </h4>
+                          <div className="mt-4 md:mt-6 flex items-center gap-2 text-white/80 md:text-white/60">
+                            <span className="text-[10px] tracking-widest uppercase font-light">View</span>
+                            <div className="w-8 h-px bg-white/60 md:bg-white/40 md:group-hover:w-12 transition-all duration-700" />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Link>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </section>
   );
