@@ -3,6 +3,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import { isAuthenticated } from '@/lib/auth';
 import { isCloudinaryConfigured, uploadToCloudinary } from '@/lib/cloudinary';
+import sharp from 'sharp';
 
 export async function POST(request: NextRequest) {
   const authed = await isAuthenticated();
@@ -38,19 +39,40 @@ export async function POST(request: NextRequest) {
       if (!file || typeof file === 'string' || !file.name) continue;
 
       const bytes = await file.arrayBuffer();
-      const buffer = Buffer.from(bytes);
+      let buffer = Buffer.from(bytes);
+      let outputExt = path.extname(file.name).toLowerCase() || '.jpg';
 
-      const originalExt = path.extname(file.name) || '.jpg';
-      const cleanName = path.basename(file.name, originalExt).replace(/[^a-zA-Z0-9_-]/g, '_');
+      // Server-side compression pass with Sharp if it's an image
+      try {
+        const isStandardImage = /\.(jpe?g|png|webp|avif|tiff)$/i.test(file.name) || file.type?.startsWith('image/');
+        if (isStandardImage && !file.name.endsWith('.svg') && !file.name.endsWith('.gif')) {
+          buffer = await sharp(buffer)
+            .rotate() // Auto-orient based on EXIF
+            .resize({
+              width: 2560,
+              height: 2560,
+              fit: 'inside',
+              withoutEnlargement: true,
+            })
+            .webp({ quality: 85 })
+            .toBuffer();
+          outputExt = '.webp';
+        }
+      } catch (sharpError) {
+        // If sharp processing fails on this specific buffer, fall back to raw buffer
+        console.warn('Sharp processing skipped for file:', file.name, sharpError);
+      }
+
+      const cleanName = path.basename(file.name, path.extname(file.name)).replace(/[^a-zA-Z0-9_-]/g, '_');
       const uniqueFileName = `${Date.now()}-${cleanName}`;
 
       if (useCloudinary) {
         // Upload directly to Cloudinary CDN
-        const cloudUrl = await uploadToCloudinary(buffer, 'chrispoparch', uniqueFileName);
+        const cloudUrl = await uploadToCloudinary(buffer, 'chrispoparch', `${uniqueFileName}${outputExt}`);
         uploadedUrls.push(cloudUrl);
       } else {
         // Fallback to local public/uploads for local development
-        const localFileName = `${uniqueFileName}${originalExt}`;
+        const localFileName = `${uniqueFileName}${outputExt}`;
         const filePath = path.join(uploadsDir, localFileName);
         await fs.writeFile(filePath, buffer);
         uploadedUrls.push(`/uploads/${localFileName}`);

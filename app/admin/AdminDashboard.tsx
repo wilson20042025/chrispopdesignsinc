@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Project, Category, BlogPost } from '@/lib/types';
+import { compressImage, formatBytes, CompressionPreset } from '@/lib/compressImage';
 
 interface AdminDashboardProps {
   initialProjects: Project[];
@@ -53,6 +54,11 @@ export default function AdminDashboard({
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Image Compression Settings
+  const [compressionPreset, setCompressionPreset] = useState<CompressionPreset>('web');
+  const [compressionStats, setCompressionStats] = useState<string | null>(null);
+  const [compressionProgress, setCompressionProgress] = useState<string | null>(null);
 
   // Saving state
   const [isSaving, setIsSaving] = useState(false);
@@ -199,18 +205,39 @@ export default function AdminDashboard({
     }
   };
 
-  // Upload Photos
+  // Upload Photos with automatic client-side compression
   const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files || files.length === 0) return;
+    const rawFiles = e.target.files;
+    if (!rawFiles || rawFiles.length === 0) return;
 
     setIsUploading(true);
     setUploadError('');
+    setCompressionStats(null);
 
     try {
+      let totalOriginal = 0;
+      let totalCompressed = 0;
+      const processedFiles: File[] = [];
+
+      for (let i = 0; i < rawFiles.length; i++) {
+        const file = rawFiles[i];
+        if (rawFiles.length > 1) {
+          setCompressionProgress(`Optimizing photo ${i + 1} of ${rawFiles.length}...`);
+        } else {
+          setCompressionProgress('Optimizing photo...');
+        }
+
+        const result = await compressImage(file, { preset: compressionPreset });
+        processedFiles.push(result.file);
+        totalOriginal += result.originalSize;
+        totalCompressed += result.compressedSize;
+      }
+
+      setCompressionProgress(`Uploading ${processedFiles.length} photo(s)...`);
+
       const formData = new FormData();
-      for (let i = 0; i < files.length; i++) {
-        formData.append('files', files[i]);
+      for (const file of processedFiles) {
+        formData.append('files', file);
       }
 
       const res = await fetch('/api/admin/upload', {
@@ -231,12 +258,21 @@ export default function AdminDashboard({
             images: [...(prev.images || []), ...data.urls],
           };
         });
-        showToast(`📷 ${data.urls.length} photo(s) uploaded!`);
+
+        if (totalOriginal > totalCompressed && compressionPreset !== 'original') {
+          const savings = Math.round(((totalOriginal - totalCompressed) / totalOriginal) * 100);
+          const statsMsg = `Compressed ${formatBytes(totalOriginal)} ➔ ${formatBytes(totalCompressed)} (${savings}% saved)`;
+          setCompressionStats(statsMsg);
+          showToast(`📷 ${data.urls.length} photo(s) optimized & uploaded! (${savings}% saved)`);
+        } else {
+          showToast(`📷 ${data.urls.length} photo(s) uploaded!`);
+        }
       }
     } catch (err: any) {
       setUploadError(err.message || 'Could not upload photos');
     } finally {
       setIsUploading(false);
+      setCompressionProgress(null);
       if (fileInputRef.current) fileInputRef.current.value = '';
     }
   };
@@ -1055,9 +1091,94 @@ export default function AdminDashboard({
                 <label className="block text-xs font-semibold uppercase tracking-wider text-white mb-2">
                   3. Project Photos ({projectToEdit.images?.length || 0})
                 </label>
-                <p className="text-xs text-white/50 mb-4">
+                <p className="text-xs text-white/50 mb-3">
                   Upload photos of this project. The first photo with the ⭐ badge is your main cover photo.
                 </p>
+
+                {/* Photo Compressor & Size Controller */}
+                <div className="mb-4 bg-[#111215] border border-white/10 rounded-xl p-3">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-xs">⚡</span>
+                      <span className="text-xs font-semibold text-white">Photo Compressor & Size Controller</span>
+                    </div>
+                    <span className="text-[10px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full font-medium">
+                      Active
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-white/50 mb-3">
+                    Choose a target size. Photos are automatically compressed in your browser before upload to prevent upload failures and keep your site fast.
+                  </p>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setCompressionPreset('web')}
+                      className={`px-2.5 py-2 rounded-lg border text-left transition-all cursor-pointer ${
+                        compressionPreset === 'web'
+                          ? 'bg-white text-black border-white shadow-md'
+                          : 'bg-[#181920] text-white/60 border-white/10 hover:text-white hover:border-white/20'
+                      }`}
+                    >
+                      <span className="block text-[11px] font-bold">🌟 Web Optimized</span>
+                      <span className={`block text-[9px] ${compressionPreset === 'web' ? 'text-black/70' : 'text-white/40'}`}>
+                        Max 1920px (~200KB)
+                      </span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setCompressionPreset('high')}
+                      className={`px-2.5 py-2 rounded-lg border text-left transition-all cursor-pointer ${
+                        compressionPreset === 'high'
+                          ? 'bg-white text-black border-white shadow-md'
+                          : 'bg-[#181920] text-white/60 border-white/10 hover:text-white hover:border-white/20'
+                      }`}
+                    >
+                      <span className="block text-[11px] font-bold">🖥️ High-Res 2K</span>
+                      <span className={`block text-[9px] ${compressionPreset === 'high' ? 'text-black/70' : 'text-white/40'}`}>
+                        Max 2560px (~500KB)
+                      </span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setCompressionPreset('compact')}
+                      className={`px-2.5 py-2 rounded-lg border text-left transition-all cursor-pointer ${
+                        compressionPreset === 'compact'
+                          ? 'bg-white text-black border-white shadow-md'
+                          : 'bg-[#181920] text-white/60 border-white/10 hover:text-white hover:border-white/20'
+                      }`}
+                    >
+                      <span className="block text-[11px] font-bold">📱 Compact</span>
+                      <span className={`block text-[9px] ${compressionPreset === 'compact' ? 'text-black/70' : 'text-white/40'}`}>
+                        Max 1280px (~100KB)
+                      </span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setCompressionPreset('original')}
+                      className={`px-2.5 py-2 rounded-lg border text-left transition-all cursor-pointer ${
+                        compressionPreset === 'original'
+                          ? 'bg-white text-black border-white shadow-md'
+                          : 'bg-[#181920] text-white/60 border-white/10 hover:text-white hover:border-white/20'
+                      }`}
+                    >
+                      <span className="block text-[11px] font-bold">📁 Original</span>
+                      <span className={`block text-[9px] ${compressionPreset === 'original' ? 'text-black/70' : 'text-white/40'}`}>
+                        Raw File (No change)
+                      </span>
+                    </button>
+                  </div>
+
+                  {compressionStats && (
+                    <div className="mt-2.5 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 rounded text-xs flex items-center gap-1.5">
+                      <span>✓</span>
+                      <span>{compressionStats}</span>
+                    </div>
+                  )}
+                </div>
 
                 {/* Big Drag and Drop / Upload Button */}
                 <label className="border-2 border-dashed border-white/20 hover:border-white/50 rounded-xl p-6 text-center block cursor-pointer bg-[#111215] transition-colors mb-4">
@@ -1079,8 +1200,9 @@ export default function AdminDashboard({
                 </label>
 
                 {isUploading && (
-                  <div className="p-3 bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs text-center rounded-lg mb-4 animate-pulse">
-                    Uploading your photos... please wait a moment.
+                  <div className="p-3 bg-blue-500/10 border border-blue-500/30 text-blue-300 text-xs text-center rounded-lg mb-4 animate-pulse flex items-center justify-center gap-2">
+                    <span className="text-sm">⏳</span>
+                    <span>{compressionProgress || 'Processing photos... please wait a moment.'}</span>
                   </div>
                 )}
                 {uploadError && (
