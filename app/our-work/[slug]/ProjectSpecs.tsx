@@ -10,10 +10,11 @@ interface ProjectSpecsProps {
 }
 
 export default function ProjectSpecs({ title, category, details }: ProjectSpecsProps) {
-  // If more than 4 items, initially collapse the extra items for a compact UI
+  // If more than 4 items, collapse the extra items for a compact UI
   const hasManyDetails = details.length > 4;
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isOpen, setIsOpen] = useState(true);
+  // By default, specifications are hidden until clicked
+  const [isOpen, setIsOpen] = useState(false);
 
   // Items to display based on expansion state
   const displayedDetails = hasManyDetails && !isExpanded ? details.slice(0, 4) : details;
@@ -42,7 +43,7 @@ export default function ProjectSpecs({ title, category, details }: ProjectSpecsP
                 aria-expanded={isOpen}
                 aria-label="Toggle project specifications"
               >
-                <span>Specs ({details.length})</span>
+                <span>{isOpen ? "Hide Specs" : `View Specs (${details.length})`}</span>
                 <svg
                   className={`w-3 h-3 transition-transform duration-300 ${isOpen ? "rotate-180" : "rotate-0"}`}
                   fill="none"
