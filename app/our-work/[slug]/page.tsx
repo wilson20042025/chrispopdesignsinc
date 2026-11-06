@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getProjectBySlug } from "@/lib/data";
 import { notFound } from "next/navigation";
 import ProjectGallery from "./ProjectGallery";
+import ProjectSpecs from "./ProjectSpecs";
 import { Metadata } from "next";
 
 export const revalidate = 0;
@@ -56,34 +57,11 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
 
 
         {/* Project Container / Specifications */}
-        <section className="px-6 xs:px-12 md:px-24 mb-8 xs:mb-12 md:mb-16">
-          <div className="border border-black/10 p-6 bg-[#fafafa]">
-            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 mb-6">
-              <h1 className="text-xl sm:text-2xl md:text-3xl font-light tracking-tight text-black uppercase">
-                {projectData.title}
-              </h1>
-              {projectData.category && (
-                <span className="text-[10px] tracking-[0.3em] font-medium text-black/40 uppercase bg-black/5 px-3 py-1 self-start sm:self-auto">
-                  {projectData.category}
-                </span>
-              )}
-            </div>
-            {projectData.details.length > 0 && (
-              <dl className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 pt-4 border-t border-black/5">
-                {projectData.details.map((detail, idx) => (
-                  <div key={idx} className="border-b border-black/5 pb-2">
-                    <dt className="text-[10px] tracking-wider text-black/40 uppercase font-medium">
-                      {detail.label}
-                    </dt>
-                    <dd className="text-sm font-light text-black mt-0.5">
-                      {detail.value}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            )}
-          </div>
-        </section>
+        <ProjectSpecs
+          title={projectData.title}
+          category={projectData.category}
+          details={projectData.details}
+        />
 
         {/* Architectural Gallery */}
         <ProjectGallery
