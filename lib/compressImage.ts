@@ -46,13 +46,13 @@ export async function compressImage(
 ): Promise<CompressionResult> {
   const originalSize = file.size;
 
-  // If user selected original or file is not an image (e.g. svg, gif), return as-is
-  if (
-    options.preset === 'original' ||
-    !file.type.startsWith('image/') ||
-    file.type === 'image/svg+xml' ||
-    file.type === 'image/gif'
-  ) {
+  // Detect image type via MIME type or file extension (Windows inputs often leave file.type empty)
+  const isImageByName = /\.(jpe?g|png|webp|bmp|tiff|heic|heif)$/i.test(file.name || '');
+  const isImageByType = file.type ? file.type.startsWith('image/') : false;
+  const isSvgOrGif = file.type === 'image/svg+xml' || file.type === 'image/gif' || /\.(svg|gif)$/i.test(file.name || '');
+
+  // If user selected original, or file is not a compressible image, return as-is
+  if (options.preset === 'original' || (!isImageByType && !isImageByName) || isSvgOrGif) {
     return {
       file,
       originalSize,
@@ -69,119 +69,155 @@ export async function compressImage(
   const maxWidth = options.maxWidth || config.maxWidth;
   const maxHeight = options.maxHeight || config.maxHeight;
   const quality = options.quality !== undefined ? options.quality : config.quality;
-  const format = options.format || 'image/webp';
+  const targetFormat = options.format || 'image/webp';
 
   return new Promise((resolve) => {
-    const reader = new FileReader();
+    // Safety timer: if compression ever hangs, fallback to original file
+    let hasResolved = false;
+    const safeResolve = (result: CompressionResult) => {
+      if (!hasResolved) {
+        hasResolved = true;
+        resolve(result);
+      }
+    };
 
-    reader.onload = (event) => {
-      const img = new Image();
+    const timeout = setTimeout(() => {
+      safeResolve({
+        file,
+        originalSize,
+        compressedSize: originalSize,
+        savingsPercent: 0,
+        width: 0,
+        height: 0,
+      });
+    }, 7000);
 
-      img.onload = () => {
-        let width = img.width;
-        let height = img.height;
+    const objectUrl = URL.createObjectURL(file);
+    const img = new Image();
 
-        // Calculate proportional scale down
-        if (width > maxWidth || height > maxHeight) {
-          const ratio = Math.min(maxWidth / width, maxHeight / height);
-          width = Math.round(width * ratio);
-          height = Math.round(height * ratio);
-        }
+    img.onload = () => {
+      clearTimeout(timeout);
+      URL.revokeObjectURL(objectUrl);
 
-        const canvas = document.createElement('canvas');
-        canvas.width = width;
-        canvas.height = height;
+      let width = img.naturalWidth || img.width;
+      let height = img.naturalHeight || img.height;
 
-        const ctx = canvas.getContext('2d');
-        if (!ctx) {
-          // If 2d context fails, fallback to original
-          resolve({
-            file,
-            originalSize,
-            compressedSize: originalSize,
-            savingsPercent: 0,
-            width: img.width,
-            height: img.height,
-          });
-          return;
-        }
+      // Calculate proportional scale down
+      if (width > maxWidth || height > maxHeight) {
+        const ratio = Math.min(maxWidth / width, maxHeight / height);
+        width = Math.round(width * ratio);
+        height = Math.round(height * ratio);
+      }
 
-        // Draw image onto canvas
-        ctx.drawImage(img, 0, 0, width, height);
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
 
-        // Convert canvas to blob
-        canvas.toBlob(
-          (blob) => {
-            if (!blob) {
-              resolve({
-                file,
-                originalSize,
-                compressedSize: originalSize,
-                savingsPercent: 0,
-                width,
-                height,
-              });
-              return;
-            }
-
-            // If compressed blob is somehow larger than original, keep original
-            if (blob.size >= originalSize) {
-              resolve({
-                file,
-                originalSize,
-                compressedSize: originalSize,
-                savingsPercent: 0,
-                width: img.width,
-                height: img.height,
-              });
-              return;
-            }
-
-            // Create new File with appropriate extension
-            const ext = format === 'image/webp' ? '.webp' : '.jpg';
-            const baseName = file.name.replace(/\.[^/.]+$/, '');
-            const compressedFileName = `${baseName}${ext}`;
-
-            const compressedFile = new File([blob], compressedFileName, {
-              type: format,
-              lastModified: Date.now(),
-            });
-
-            const savingsPercent = Math.max(
-              0,
-              Math.round(((originalSize - blob.size) / originalSize) * 100)
-            );
-
-            resolve({
-              file: compressedFile,
-              originalSize,
-              compressedSize: blob.size,
-              savingsPercent,
-              width,
-              height,
-            });
-          },
-          format,
-          quality
-        );
-      };
-
-      img.onerror = () => {
-        resolve({
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        safeResolve({
           file,
           originalSize,
           compressedSize: originalSize,
           savingsPercent: 0,
-          width: 0,
-          height: 0,
+          width,
+          height,
         });
+        return;
+      }
+
+      // Draw image onto canvas
+      ctx.drawImage(img, 0, 0, width, height);
+
+      // Export canvas to blob with WebP -> JPEG fallback
+      const exportToBlob = (
+        format: string,
+        callback: (blob: Blob | null, usedFormat: string) => void
+      ) => {
+        try {
+          canvas.toBlob(
+            (b) => {
+              if (!b && format !== 'image/jpeg') {
+                try {
+                  canvas.toBlob((fb) => callback(fb, 'image/jpeg'), 'image/jpeg', quality);
+                } catch {
+                  callback(null, format);
+                }
+              } else {
+                callback(b, format);
+              }
+            },
+            format,
+            quality
+          );
+        } catch {
+          if (format !== 'image/jpeg') {
+            try {
+              canvas.toBlob((fb) => callback(fb, 'image/jpeg'), 'image/jpeg', quality);
+            } catch {
+              callback(null, format);
+            }
+          } else {
+            callback(null, format);
+          }
+        }
       };
 
-      img.src = event.target?.result as string;
+      exportToBlob(targetFormat, (blob, finalFormat) => {
+        if (!blob) {
+          safeResolve({
+            file,
+            originalSize,
+            compressedSize: originalSize,
+            savingsPercent: 0,
+            width,
+            height,
+          });
+          return;
+        }
+
+        // If compressed blob is somehow larger than original, keep original
+        if (blob.size >= originalSize) {
+          safeResolve({
+            file,
+            originalSize,
+            compressedSize: originalSize,
+            savingsPercent: 0,
+            width,
+            height,
+          });
+          return;
+        }
+
+        const ext = finalFormat === 'image/webp' ? '.webp' : '.jpg';
+        const baseName = file.name.replace(/\.[^/.]+$/, '');
+        const compressedFileName = `${baseName}${ext}`;
+
+        const compressedFile = new File([blob], compressedFileName, {
+          type: finalFormat,
+          lastModified: Date.now(),
+        });
+
+        const savingsPercent = Math.max(
+          0,
+          Math.round(((originalSize - blob.size) / originalSize) * 100)
+        );
+
+        safeResolve({
+          file: compressedFile,
+          originalSize,
+          compressedSize: blob.size,
+          savingsPercent,
+          width,
+          height,
+        });
+      });
     };
 
-    reader.onerror = () => {
-      resolve({
+    img.onerror = () => {
+      clearTimeout(timeout);
+      URL.revokeObjectURL(objectUrl);
+      safeResolve({
         file,
         originalSize,
         compressedSize: originalSize,
@@ -191,7 +227,7 @@ export async function compressImage(
       });
     };
 
-    reader.readAsDataURL(file);
+    img.src = objectUrl;
   });
 }
 
@@ -206,4 +242,3 @@ export function formatBytes(bytes: number, decimals: number = 1): string {
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
-

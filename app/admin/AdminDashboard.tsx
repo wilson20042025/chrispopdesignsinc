@@ -245,9 +245,19 @@ export default function AdminDashboard({
         body: formData,
       });
 
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || 'Upload failed');
+      let data: any = null;
+      const text = await res.text();
+      try {
+        data = JSON.parse(text);
+      } catch {
+        if (!res.ok) {
+          throw new Error(`Upload server error (${res.status}): ${res.statusText || 'Server error'}. Please verify Cloudinary keys in Vercel.`);
+        }
+        throw new Error('Upload server returned an invalid response. Please try again.');
+      }
+
+      if (!res.ok || !data?.success) {
+        throw new Error(data?.error || 'Upload failed');
       }
 
       if (data.urls && data.urls.length > 0) {
